@@ -25,7 +25,7 @@ const Concert = () => {
                 {/* Concert Image */}
                 <div className="relative overflow-hidden">
                   <img 
-                    src="/lovable-uploads/e4a63d7e-ce3c-40fb-9774-165bd6b4c36b.png"
+                    src="/lovable-uploads/1000007342.jpg"
                     alt="Klarisse De Guzman's THE BIG NIGHT Concert Poster"
                     className="w-full h-full object-cover min-h-[400px] lg:min-h-[600px]"
                   />
