@@ -7,7 +7,7 @@ const Social = () => {
       name: "Instagram",
       link: "https://www.instagram.com/klarissedguzman/",
       iconClass: "fab fa-instagram",
-      iconColorClass: "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500" // A custom gradient for Instagram
+      iconColorClass: "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"
     },
     {
       name: "YouTube",
@@ -31,7 +31,7 @@ const Social = () => {
       name: "Twitter",
       link: "https://x.com/Klarissedguzman?t=ZFXgmlgJTyf0daUNbcUguA&s=09",
       iconClass: "fab fa-x-twitter",
-      iconColorClass: "text-black" // Twitter (X) logo is solid black
+      iconColorClass: "text-black"
     },
     {
       name: "Spotify",
@@ -45,7 +45,10 @@ const Social = () => {
     <section id="social" className="py-20 flex justify-center bg-gradient-to-br from-muted/30 to-background">
       <Card className="w-full max-w-lg shadow-xl">
         <CardContent className="p-6 text-center">
-          <h3 className="text-2xl font-bold mb-4">Connect with Klarisse</h3>
+          {/* Updated the h3 tag with a green gradient color palette */}
+          <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+            Connect with Klarisse
+          </h3>
           <p className="text-muted-foreground mb-6">
             Stay updated with the latest music and content on all my social platforms.
           </p>
@@ -57,7 +60,6 @@ const Social = () => {
                 onClick={() => window.open(platform.link, '_blank')}
                 className="w-full sm:w-auto flex items-center gap-2"
               >
-                {/* Rendering the icon with gradient colors */}
                 <i className={`${platform.iconClass} ${platform.iconColorClass} bg-clip-text text-transparent`}></i>
                 {platform.name}
               </Button>
