@@ -1,6 +1,14 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Users, Heart, Star } from "lucide-react";
+import {
+  ExternalLink,
+  Users,
+  Heart,
+  Star,
+  Facebook,
+  Instagram,
+  Twitter,
+} from "lucide-react";
 
 const Fanpage = () => {
   const fanCommunities = [
@@ -12,21 +20,20 @@ const Fanpage = () => {
         {
           platform: "Facebook",
           url: "https://www.facebook.com/share/1BB7Ms5YxQ/",
-          icon: "📘",
-          color: "bg-blue-500",
+          icon: <Facebook className="h-4 w-4 text-white" />,
+          color: "bg-blue-600",
         },
         {
           platform: "Instagram",
-          url: "https://www.instagram.com/klarissenaticsofficial?igsh=N2F0dm0zYzI3eTY3/", 
-       
-          icon: "📸",
-          color: "bg-pink-500",
+          url: "https://www.instagram.com/klarissenaticsofficial?igsh=N2F0dm0zYzI3eTY3/",
+          icon: <Instagram className="h-4 w-4 text-white" />,
+          color: "bg-pink-600",
         },
         {
           platform: "Twitter/X",
           url: "https://x.com/KLARISSEnatics_?t=yi1BxfMkRQxv9RTXCukr2w&s=09",
-          icon: "🐦",
-          color: "bg-sky-500",
+          icon: <Twitter className="h-4 w-4 text-white" />,
+          color: "bg-sky-600",
         },
       ],
     },
@@ -38,19 +45,19 @@ const Fanpage = () => {
         {
           platform: "Facebook",
           url: "https://www.facebook.com/share/1DzuSVjNAF/",
-          icon: "📘",
+          icon: <Facebook className="h-4 w-4 text-white" />,
           color: "bg-blue-600",
         },
         {
           platform: "Instagram",
-          url: "https://www.instagram.com/theklangots?igsh=eDliY3VjMDBrd29y/", 
-          icon: "📸",
+          url: "https://www.instagram.com/theklangots?igsh=eDliY3VjMDBrd29y/",
+          icon: <Instagram className="h-4 w-4 text-white" />,
           color: "bg-pink-600",
         },
         {
           platform: "Twitter/X",
           url: "https://x.com/theklangots?t=yP1vgOIB5hqdKI8ieoBaHw&s=09",
-          icon: "🐦",
+          icon: <Twitter className="h-4 w-4 text-white" />,
           color: "bg-sky-600",
         },
       ],
