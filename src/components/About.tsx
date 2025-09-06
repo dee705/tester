@@ -21,7 +21,7 @@ const About = () => {
           <div className="relative">
             <div className="aspect-square rounded-2xl overflow-hidden shadow-luxury bg-gradient-primary">
               <img 
-                src="/lovable-uploads/49966ea4-3532-4c0f-8c4e-87c5cbac7377.png"
+                src="/lovable-uploads/featured.jpg"
                 alt="Klarisse de Guzman"
                 className="w-full h-full object-cover"
               />
