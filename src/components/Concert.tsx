@@ -25,7 +25,7 @@ const Concert = () => {
                 {/* Concert Video */}
                 <div className="relative overflow-hidden w-full min-h-[400px] lg:min-h-[600px]">
                   <iframe
-                    src="https://www.youtube.com/embed/5F2v_2qI_mE?autoplay=1&mute=1&loop=1&playlist=5F2v_2qI_mE"
+                    src="https://www.youtube.com/watch?v=nJpLZ15-Vzo0"
                     className="absolute top-0 left-0 w-full h-full"
                     frameBorder="0"
                     allowFullScreen
