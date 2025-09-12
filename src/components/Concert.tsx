@@ -9,11 +9,10 @@ const Concert = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-gradient">Upcoming Concert</span>
+            <span className="text-gradient"> Latest Single </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Experience the biggest night of Filipino music as Klarisse takes the stage
-            at the iconic Smart Araneta Coliseum
+            Experience the soulful voice of our very own Soul Diva Klarisse as she share with us her Latest single on YouTube, Spotify and apple music. Stream Now! 
           </p>
         </div>
 
@@ -22,10 +21,10 @@ const Concert = () => {
           <Card className="overflow-hidden shadow-luxury border-0 bg-gradient-to-br from-card to-card/50">
             <CardContent className="p-0">
               <div className="grid lg:grid-cols-2 gap-0">
-                {/* Concert Video (Replaced Image) */}
+                {/* Concert Video */}
                 <div className="relative overflow-hidden w-full min-h-[400px] lg:min-h-[600px]">
                   <iframe
-                    src="https://www.instagram.com/reel/BAOca_G_0F/embed/captioned/?autoplay=1&loop=1&muted=1"
+                    src="http://googleusercontent.com/youtube.com/6"
                     className="absolute top-0 left-0 w-full h-full"
                     frameBorder="0"
                     allowFullScreen
@@ -34,31 +33,16 @@ const Concert = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent lg:hidden"></div>
                 </div>
 
-                {/* Concert Details */}
+                {/* Song Details */}
                 <div className="p-8 lg:p-12 flex flex-col justify-center">
                   <div className="space-y-6">
                     <div>
                       <h3 className="text-3xl lg:text-4xl font-bold mb-2 text-gradient">
-                        THE BIG NIGHT
+                        DITO KA LANG
                       </h3>
                       <p className="text-lg text-muted-foreground">
-                        Klarisse De Guzman's Grand Concert
+                        WAG KANG LALAYO
                       </p>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3">
-                        <Calendar className="h-5 w-5 text-primary" />
-                        <span className="text-lg">September 26, 2025</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <MapPin className="h-5 w-5 text-primary" />
-                        <span className="text-lg">Smart Araneta Coliseum</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Clock className="h-5 w-5 text-primary" />
-                        <span className="text-lg">7:00 PM</span>
-                      </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
