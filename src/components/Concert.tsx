@@ -1,30 +1,49 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Ticket } from "lucide-react";
+import { Ticket, Play, Pause } from "lucide-react";
 
 const Concert = () => {
+  const playerRef = useRef<any>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
   useEffect(() => {
-    // Load the YouTube IFrame Player API
+    // Load YouTube API script
     const tag = document.createElement("script");
     tag.src = "https://www.youtube.com/iframe_api";
     document.body.appendChild(tag);
 
-    // When API is ready, create the player
+    // Initialize YouTube Player
     (window as any).onYouTubeIframeAPIReady = () => {
-      const player = new (window as any).YT.Player("concert-video", {
+      playerRef.current = new (window as any).YT.Player("concert-video", {
         videoId: "zd7kQQ0fjDU", // Your video ID
+        playerVars: {
+          autoplay: 1,
+          mute: 1, // start muted to allow autoplay
+          controls: 0, // hide default controls
+        },
         events: {
-          onReady: (event: any) => {
-            // Wait for user interaction before playing with sound
-            document.addEventListener("click", () => {
-              event.target.playVideo();
-            }, { once: true });
+          onReady: () => {
+            setIsPlaying(true);
           },
         },
       });
     };
   }, []);
+
+  const handlePlay = () => {
+    if (playerRef.current) {
+      playerRef.current.playVideo();
+      setIsPlaying(true);
+    }
+  };
+
+  const handlePause = () => {
+    if (playerRef.current) {
+      playerRef.current.pauseVideo();
+      setIsPlaying(false);
+    }
+  };
 
   return (
     <section id="concert" className="py-20 bg-gradient-to-br from-background to-muted/20">
@@ -32,10 +51,11 @@ const Concert = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-gradient"> STREAM NOW! </span>
+            <span className="text-gradient">Upcoming Concert</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Experience the soulful voice of our very own Mowm as she share with us her latest single DKLWKL available on YouTube, Spotify and apple Music! Stream Now! 
+            Experience the biggest night of Filipino music as Klarisse takes the stage
+            at the iconic Smart Araneta Coliseum
           </p>
         </div>
 
@@ -51,6 +71,27 @@ const Concert = () => {
                     className="absolute top-0 left-0 w-full h-full"
                   ></div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent lg:hidden"></div>
+
+                  {/* Custom Play/Pause Buttons */}
+                  <div className="absolute bottom-4 left-4 flex gap-2 z-10">
+                    {isPlaying ? (
+                      <Button
+                        variant="elegant"
+                        size="sm"
+                        onClick={handlePause}
+                      >
+                        <Pause className="mr-1 h-4 w-4" /> Pause
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="elegant"
+                        size="sm"
+                        onClick={handlePlay}
+                      >
+                        <Play className="mr-1 h-4 w-4" /> Play
+                      </Button>
+                    )}
+                  </div>
                 </div>
 
                 {/* Song Details */}
@@ -58,10 +99,10 @@ const Concert = () => {
                   <div className="space-y-6">
                     <div>
                       <h3 className="text-3xl lg:text-4xl font-bold mb-2 text-gradient">
-                        Dito Ka lang, Wag Kang Lalayo
+                        DITO KA LANG
                       </h3>
                       <p className="text-lg text-muted-foreground">
-                        Themesong for Alibi 
+                        WAG KANG LALAYO
                       </p>
                     </div>
 
@@ -72,44 +113,15 @@ const Concert = () => {
                         className="flex-1"
                         onClick={() =>
                           window.open(
-                            "  https://open.spotify.com/track/2GjTvT9x3XYnngU7JyKQZZ?si=TrzB8zUKQ0Oxgzyoj__bKQ", 
+                            "https://ticketnet.com.ph/event-detail/Klarisse-De-Guzman-s-The-Big-Night",
                             "_blank"
                           )
                         }
                       >
                         <Ticket className="mr-2 h-5 w-5" />
-                        stream here! 
+                        Buy Tickets
                       </Button>
                       <Button
                         variant="elegant"
                         size="lg"
-                        className="flex-1"
-                        onClick={() =>
-                          window.open(
-                            "https://www.instagram.com/p/DMmO_QVTzow/?igsh=aDJuMnFkZWo2cDln",
-                            "_blank"
-                          )
-                        }
-                      >
-                        Get Updates
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Additional Info */}
-        <div className="text-center">
-          <p className="text-muted-foreground mb-4">
-            Don't miss this once-in-a-lifetime musical experience!
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default Concert;
+                        className="flex-
