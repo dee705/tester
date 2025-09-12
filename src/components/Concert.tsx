@@ -1,8 +1,31 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calendar, MapPin, Clock, Ticket } from "lucide-react";
+import { Ticket } from "lucide-react";
 
 const Concert = () => {
+  useEffect(() => {
+    // Load the YouTube IFrame Player API
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
+
+    // When API is ready, create the player
+    (window as any).onYouTubeIframeAPIReady = () => {
+      const player = new (window as any).YT.Player("concert-video", {
+        videoId: "zd7kQQ0fjDU", // Your video ID
+        events: {
+          onReady: (event: any) => {
+            // Wait for user interaction before playing with sound
+            document.addEventListener("click", () => {
+              event.target.playVideo();
+            }, { once: true });
+          },
+        },
+      });
+    };
+  }, []);
+
   return (
     <section id="concert" className="py-20 bg-gradient-to-br from-background to-muted/20">
       <div className="container mx-auto px-4">
@@ -24,13 +47,10 @@ const Concert = () => {
               <div className="grid lg:grid-cols-2 gap-0">
                 {/* Concert Video */}
                 <div className="relative overflow-hidden w-full min-h-[400px] lg:min-h-[600px]">
-                  <iframe
-                    src="https://www.youtube.com/embed/zd7kQQ0fjDU?si=FHKu39e10iOnDMrS&autoplay=1"
+                  <div
+                    id="concert-video"
                     className="absolute top-0 left-0 w-full h-full"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
+                  ></div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent lg:hidden"></div>
                 </div>
 
@@ -51,7 +71,12 @@ const Concert = () => {
                         variant="luxury"
                         size="lg"
                         className="flex-1"
-                        onClick={() => window.open('https://ticketnet.com.ph/event-detail/Klarisse-De-Guzman-s-The-Big-Night', '_blank')}
+                        onClick={() =>
+                          window.open(
+                            "https://ticketnet.com.ph/event-detail/Klarisse-De-Guzman-s-The-Big-Night",
+                            "_blank"
+                          )
+                        }
                       >
                         <Ticket className="mr-2 h-5 w-5" />
                         Buy Tickets
@@ -60,7 +85,12 @@ const Concert = () => {
                         variant="elegant"
                         size="lg"
                         className="flex-1"
-                        onClick={() => window.open('https://www.instagram.com/p/DMmO_QVTzow/?igsh=aDJuMnFkZWo2cDln', '_blank')}
+                        onClick={() =>
+                          window.open(
+                            "https://www.instagram.com/p/DMmO_QVTzow/?igsh=aDJuMnFkZWo2cDln",
+                            "_blank"
+                          )
+                        }
                       >
                         Get Updates
                       </Button>
