@@ -9,11 +9,10 @@ const Concert = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-gradient">Upcoming Concert</span>
+            <span className="text-gradient">Latest Single </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Experience the biggest night of Filipino music as Klarisse takes the stage
-            at the iconic Smart Araneta Coliseum
+            Experience the soulful voice of our very own Mowm! Our Philippine Soul Diva as she share with us her latest single on YouTube, Spotify and apple music. Stream Now! 
           </p>
         </div>
 
@@ -25,7 +24,7 @@ const Concert = () => {
                 {/* Concert Video */}
                 <div className="relative overflow-hidden w-full min-h-[400px] lg:min-h-[600px]">
                   <iframe
-                    src="https://www.youtube.com/watch?v=nJpLZ15-Vzo0"
+                    src="https://www.youtube.com/embed/zd7kQQ0fjDU?si=FHKu39e10iOnDMrS"
                     className="absolute top-0 left-0 w-full h-full"
                     frameBorder="0"
                     allowFullScreen
@@ -39,10 +38,10 @@ const Concert = () => {
                   <div className="space-y-6">
                     <div>
                       <h3 className="text-3xl lg:text-4xl font-bold mb-2 text-gradient">
-                        DITO KA LANG
+                        Dito ka lang, Wag kang lalayo 
                       </h3>
                       <p className="text-lg text-muted-foreground">
-                        WAG KANG LALAYO
+                        ALIBI Themesong
                       </p>
                     </div>
 
