@@ -32,11 +32,10 @@ const Concert = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-gradient">Upcoming Concert</span>
+            <span className="text-gradient"> STREAM NOW! </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Experience the biggest night of Filipino music as Klarisse takes the stage
-            at the iconic Smart Araneta Coliseum
+            Experience the soulful voice of our very own Mowm as she share with us her latest single DKLWKL available on YouTube, Spotify and apple Music! Stream Now! 
           </p>
         </div>
 
@@ -59,10 +58,10 @@ const Concert = () => {
                   <div className="space-y-6">
                     <div>
                       <h3 className="text-3xl lg:text-4xl font-bold mb-2 text-gradient">
-                        DITO KA LANG
+                        Dito Ka lang, Wag Kang Lalayo
                       </h3>
                       <p className="text-lg text-muted-foreground">
-                        WAG KANG LALAYO
+                        Themesong for Alibi 
                       </p>
                     </div>
 
@@ -73,13 +72,13 @@ const Concert = () => {
                         className="flex-1"
                         onClick={() =>
                           window.open(
-                            "https://ticketnet.com.ph/event-detail/Klarisse-De-Guzman-s-The-Big-Night",
+                            "  https://open.spotify.com/track/2GjTvT9x3XYnngU7JyKQZZ?si=TrzB8zUKQ0Oxgzyoj__bKQ", 
                             "_blank"
                           )
                         }
                       >
                         <Ticket className="mr-2 h-5 w-5" />
-                        Buy Tickets
+                        stream here! 
                       </Button>
                       <Button
                         variant="elegant"
