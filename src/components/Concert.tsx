@@ -25,11 +25,11 @@ const Concert = () => {
                 {/* Concert Video */}
                 <div className="relative overflow-hidden w-full min-h-[400px] lg:min-h-[600px]">
                   <iframe
-                    src="https://www.youtube.com/embed/zd7kQQ0fjDU?si=FHKu39e10iOnDMrS?autoplay=1"
+                    src="https://www.youtube.com/embed/zd7kQQ0fjDU?si=FHKu39e10iOnDMrS&autoplay=1"
                     className="absolute top-0 left-0 w-full h-full"
                     frameBorder="0"
-                    allowFullScreen
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   ></iframe>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent lg:hidden"></div>
                 </div>
