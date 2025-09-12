@@ -78,7 +78,7 @@ const Concert = () => {
             <span className="text-gradient">Stream Now! </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Experience the soulful voice of our very own Nation's Mowm and Phillipines Soul Diva as she share with us her latest single available on YouTube, Spotify and Apple Music! 
+            Experience the soulful voice of our very own Nation's Mowm and Philippines Soul Diva as she share with us her latest single available on YouTube, Spotify and Apple Music! 
           </p>
         </div>
 
