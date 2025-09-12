@@ -12,7 +12,7 @@ const Concert = () => {
             <span className="text-gradient">Upcoming Concert</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Experience the biggest night of Filipino music as Klarisse takes the stage 
+            Experience the biggest night of Filipino music as Klarisse takes the stage
             at the iconic Smart Araneta Coliseum
           </p>
         </div>
@@ -22,13 +22,15 @@ const Concert = () => {
           <Card className="overflow-hidden shadow-luxury border-0 bg-gradient-to-br from-card to-card/50">
             <CardContent className="p-0">
               <div className="grid lg:grid-cols-2 gap-0">
-                {/* Concert Image */}
-                <div className="relative overflow-hidden">
-                  <img 
-                    src="/lovable-uploads/1000007342.jpg"
-                    alt="Klarisse De Guzman's THE BIG NIGHT Concert Poster"
-                    className="w-full h-full object-cover min-h-[400px] lg:min-h-[600px]"
-                  />
+                {/* Concert Video (Replaced Image) */}
+                <div className="relative overflow-hidden w-full min-h-[400px] lg:min-h-[600px]">
+                  <iframe
+                    src="https://www.instagram.com/reel/BAOca_G_0F/embed/captioned/?autoplay=1&loop=1&muted=1"
+                    className="absolute top-0 left-0 w-full h-full"
+                    frameBorder="0"
+                    allowFullScreen
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  ></iframe>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent lg:hidden"></div>
                 </div>
 
@@ -59,60 +61,19 @@ const Concert = () => {
                       </div>
                     </div>
 
-                    <div className="bg-muted/30 rounded-lg p-4">
-                      <h4 className="font-semibold mb-3 flex items-center gap-2">
-                        <Ticket className="h-5 w-5 text-primary" />
-                        Ticket Prices
-                      </h4>
-                      <div className="grid grid-cols-2 gap-3 text-sm">
-                        <div className="flex justify-between">
-                          <span>Platinum (M&G):</span>
-                          <span className="font-semibold">SOLD OUT</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Platinum:</span>
-                          <span className="font-semibold">SOLD OUT</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>VIP:</span>
-                          <span className="font-semibold">SOLD OUT</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Patron A:</span>
-                          <span className="font-semibold">₱3,000</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Patron B:</span>
-                          <span className="font-semibold">₱2,500</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Lower Box Regular:</span>
-                          <span className="font-semibold">₱1,800</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Upper Box:</span>
-                          <span className="font-semibold">₱1,200</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Gen Ad:</span>
-                          <span className="font-semibold">₱500</span>
-                        </div>
-                      </div>
-                    </div>
-
                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                      <Button 
-                        variant="luxury" 
-                        size="lg" 
+                      <Button
+                        variant="luxury"
+                        size="lg"
                         className="flex-1"
                         onClick={() => window.open('https://ticketnet.com.ph/event-detail/Klarisse-De-Guzman-s-The-Big-Night', '_blank')}
                       >
                         <Ticket className="mr-2 h-5 w-5" />
                         Buy Tickets
                       </Button>
-                      <Button 
-                        variant="elegant" 
-                        size="lg" 
+                      <Button
+                        variant="elegant"
+                        size="lg"
                         className="flex-1"
                         onClick={() => window.open('https://www.instagram.com/p/DMmO_QVTzow/?igsh=aDJuMnFkZWo2cDln', '_blank')}
                       >
@@ -130,9 +91,6 @@ const Concert = () => {
         <div className="text-center">
           <p className="text-muted-foreground mb-4">
             Don't miss this once-in-a-lifetime musical experience!
-          </p>
-          <p className="text-sm text-muted-foreground">
-            *Ticket prices are exclusive of ticketing charges
           </p>
         </div>
       </div>
