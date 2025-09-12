@@ -9,10 +9,11 @@ const Concert = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-gradient"> Latest Single </span>
+            <span className="text-gradient">Upcoming Concert</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Experience the soulful voice of our very own Soul Diva Klarisse as she share with us her Latest single on YouTube, Spotify and apple music. Stream Now! 
+            Experience the biggest night of Filipino music as Klarisse takes the stage
+            at the iconic Smart Araneta Coliseum
           </p>
         </div>
 
@@ -24,7 +25,7 @@ const Concert = () => {
                 {/* Concert Video */}
                 <div className="relative overflow-hidden w-full min-h-[400px] lg:min-h-[600px]">
                   <iframe
-                    src="http://googleusercontent.com/youtube.com/6"
+                    src="https://www.youtube.com/embed/5F2v_2qI_mE?autoplay=1&mute=1&loop=1&playlist=5F2v_2qI_mE"
                     className="absolute top-0 left-0 w-full h-full"
                     frameBorder="0"
                     allowFullScreen
