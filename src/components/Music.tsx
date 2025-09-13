@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, Music as MusicIcon, Calendar, X } from "lucide-react";
+import { Play, Music as MusicIcon, Calendar, X, ChevronDown } from "lucide-react";
 
 const Music = () => {
   const [openSongs, setOpenSongs] = useState([]);
@@ -18,6 +18,9 @@ const Music = () => {
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
+
+  const collapseAllSongs = () => setOpenSongs([]);
+  const collapseAllAlbums = () => setOpenAlbums([]);
 
   const songs = [
     {
@@ -102,22 +105,38 @@ const Music = () => {
   return (
     <section id="music" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        
-        {/* Albums */}
+
+        {/* Albums Section */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold mb-8 text-center">Albums</h3>
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-2xl font-bold text-green-600">Albums</h3>
+            {openAlbums.length > 0 && (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={collapseAllAlbums}
+                className="flex items-center gap-2 border-green-500 text-green-600 hover:bg-green-100"
+              >
+                <ChevronDown className="h-4 w-4" /> Collapse All
+              </Button>
+            )}
+          </div>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {albums.map((album, index) => (
-              <Card key={index}>
+              <Card 
+                key={index} 
+                className="border border-green-300 hover:shadow-lg transition"
+              >
                 <CardContent className="p-8">
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h4 className="text-xl font-bold">{album.title}</h4>
-                      <p className="text-primary font-medium">{album.type} • {album.year}</p>
+                      <h4 className="text-xl font-bold text-green-700">{album.title}</h4>
+                      <p className="text-green-500 font-medium">{album.type} • {album.year}</p>
                     </div>
                     <Button 
                       variant="ghost" 
                       size="icon"
+                      className="hover:bg-green-100 text-green-600"
                       onClick={() => toggleAlbum(index)}
                     >
                       {openAlbums.includes(index) ? <X className="h-5 w-5" /> : <Play className="h-5 w-5" />}
@@ -141,17 +160,36 @@ const Music = () => {
           </div>
         </div>
 
-        {/* Songs */}
+        {/* Songs Section */}
         <div>
-          <h3 className="text-2xl font-bold mb-8 text-center">Featured Songs</h3>
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-2xl font-bold text-green-600">Featured Songs</h3>
+            {openSongs.length > 0 && (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={collapseAllSongs}
+                className="flex items-center gap-2 border-green-500 text-green-600 hover:bg-green-100"
+              >
+                <ChevronDown className="h-4 w-4" /> Collapse All
+              </Button>
+            )}
+          </div>
           <div className="grid gap-6">
             {songs.map((song, index) => (
-              <Card key={index}>
+              <Card 
+                key={index} 
+                className={`border transition ${
+                  song.featured
+                    ? "border-green-400 bg-gradient-to-r from-green-50 to-green-100"
+                    : "border-green-200"
+                }`}
+              >
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h4 className="text-lg font-bold">{song.title}</h4>
-                      <div className="flex gap-4 text-sm text-muted-foreground">
+                      <h4 className="text-lg font-bold text-green-700">{song.title}</h4>
+                      <div className="flex gap-4 text-sm text-green-600">
                         <span className="flex items-center gap-1">
                           <MusicIcon className="h-4 w-4" /> {song.album}
                         </span>
@@ -163,6 +201,7 @@ const Music = () => {
                     <Button 
                       variant="ghost" 
                       size="icon"
+                      className="hover:bg-green-100 text-green-600"
                       onClick={() => toggleSong(index)}
                     >
                       {openSongs.includes(index) ? <X className="h-5 w-5" /> : <Play className="h-5 w-5" />}
