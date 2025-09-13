@@ -33,7 +33,7 @@ const Music = () => {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      spotify: "https://youtu.be/pWYMxPYW2yk?si=S-Vf_g8LpCs4Qs3d", 
+      spotify: "https://youtu.be/pWYMxPYW2yk?si=S-Vf_g8LpCs4Qs3d",
     },
     {
       title: "Ulan Ng Kahapon",
@@ -45,7 +45,7 @@ const Music = () => {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      spotify: "https://youtu.be/nuDNvk22Qmg?si=Biuah7DxUz6Rz5Cg", 
+      spotify: "https://youtu.be/nuDNvk22Qmg?si=Biuah7DxUz6Rz5Cg",
     },
   ];
 
@@ -91,9 +91,7 @@ const Music = () => {
                 className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
                   isActive ? "ring-2 ring-green-500" : ""
                 }`}
-                onClick={() =>
-                  setCurrentAlbum(isActive ? null : index)
-                }
+                onClick={() => setCurrentAlbum(isActive ? null : index)}
               >
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -148,7 +146,7 @@ const Music = () => {
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Featured Songs
         </h3>
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
           {songs.map((song, index) => {
             const isActive = currentSong === index;
             return (
@@ -157,9 +155,7 @@ const Music = () => {
                 className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
                   isActive ? "ring-2 ring-green-500" : ""
                 }`}
-                onClick={() =>
-                  setCurrentSong(isActive ? null : index)
-                }
+                onClick={() => setCurrentSong(isActive ? null : index)}
               >
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -221,6 +217,45 @@ const Music = () => {
               </Card>
             );
           })}
+        </div>
+
+        {/* Listen Everywhere Section */}
+        <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
+          Listen Everywhere
+        </h3>
+        <div className="flex flex-wrap justify-center gap-6">
+          <a
+            href="https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC?si=dg-SlfOOR3iRjm56evf_CA"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 bg-green-500 text-white rounded-full shadow-md hover:bg-green-600 transition"
+          >
+            Spotify
+          </a>
+          <a
+            href="https://music.apple.com/ph/artist/klarisse/1462398733"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 bg-pink-500 text-white rounded-full shadow-md hover:bg-pink-600 transition"
+          >
+            Apple Music
+          </a>
+          <a
+            href="https://music.youtube.com/channel/UCeg7EAceRGI8D6q1j4djPTQ?si=iYiNmeIBAf25OFFH"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 bg-red-500 text-white rounded-full shadow-md hover:bg-red-600 transition"
+          >
+            YouTube
+          </a>
+          <a
+            href="https://soundcloud.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 bg-orange-500 text-white rounded-full shadow-md hover:bg-orange-600 transition"
+          >
+            SoundCloud
+          </a>
         </div>
       </div>
     </section>
