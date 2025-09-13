@@ -1,7 +1,23 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, ExternalLink, Music as MusicIcon, Calendar, ChevronDown, ChevronUp } from "lucide-react";
-import { useState } from "react";
+import {
+  Play,
+  ExternalLink,
+  Music as MusicIcon,
+  Calendar,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
+
+// Helper to generate correct Spotify embed URL
+const getSpotifyEmbedUrl = (url: string) => {
+  if (!url.includes("open.spotify.com")) return url;
+  const parts = url.split("/");
+  const type = parts[3]; // track | album | artist
+  const id = parts[4]?.split("?")[0]; // clean ID without query
+  return `https://open.spotify.com/embed/${type}/${id}`;
+};
 
 const Music = () => {
   const [expandedSong, setExpandedSong] = useState<number | null>(null);
@@ -12,40 +28,44 @@ const Music = () => {
       title: "Dito Ka Lang, Wag kang lalayo",
       album: "Klarisse",
       year: "2025",
-      description: "A heartfelt song that shows empowering anthem on declaring one's love",
+      description:
+        "A heartfelt song that shows empowering anthem on declaring one's love",
       featured: true,
-      spotify: "https://open.spotify.com/album/4kl5U1j3VxkjcXCpHxzgz7"
+      spotify: "https://open.spotify.com/album/4kl5U1j3VxkjcXCpHxzgz7",
     },
     {
       title: "Dito",
       album: "Feels",
       year: "2024",
-      description: "A heartfelt song from her latest album Feels, showcasing her emotional depth and vocal prowess.",
+      description:
+        "A heartfelt song from her latest album Feels, showcasing her emotional depth and vocal prowess.",
       featured: true,
-      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK"
+      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK",
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      description: "A powerful track from Feels exploring themes of letting go and moving forward.",
+      description:
+        "A powerful track from Feels exploring themes of letting go and moving forward.",
       featured: true,
-      spotify: "https://open.spotify.com/track/6Rl2zqkSoIfyUnMFFBYeIK"
+      spotify: "https://open.spotify.com/track/6Rl2zqkSoIfyUnMFFBYeIK",
     },
     {
       title: "Ulan Ng Kahapon",
       album: "Singles",
       year: "2021",
       description: "A nostalgic track about memories and past relationships.",
-      youtube: "https://www.youtube.com/embed/RcKMBkkZZdc"
-    }, 
+      youtube: "https://www.youtube.com/embed/RcKMBkkZZdc",
+    },
     {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      description: "A nostalgic track that expresses a finality and the absence of something that was once there.", 
-      spotify: "https://open.spotify.com/track/6A3oVEfrPO6XSYfakUw3N1"
-    }
+      description:
+        "A nostalgic track that expresses a finality and the absence of something that was once there.",
+      spotify: "https://open.spotify.com/track/6A3oVEfrPO6XSYfakUw3N1",
+    },
   ];
 
   const albums = [
@@ -54,17 +74,19 @@ const Music = () => {
       year: "2024",
       type: "Latest Album",
       tracks: 3,
-      description: "Her latest album featuring heartfelt ballads and emotional storytelling.",
-      spotify: "https://open.spotify.com/album/4jUJec6voKpplFklfNeTk6"
+      description:
+        "Her latest album featuring heartfelt ballads and emotional storytelling.",
+      spotify: "https://open.spotify.com/album/4jUJec6voKpplFklfNeTk6",
     },
     {
       title: "Klarisse",
       year: "2017",
       type: "Self-Titled Album",
       tracks: 10,
-      description: "Her acclaimed self-titled album showcasing her vocal range and artistry.",
-      spotify: "https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC"
-    }
+      description:
+        "Her acclaimed self-titled album showcasing her vocal range and artistry.",
+      spotify: "https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC",
+    },
   ];
 
   return (
@@ -76,47 +98,62 @@ const Music = () => {
             Music & Albums
           </h2>
           <p className="text-xl text-black max-w-3xl mx-auto">
-            Discover the songs that have touched hearts and the albums that define a generation.
+            Discover the songs that have touched hearts and the albums that
+            define a generation.
           </p>
         </div>
 
         {/* Albums Section */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold mb-8 text-center text-green-700">Albums</h3>
+          <h3 className="text-2xl font-bold mb-8 text-center text-green-700">
+            Albums
+          </h3>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {albums.map((album, index) => (
-              <Card key={index} className="group hover:shadow-luxury transition-all duration-500 border-green-200">
+              <Card
+                key={index}
+                className="group hover:shadow-lg transition-all duration-500 border-green-400"
+              >
                 <CardContent className="p-8">
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h4 className="text-xl font-bold text-green-700">
                         {album.title}
                       </h4>
-                      <p className="text-green-600 font-medium">{album.type} • {album.year}</p>
+                      <p className="text-green-600 font-medium">
+                        {album.type} • {album.year}
+                      </p>
                     </div>
-                    <MusicIcon className="h-6 w-6 text-green-500" />
+                    <MusicIcon className="h-6 w-6 text-green-600" />
                   </div>
                   <p className="text-black mb-4">{album.description}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-black">{album.tracks} tracks</span>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="group-hover:bg-green-100"
-                      onClick={() => setExpandedAlbum(expandedAlbum === index ? null : index)}
+                    <span className="text-sm text-black">
+                      {album.tracks} tracks
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="group-hover:bg-green-50 text-green-700"
+                      onClick={() =>
+                        setExpandedAlbum(expandedAlbum === index ? null : index)
+                      }
                     >
-                      {expandedAlbum === index ? <ChevronUp className="h-4 w-4"/> : <ChevronDown className="h-4 w-4"/>}
+                      {expandedAlbum === index ? (
+                        <ChevronUp className="h-4 w-4" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4" />
+                      )}
                     </Button>
                   </div>
                   {expandedAlbum === index && (
                     <div className="mt-4">
                       <iframe
-                        src={`https://open.spotify.com/embed/${album.spotify.split("/").pop()}`}
+                        src={getSpotifyEmbedUrl(album.spotify)}
                         width="100%"
                         height="380"
                         frameBorder="0"
                         allow="encrypted-media"
-                        allowFullScreen
                       />
                     </div>
                   )}
@@ -128,10 +165,19 @@ const Music = () => {
 
         {/* Featured Songs */}
         <div className="mb-12">
-          <h3 className="text-2xl font-bold mb-8 text-center text-green-700">Featured Songs</h3>
+          <h3 className="text-2xl font-bold mb-8 text-center text-green-700">
+            Featured Songs
+          </h3>
           <div className="grid gap-6">
             {songs.map((song, index) => (
-              <Card key={index} className="group hover:shadow-elegant transition-all duration-500 border-green-200">
+              <Card
+                key={index}
+                className={`group hover:shadow-lg transition-all duration-500 ${
+                  song.featured
+                    ? "border-green-500 bg-gradient-to-r from-green-50 to-green-100"
+                    : "border-green-300"
+                }`}
+              >
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
@@ -158,13 +204,19 @@ const Music = () => {
                       <p className="text-black text-sm">{song.description}</p>
                     </div>
                     <div className="flex items-center gap-2 ml-4">
-                      <Button 
-                        variant="ghost" 
+                      <Button
+                        variant="ghost"
                         size="icon"
-                        className="group-hover:bg-green-100 group-hover:text-green-700"
-                        onClick={() => setExpandedSong(expandedSong === index ? null : index)}
+                        className="group-hover:bg-green-50 text-green-700"
+                        onClick={() =>
+                          setExpandedSong(expandedSong === index ? null : index)
+                        }
                       >
-                        {expandedSong === index ? <ChevronUp className="h-5 w-5"/> : <ChevronDown className="h-5 w-5"/>}
+                        {expandedSong === index ? (
+                          <ChevronUp className="h-5 w-5" />
+                        ) : (
+                          <ChevronDown className="h-5 w-5" />
+                        )}
                       </Button>
                     </div>
                   </div>
@@ -172,9 +224,11 @@ const Music = () => {
                     <div className="mt-4">
                       {song.spotify && (
                         <iframe
-                          src={`https://open.spotify.com/embed/${song.spotify.split("/").slice(-2).join("/")}`}
+                          src={getSpotifyEmbedUrl(song.spotify)}
                           width="100%"
-                          height="80"
+                          height={
+                            song.spotify.includes("/track/") ? "80" : "380"
+                          }
                           frameBorder="0"
                           allow="encrypted-media"
                         />
@@ -200,28 +254,42 @@ const Music = () => {
 
         {/* Music Platform Links */}
         <div className="text-center">
-          <h3 className="text-2xl font-bold mb-8 text-green-700">Listen Everywhere</h3>
+          <h3 className="text-2xl font-bold mb-8 text-green-700">
+            Listen Everywhere
+          </h3>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button 
-              variant="outline" 
-              className="hover:bg-green-100 hover:border-green-300 text-green-700"
-              onClick={() => window.open('https://open.spotify.com/artist/7r59WFPJdYBQmnIQB4DX7K', '_blank')}
+            <Button
+              variant="outline"
+              className="hover:bg-green-50 hover:border-green-400 text-green-700"
+              onClick={() =>
+                window.open(
+                  "https://open.spotify.com/artist/7r59WFPJdYBQmnIQB4DX7K",
+                  "_blank"
+                )
+              }
             >
               <span className="mr-2">🎵</span>
               Spotify
             </Button>
-            <Button 
-              variant="outline" 
-              className="hover:bg-green-100 hover:border-green-300 text-green-700"
-              onClick={() => window.open('https://music.apple.com/ph/album/klarisse-de-guzman/1444083907', '_blank')}
+            <Button
+              variant="outline"
+              className="hover:bg-green-50 hover:border-green-400 text-green-700"
+              onClick={() =>
+                window.open(
+                  "https://music.apple.com/ph/album/klarisse-de-guzman/1444083907",
+                  "_blank"
+                )
+              }
             >
               <span className="mr-2">🎵</span>
               Apple Music
             </Button>
-            <Button 
-              variant="outline" 
-              className="hover:bg-green-100 hover:border-green-300 text-green-700"
-              onClick={() => window.open('https://www.youtube.com/@KLARISSEUpdates', '_blank')}
+            <Button
+              variant="outline"
+              className="hover:bg-green-50 hover:border-green-400 text-green-700"
+              onClick={() =>
+                window.open("https://www.youtube.com/@KLARISSEUpdates", "_blank")
+              }
             >
               <span className="mr-2">▶️</span>
               YouTube Music
