@@ -1,7 +1,24 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Music as MusicIcon, Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Play, Music as MusicIcon, Calendar, X } from "lucide-react";
 
 const Music = () => {
+  const [openSongs, setOpenSongs] = useState([]);
+  const [openAlbums, setOpenAlbums] = useState([]);
+
+  const toggleSong = (index) => {
+    setOpenSongs((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    );
+  };
+
+  const toggleAlbum = (index) => {
+    setOpenAlbums((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    );
+  };
+
   const songs = [
     {
       title: "Dito Ka Lang, Wag kang lalayo",
@@ -62,7 +79,6 @@ const Music = () => {
     }
   ];
 
-  // Helper function to convert Spotify/YouTube URLs into embed players
   const getEmbedUrl = (url) => {
     if (url.includes("spotify.com/track/")) {
       const trackId = url.split("track/")[1]?.split("?")[0];
@@ -86,16 +102,7 @@ const Music = () => {
   return (
     <section id="music" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-gradient">Music</span> & Albums
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Discover the songs that have touched hearts and the albums that define a generation.
-          </p>
-        </div>
-
+        
         {/* Albums */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold mb-8 text-center">Albums</h3>
@@ -108,19 +115,26 @@ const Music = () => {
                       <h4 className="text-xl font-bold">{album.title}</h4>
                       <p className="text-primary font-medium">{album.type} • {album.year}</p>
                     </div>
-                    <MusicIcon className="h-6 w-6 text-primary/60" />
+                    <Button 
+                      variant="ghost" 
+                      size="icon"
+                      onClick={() => toggleAlbum(index)}
+                    >
+                      {openAlbums.includes(index) ? <X className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+                    </Button>
                   </div>
                   <p className="text-muted-foreground mb-4">{album.description}</p>
 
-                  {/* Embed Album */}
-                  <iframe
-                    src={getEmbedUrl(album.spotify)}
-                    width="100%"
-                    height="380"
-                    frameBorder="0"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    className="rounded-lg"
-                  ></iframe>
+                  {openAlbums.includes(index) && (
+                    <iframe
+                      src={getEmbedUrl(album.spotify)}
+                      width="100%"
+                      height="380"
+                      frameBorder="0"
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      className="rounded-lg"
+                    ></iframe>
+                  )}
                 </CardContent>
               </Card>
             ))}
@@ -146,19 +160,27 @@ const Music = () => {
                         </span>
                       </div>
                     </div>
+                    <Button 
+                      variant="ghost" 
+                      size="icon"
+                      onClick={() => toggleSong(index)}
+                    >
+                      {openSongs.includes(index) ? <X className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+                    </Button>
                   </div>
                   <p className="text-muted-foreground mb-4">{song.description}</p>
 
-                  {/* Embed Song */}
-                  <iframe
-                    src={getEmbedUrl(song.spotify)}
-                    width="100%"
-                    height={song.spotify.includes("youtube") ? "315" : "80"}
-                    frameBorder="0"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    allowFullScreen={song.spotify.includes("youtube")}
-                    className="rounded-lg"
-                  ></iframe>
+                  {openSongs.includes(index) && (
+                    <iframe
+                      src={getEmbedUrl(song.spotify)}
+                      width="100%"
+                      height={song.spotify.includes("youtube") ? "315" : "80"}
+                      frameBorder="0"
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      allowFullScreen={song.spotify.includes("youtube")}
+                      className="rounded-lg"
+                    ></iframe>
+                  )}
                 </CardContent>
               </Card>
             ))}
