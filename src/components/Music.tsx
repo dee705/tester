@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Headphones } from "lucide-react";
-import { SiSpotify, SiApplemusic, SiYoutube } from "react-icons/si";
+import { SiSpotify, SiApplemusic, SiYoutube } from "react-icons/si"; // ✅ fixed import
 
 // Helper for Spotify embeds with autoplay
 const getSpotifyEmbedUrl = (url: string) => {
@@ -71,7 +71,7 @@ const Music = () => {
 
   return (
     <section
-      id="music" // ✅ for nav link
+      id="music" // ✅ added so nav works
       className="py-20 bg-gradient-to-b from-green-100 to-white"
     >
       <div className="container mx-auto px-4">
@@ -228,7 +228,7 @@ const Music = () => {
         </div>
 
         {/* Listen Everywhere Section */}
-        <div className="text-center mt-24 pb-20"> {/* ✅ improved spacing */}
+        <div className="text-center mt-24 pb-20">
           <h3 className="text-3xl font-bold mb-8 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
             Listen Everywhere
           </h3>
