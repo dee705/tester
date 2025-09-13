@@ -27,13 +27,13 @@ const Music = () => {
       title: "Dito",
       album: "Feels",
       year: "2024",
-      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK?si=6056ffaaa6d647d9",
+      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK",
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      spotify: "https://open.spotify.com/track/6Rl2zqkSoIfyUnMFFBYeIK?si=e94916dc00e7479d",
+      spotify: "https://youtu.be/pWYMxPYW2yk?si=S-Vf_g8LpCs4Qs3d",
     },
     {
       title: "Ulan Ng Kahapon",
@@ -45,7 +45,7 @@ const Music = () => {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      spotify: "https://open.spotify.com/track/4o8yZ5AnripYyuTksF1nK6?si=960d087bced24098",
+      spotify: "https://youtu.be/nuDNvk22Qmg?si=Biuah7DxUz6Rz5Cg",
     },
   ];
 
@@ -69,7 +69,8 @@ const Music = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-green-100 to-white">
+    // ✅ Added id="music"
+    <section id="music" className="py-20 bg-gradient-to-b from-green-100 to-white">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
@@ -146,7 +147,7 @@ const Music = () => {
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Featured Songs
         </h3>
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 gap-8">
           {songs.map((song, index) => {
             const isActive = currentSong === index;
             return (
@@ -191,9 +192,7 @@ const Music = () => {
                         <iframe
                           src={getSpotifyEmbedUrl(song.spotify)}
                           width="100%"
-                          height={
-                            song.spotify.includes("/track/") ? "80" : "380"
-                          }
+                          height={song.spotify.includes("/track/") ? "80" : "380"}
                           frameBorder="0"
                           allow="encrypted-media"
                           className="rounded-xl"
@@ -217,45 +216,6 @@ const Music = () => {
               </Card>
             );
           })}
-        </div>
-
-        {/* Listen Everywhere Section */}
-        <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-          Listen Everywhere
-        </h3>
-        <div className="flex flex-wrap justify-center gap-6">
-          <a
-            href="https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC?si=dg-SlfOOR3iRjm56evf_CA"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 bg-green-500 text-white rounded-full shadow-md hover:bg-green-600 transition"
-          >
-            Spotify
-          </a>
-          <a
-            href="https://music.apple.com/ph/artist/klarisse/1462398733"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 bg-pink-500 text-white rounded-full shadow-md hover:bg-pink-600 transition"
-          >
-            Apple Music
-          </a>
-          <a
-            href="https://music.youtube.com/channel/UCeg7EAceRGI8D6q1j4djPTQ?si=iYiNmeIBAf25OFFH"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 bg-red-500 text-white rounded-full shadow-md hover:bg-red-600 transition"
-          >
-            YouTube
-          </a>
-          <a
-            href="https://on.soundcloud.com/X7g5hoFdHlsOAswEvG"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 bg-orange-500 text-white rounded-full shadow-md hover:bg-orange-600 transition"
-          >
-            SoundCloud
-          </a>
         </div>
       </div>
     </section>
