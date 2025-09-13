@@ -69,17 +69,3 @@ All colors MUST be HSL.
     --ring: 142 76% 36%;
   }
 }
-/* Glassmorphism Utility */
-.glass {
-  background: rgba(255, 255, 255, 0.35);
-  border-radius: 16px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-
-/* ✅ Added fix: make space for fixed navbar */
-body {
-  padding-top: 64px; /* adjust if navbar height changes */
-}
