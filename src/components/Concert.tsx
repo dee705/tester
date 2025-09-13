@@ -9,21 +9,15 @@ const Concert = () => {
   const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
-    // Load YouTube API script if not already loaded
-    if (!(window as any).YT) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.appendChild(tag);
-    }
-
-    // Wait until API is ready
-    (window as any).onYouTubeIframeAPIReady = () => {
+    const initPlayer = () => {
       playerRef.current = new (window as any).YT.Player("concert-video", {
-        videoId: "zd7kQQ0fjDU", // Your video ID
+        videoId: "zd7kQQ0fjDU", // Replace with your YouTube video ID
         playerVars: {
           autoplay: 1,
-          mute: 1, // start muted (browser requirement)
-          controls: 0, // hide default YouTube controls
+          mute: 1,
+          controls: 0,
+          modestbranding: 1,
+          rel: 0,
         },
         events: {
           onReady: () => {
@@ -40,19 +34,23 @@ const Concert = () => {
         },
       });
     };
+
+    if ((window as any).YT && (window as any).YT.Player) {
+      initPlayer();
+    } else {
+      const existingScript = document.getElementById("youtube-iframe-api");
+      if (!existingScript) {
+        const tag = document.createElement("script");
+        tag.id = "youtube-iframe-api";
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.body.appendChild(tag);
+      }
+      (window as any).onYouTubeIframeAPIReady = initPlayer;
+    }
   }, []);
 
-  const handlePlay = () => {
-    if (playerRef.current) {
-      playerRef.current.playVideo();
-    }
-  };
-
-  const handlePause = () => {
-    if (playerRef.current) {
-      playerRef.current.pauseVideo();
-    }
-  };
+  const handlePlay = () => playerRef.current?.playVideo();
+  const handlePause = () => playerRef.current?.pauseVideo();
 
   const handleToggleMute = () => {
     if (playerRef.current) {
@@ -75,10 +73,12 @@ const Concert = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-gradient">Stream Now! </span>
+            <span className="text-gradient">Stream Now!</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Experience the soulful voice of our very own Nation's Mowm and Philippines Soul Diva as she share with us her latest single available on YouTube, Spotify and Apple Music! 
+            Experience the soulful voice of our very own Nation's Mowm and
+            Philippines Soul Diva as she shares her latest single, available on
+            YouTube, Spotify and Apple Music!
           </p>
         </div>
 
@@ -88,11 +88,16 @@ const Concert = () => {
             <CardContent className="p-0">
               <div className="grid lg:grid-cols-2 gap-0">
                 {/* Concert Video */}
-                <div className="relative overflow-hidden w-full min-h-[400px] lg:min-h-[600px]">
-                  <div
-                    id="concert-video"
-                    className="absolute top-0 left-0 w-full h-full"
-                  ></div>
+                <div className="relative w-full overflow-hidden">
+                  {/* Aspect Ratio Box (16:9) */}
+                  <div className="relative w-full pt-[56.25%]">
+                    <div
+                      id="concert-video"
+                      className="absolute top-0 left-0 w-full h-full"
+                    ></div>
+                  </div>
+
+                  {/* Gradient Overlay for mobile */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent lg:hidden"></div>
 
                   {/* Custom Controls */}
@@ -106,7 +111,11 @@ const Concert = () => {
                         <Play className="mr-1 h-4 w-4" /> Play
                       </Button>
                     )}
-                    <Button variant="elegant" size="sm" onClick={handleToggleMute}>
+                    <Button
+                      variant="elegant"
+                      size="sm"
+                      onClick={handleToggleMute}
+                    >
                       {isMuted ? (
                         <>
                           <VolumeX className="mr-1 h-4 w-4" /> Unmute
@@ -128,7 +137,7 @@ const Concert = () => {
                         Dito Ka Lang, Wag Kang Lalayo
                       </h3>
                       <p className="text-lg text-muted-foreground">
-                        Original Themesong for drama series Alibi 
+                        Original Themesong for drama series Alibi
                       </p>
                     </div>
 
@@ -139,13 +148,13 @@ const Concert = () => {
                         className="flex-1"
                         onClick={() =>
                           window.open(
-                            "  https://open.spotify.com/track/2GjTvT9x3XYnngU7JyKQZZ?si=RI42URD-RfGhnO6BqiS86A", 
+                            "https://open.spotify.com/track/2GjTvT9x3XYnngU7JyKQZZ?si=RI42URD-RfGhnO6BqiS86A",
                             "_blank"
                           )
                         }
                       >
                         <Ticket className="mr-2 h-5 w-5" />
-                        Stream Now! 
+                        Stream Now!
                       </Button>
                       <Button
                         variant="elegant"
@@ -153,7 +162,7 @@ const Concert = () => {
                         className="flex-1"
                         onClick={() =>
                           window.open(
-                            "https://www.instagram.com/share/reel/BAO5vyT9Vw", 
+                            "https://www.instagram.com/share/reel/BAO5vyT9Vw",
                             "_blank"
                           )
                         }
