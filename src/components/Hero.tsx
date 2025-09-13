@@ -13,8 +13,11 @@ const Hero = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* ✅ Softer Gradient Overlay so image stays visible */}
-      <div className="absolute inset-0 bg-gradient-to-br from-green-200/30 via-white/10 to-green-100/20"></div>
+      {/* ✅ Main Light Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-green-200/20 via-white/10 to-green-100/20"></div>
+
+      {/* ✅ Extra Bottom Dark Fade for readability */}
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/50 via-black/30 to-transparent"></div>
 
       {/* Content */}
       <div className="container mx-auto px-4 py-20 relative z-10 text-center">
@@ -29,12 +32,12 @@ const Hero = () => {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+          <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
             Filipino Pop Sensation • Singer-Songwriter • Performer
           </p>
 
-          {/* ✅ Description now readable with stronger contrast */}
-          <p className="text-lg text-white mb-12 max-w-3xl mx-auto drop-shadow-md">
+          {/* ✅ Description now stronger contrast */}
+          <p className="text-lg text-white mb-12 max-w-3xl mx-auto drop-shadow-2xl">
             From reality TV to chart-topping hits, experience the journey of one
             of the Philippines' most dynamic musical talents. Discover the voice
             that's captivating audiences worldwide.
