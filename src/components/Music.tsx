@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Headphones } from "lucide-react";
+import { Headphones, Music2, Youtube, Apple, Cloud } from "lucide-react";
 
 // Helper for Spotify embeds
 const getSpotifyEmbedUrl = (url: string) => {
@@ -27,13 +27,13 @@ const Music = () => {
       title: "Dito",
       album: "Feels",
       year: "2024",
-      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK?si=d01ec5fa695c471e",
+      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK",
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      spotify: "https://open.spotify.com/track/6Rl2zqkSoIfyUnMFFBYeIK?si=1a5902215d73459f",
+      spotify: "https://youtu.be/pWYMxPYW2yk?si=S-Vf_g8LpCs4Qs3d",
     },
     {
       title: "Ulan Ng Kahapon",
@@ -45,7 +45,7 @@ const Music = () => {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      spotify: "https://open.spotify.com/track/4o8yZ5AnripYyuTksF1nK6?si=fc9b251b4cb84bf4",
+      spotify: "https://youtu.be/nuDNvk22Qmg?si=Biuah7DxUz6Rz5Cg",
     },
   ];
 
@@ -76,10 +76,6 @@ const Music = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
             Soundtracks & Albums
           </h2>
-          {/* ✅ Listen Everywhere subtitle */}
-          <p className="text-lg md:text-xl text-gray-700 bg-white/40 backdrop-blur-md inline-block px-6 py-3 rounded-full shadow-md">
-            🎧 Listen Everywhere — Spotify, YouTube & more
-          </p>
         </div>
 
         {/* Albums Section */}
@@ -100,15 +96,11 @@ const Music = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h4 className="text-lg font-bold text-green-700">
-                        {album.title}
-                      </h4>
+                      <h4 className="text-lg font-bold text-green-700">{album.title}</h4>
                       <p className="text-sm text-black/60">
                         {album.type} • {album.year}
                       </p>
-                      <p className="text-sm text-black/70 mt-2">
-                        {album.description}
-                      </p>
+                      <p className="text-sm text-black/70 mt-2">{album.description}</p>
                     </div>
                     <Button
                       size="icon"
@@ -150,7 +142,7 @@ const Music = () => {
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Featured Songs
         </h3>
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
           {songs.map((song, index) => {
             const isActive = currentSong === index;
             return (
@@ -164,9 +156,7 @@ const Music = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h4 className="text-lg font-bold text-green-700">
-                        {song.title}
-                      </h4>
+                      <h4 className="text-lg font-bold text-green-700">{song.title}</h4>
                       <p className="text-sm text-black/60">
                         {song.album} • {song.year}
                       </p>
@@ -219,6 +209,41 @@ const Music = () => {
               </Card>
             );
           })}
+        </div>
+
+        {/* ✅ Listen Everywhere Buttons */}
+        <div className="text-center mt-20">
+          <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
+            Listen Everywhere
+          </h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button
+              className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-green-400/50"
+              onClick={() =>
+                window.open("https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC", "_blank")
+              }
+            >
+              <Music2 className="mr-2 h-5 w-5" /> Spotify
+            </Button>
+            <Button
+              className="bg-black hover:bg-gray-800 text-white shadow-md hover:shadow-gray-500/50"
+              onClick={() => window.open("https://music.apple.com", "_blank")}
+            >
+              <Apple className="mr-2 h-5 w-5" /> Apple Music
+            </Button>
+            <Button
+              className="bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-red-400/50"
+              onClick={() => window.open("https://www.youtube.com/@Klarisse", "_blank")}
+            >
+              <Youtube className="mr-2 h-5 w-5" /> YouTube
+            </Button>
+            <Button
+              className="bg-orange-500 hover:bg-orange-600 text-white shadow-md hover:shadow-orange-400/50"
+              onClick={() => window.open("https://soundcloud.com", "_blank")}
+            >
+              <Cloud className="mr-2 h-5 w-5" /> SoundCloud
+            </Button>
+          </div>
         </div>
       </div>
     </section>
