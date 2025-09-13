@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, Pause, Music as MusicIcon } from "lucide-react";
+import { Headphones } from "lucide-react";
 
 // Helper for Spotify embeds
 const getSpotifyEmbedUrl = (url: string) => {
@@ -74,12 +74,8 @@ const Music = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-            Interactive Music Player
+            Soundtracks & Albums
           </h2>
-          <p className="text-black/70 text-lg max-w-2xl mx-auto">
-            Explore featured songs and albums with smooth glassmorphism cards.
-            Click a track or album to play directly from Spotify or YouTube.
-          </p>
         </div>
 
         {/* Albums Section */}
@@ -117,7 +113,7 @@ const Music = () => {
                       variant="ghost"
                       className="bg-green-500 text-white hover:bg-green-600 rounded-full"
                     >
-                      {isActive ? <Pause /> : <Play />}
+                      <Headphones />
                     </Button>
                   </div>
 
@@ -180,7 +176,7 @@ const Music = () => {
                       variant="ghost"
                       className="bg-green-500 text-white hover:bg-green-600 rounded-full"
                     >
-                      {isActive ? <Pause /> : <Play />}
+                      <Headphones />
                     </Button>
                   </div>
 
