@@ -1,228 +1,230 @@
-import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Play, Pause, Volume2, VolumeX, Music, Headphones } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Headphones } from "lucide-react";
 
-const Concert = () => {
-  const playerRef = useRef<any>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+// Helper for Spotify embeds with autoplay
+const getSpotifyEmbedUrl = (url: string) => {
+  if (!url.includes("open.spotify.com")) return url;
+  const parts = url.split("/");
+  const type = parts[3];
+  const id = parts[4]?.split("?")[0];
+  return `https://open.spotify.com/embed/${type}/${id}?autoplay=1`;
+};
 
-  // Extra toggles for "Listen Everywhere"
-  const [showSpotify, setShowSpotify] = useState(false);
-  const [showYoutube, setShowYoutube] = useState(false);
+const Music = () => {
+  const [currentSong, setCurrentSong] = useState<number | null>(null);
+  const [currentAlbum, setCurrentAlbum] = useState<number | null>(null);
 
-  useEffect(() => {
-    const initPlayer = () => {
-      playerRef.current = new (window as any).YT.Player("concert-video", {
-        videoId: "zd7kQQ0fjDU", // Your YouTube video ID
-        playerVars: {
-          autoplay: 1,
-          mute: 1,
-          controls: 0,
-          modestbranding: 1,
-          rel: 0,
-        },
-        events: {
-          onReady: () => {
-            setIsPlaying(true);
-            setIsMuted(true);
-          },
-          onStateChange: (event: any) => {
-            if (event.data === (window as any).YT.PlayerState.PLAYING) {
-              setIsPlaying(true);
-            } else if (event.data === (window as any).YT.PlayerState.PAUSED) {
-              setIsPlaying(false);
-            }
-          },
-        },
-      });
-    };
+  const songs = [
+    {
+      title: "Dito Ka Lang, Wag kang lalayo",
+      album: "Klarisse",
+      year: "2025",
+      spotify: "https://open.spotify.com/album/4kl5U1j3VxkjcXCpHxzgz7",
+    },
+    {
+      title: "Dito",
+      album: "Feels",
+      year: "2024",
+      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK",
+    },
+    {
+      title: "Bibitawan Ka",
+      album: "Feels",
+      year: "2024",
+      spotify: "https://open.spotify.com/track/6Rl2zqkSoIfyUnMFFBYeIK",
+    },
+    {
+      title: "Ulan Ng Kahapon",
+      album: "Singles",
+      year: "2021",
+      youtube: "https://www.youtube.com/embed/RcKMBkkZZdc",
+    },
+    {
+      title: "Wala na Talaga",
+      album: "Klarisse",
+      year: "2017",
+      spotify: "https://open.spotify.com/track/6A3oVEfrPO6XSYfakUw3N1",
+    },
+  ];
 
-    if ((window as any).YT && (window as any).YT.Player) {
-      initPlayer();
-    } else {
-      const existingScript = document.getElementById("youtube-iframe-api");
-      if (!existingScript) {
-        const tag = document.createElement("script");
-        tag.id = "youtube-iframe-api";
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.body.appendChild(tag);
-      }
-      (window as any).onYouTubeIframeAPIReady = initPlayer;
-    }
-  }, []);
-
-  const handlePlay = () => playerRef.current?.playVideo();
-  const handlePause = () => playerRef.current?.pauseVideo();
-
-  const handleToggleMute = () => {
-    if (playerRef.current) {
-      if (isMuted) {
-        playerRef.current.unMute();
-        setIsMuted(false);
-      } else {
-        playerRef.current.mute();
-        setIsMuted(true);
-      }
-    }
-  };
+  const albums = [
+    {
+      title: "Feels",
+      year: "2024",
+      type: "Latest Album",
+      description:
+        "Her latest album featuring heartfelt ballads and emotional storytelling.",
+      spotify: "https://open.spotify.com/album/4jUJec6voKpplFklfNeTk6",
+    },
+    {
+      title: "Klarisse",
+      year: "2017",
+      type: "Self-Titled Album",
+      description:
+        "Her acclaimed self-titled album showcasing her vocal range and artistry.",
+      spotify: "https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC",
+    },
+  ];
 
   return (
-    <section id="concert" className="py-20 bg-gradient-to-br from-background to-muted/20">
+    <section className="py-20 bg-gradient-to-b from-green-100 to-white">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-gradient">Stream Now!</span>
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
+            Soundtracks & Albums
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Experience the soulful voice of our very own Nation's Mowm and Philippines Soul Diva as she shares her latest single, available on YouTube, Spotify and Apple Music!
-          </p>
         </div>
 
-        {/* Main Concert Card */}
-        <div className="max-w-6xl mx-auto mb-12">
-          <Card className="overflow-hidden shadow-luxury border-0 bg-gradient-to-br from-card to-card/50">
-            <CardContent className="p-0">
-              <div className="grid lg:grid-cols-2 gap-0">
-                {/* Concert Video */}
-                <div className="relative w-full overflow-hidden">
-                  <div className="relative w-full pt-[56.25%]">
-                    <div id="concert-video" className="absolute top-0 left-0 w-full h-full"></div>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent lg:hidden"></div>
-
-                  {/* Custom Controls */}
-                  <div className="absolute bottom-4 left-4 flex gap-2 z-10">
-                    {isPlaying ? (
-                      <Button variant="elegant" size="sm" onClick={handlePause}>
-                        <Pause className="mr-1 h-4 w-4" /> Pause
-                      </Button>
-                    ) : (
-                      <Button variant="elegant" size="sm" onClick={handlePlay}>
-                        <Play className="mr-1 h-4 w-4" /> Play
-                      </Button>
-                    )}
-                    <Button variant="elegant" size="sm" onClick={handleToggleMute}>
-                      {isMuted ? (
-                        <>
-                          <VolumeX className="mr-1 h-4 w-4" /> Unmute
-                        </>
-                      ) : (
-                        <>
-                          <Volume2 className="mr-1 h-4 w-4" /> Mute
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                </div>
-
-                {/* Song Details */}
-                <div className="p-8 lg:p-12 flex flex-col justify-center">
-                  <div className="space-y-6">
+        {/* Albums Section */}
+        <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
+          Albums
+        </h3>
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          {albums.map((album, index) => {
+            const isActive = currentAlbum === index;
+            return (
+              <Card
+                key={index}
+                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl hover:shadow-lg hover:shadow-green-400/40 ${
+                  isActive ? "ring-2 ring-green-500" : ""
+                }`}
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h3 className="text-3xl lg:text-4xl font-bold mb-2 text-gradient">
-                        Dito Ka Lang, Wag Kang Lalayo
-                      </h3>
-                      <p className="text-lg text-muted-foreground">
-                        Original Themesong for drama series Alibi
+                      <h4 className="text-lg font-bold text-green-700">
+                        {album.title}
+                      </h4>
+                      <p className="text-sm text-black/60">
+                        {album.type} • {album.year}
+                      </p>
+                      <p className="text-sm text-black/70 mt-2">
+                        {album.description}
                       </p>
                     </div>
-
-                    <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                      <Button
-                        variant="luxury"
-                        size="lg"
-                        className="flex-1"
-                        onClick={() =>
-                          window.open(
-                            "https://open.spotify.com/track/2GjTvT9x3XYnngU7JyKQZZ?si=RI42URD-RfGhnO6BqiS86A",
-                            "_blank"
-                          )
-                        }
-                      >
-                        <Music className="mr-2 h-5 w-5" />
-                        Stream Now!
-                      </Button>
-                      <Button
-                        variant="elegant"
-                        size="lg"
-                        className="flex-1"
-                        onClick={() =>
-                          window.open(
-                            "https://www.instagram.com/share/reel/BAO5vyT9Vw",
-                            "_blank"
-                          )
-                        }
-                      >
-                        Get Updates
-                      </Button>
-                    </div>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={() =>
+                        setCurrentAlbum(isActive ? null : index)
+                      }
+                      className="bg-green-500 text-white hover:bg-green-600 rounded-full"
+                    >
+                      <Headphones />
+                    </Button>
                   </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+
+                  {/* Visual Progress */}
+                  <div className="h-2 w-full bg-black/20 rounded-full overflow-hidden mb-4">
+                    <div
+                      className={`h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
+                        isActive ? "w-full animate-pulse" : "w-0"
+                      }`}
+                    />
+                  </div>
+
+                  {isActive && (
+                    <div className="mt-4">
+                      <iframe
+                        src={getSpotifyEmbedUrl(album.spotify)}
+                        width="100%"
+                        height="380"
+                        frameBorder="0"
+                        allow="autoplay; encrypted-media"
+                        className="rounded-xl"
+                      />
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
-        {/* Listen Everywhere Section */}
-        <div className="text-center mt-16">
-          <h3 className="text-2xl md:text-3xl font-semibold mb-6 text-gradient">
-            Listen Everywhere 🎧
-          </h3>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-            {/* Spotify */}
-            <div className="flex flex-col items-center">
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 text-green-700 border-green-400 hover:bg-green-50"
-                onClick={() => setShowSpotify(true)}
+        {/* Songs Section */}
+        <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
+          Featured Songs
+        </h3>
+        <div className="grid md:grid-cols-2 gap-8">
+          {songs.map((song, index) => {
+            const isActive = currentSong === index;
+            return (
+              <Card
+                key={index}
+                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl hover:shadow-lg hover:shadow-green-400/40 ${
+                  isActive ? "ring-2 ring-green-500" : ""
+                }`}
               >
-                <Headphones className="h-5 w-5" /> Spotify
-              </Button>
-              {showSpotify && (
-                <div className="mt-4 w-[300px] md:w-[400px]">
-                  <iframe
-                    src="https://open.spotify.com/embed/track/2GjTvT9x3XYnngU7JyKQZZ?utm_source=generator"
-                    width="100%"
-                    height="152"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                    className="rounded-xl shadow-lg"
-                  />
-                </div>
-              )}
-            </div>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h4 className="text-lg font-bold text-green-700">
+                        {song.title}
+                      </h4>
+                      <p className="text-sm text-black/60">
+                        {song.album} • {song.year}
+                      </p>
+                    </div>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={() =>
+                        setCurrentSong(isActive ? null : index)
+                      }
+                      className="bg-green-500 text-white hover:bg-green-600 rounded-full"
+                    >
+                      <Headphones />
+                    </Button>
+                  </div>
 
-            {/* YouTube */}
-            <div className="flex flex-col items-center">
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 text-red-600 border-red-400 hover:bg-red-50"
-                onClick={() => setShowYoutube(true)}
-              >
-                <Headphones className="h-5 w-5" /> YouTube
-              </Button>
-              {showYoutube && (
-                <div className="mt-4 w-[300px] md:w-[400px]">
-                  <iframe
-                    width="100%"
-                    height="200"
-                    src="https://www.youtube.com/embed/zd7kQQ0fjDU?autoplay=1"
-                    title="YouTube music player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    className="rounded-xl shadow-lg"
-                  />
-                </div>
-              )}
-            </div>
-          </div>
+                  {/* Visual Progress */}
+                  <div className="h-2 w-full bg-black/20 rounded-full overflow-hidden mb-4">
+                    <div
+                      className={`h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
+                        isActive ? "w-full animate-pulse" : "w-0"
+                      }`}
+                    />
+                  </div>
+
+                  {isActive && (
+                    <div className="mt-4">
+                      {song.spotify && (
+                        <iframe
+                          src={getSpotifyEmbedUrl(song.spotify)}
+                          width="100%"
+                          height={
+                            song.spotify.includes("/track/") ? "80" : "380"
+                          }
+                          frameBorder="0"
+                          allow="autoplay; encrypted-media"
+                          className="rounded-xl"
+                        />
+                      )}
+                      {song.youtube && (
+                        <iframe
+                          width="100%"
+                          height="200"
+                          src={`${song.youtube}?autoplay=1`}
+                          title={song.title}
+                          frameBorder="0"
+                          allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="rounded-xl"
+                        />
+                      )}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 };
 
-export default Concert;
+export default Music;
