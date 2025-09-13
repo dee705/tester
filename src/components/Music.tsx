@@ -27,13 +27,13 @@ const Music = () => {
       title: "Dito",
       album: "Feels",
       year: "2024",
-      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK",
+      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK?si=d01ec5fa695c471e",
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      spotify: "https://youtu.be/pWYMxPYW2yk?si=S-Vf_g8LpCs4Qs3d",
+      spotify: "https://open.spotify.com/track/6Rl2zqkSoIfyUnMFFBYeIK?si=1a5902215d73459f",
     },
     {
       title: "Ulan Ng Kahapon",
@@ -45,7 +45,7 @@ const Music = () => {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      spotify: "https://youtu.be/nuDNvk22Qmg?si=Biuah7DxUz6Rz5Cg",
+      spotify: "https://open.spotify.com/track/4o8yZ5AnripYyuTksF1nK6?si=fc9b251b4cb84bf4",
     },
   ];
 
@@ -69,7 +69,6 @@ const Music = () => {
   ];
 
   return (
-    // ✅ Added id="music"
     <section id="music" className="py-20 bg-gradient-to-b from-green-100 to-white">
       <div className="container mx-auto px-4">
         {/* Header */}
@@ -77,6 +76,10 @@ const Music = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
             Soundtracks & Albums
           </h2>
+          {/* ✅ Listen Everywhere subtitle */}
+          <p className="text-lg md:text-xl text-gray-700 bg-white/40 backdrop-blur-md inline-block px-6 py-3 rounded-full shadow-md">
+            🎧 Listen Everywhere — Spotify, YouTube & more
+          </p>
         </div>
 
         {/* Albums Section */}
