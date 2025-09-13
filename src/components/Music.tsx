@@ -1,24 +1,7 @@
-import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Play, ExternalLink, Music as MusicIcon, Calendar } from "lucide-react";
+import { Music as MusicIcon, Calendar } from "lucide-react";
 
 const Music = () => {
-  const [openSongs, setOpenSongs] = useState([]);
-  const [openAlbums, setOpenAlbums] = useState([]);
-
-  const toggleSong = (index) => {
-    setOpenSongs((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
-  };
-
-  const toggleAlbum = (index) => {
-    setOpenAlbums((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
-  };
-
   const songs = [
     {
       title: "Dito Ka Lang, Wag kang lalayo",
@@ -66,4 +49,4 @@ const Music = () => {
       year: "2024",
       type: "Latest Album",
       tracks: 3,
-      description: "H
+      description: "Her latest album featurin
