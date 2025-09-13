@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Ticket, Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, Music } from "lucide-react"; // 🎶 replaced Ticket with Music
 
 const Concert = () => {
   const playerRef = useRef<any>(null);
@@ -142,6 +142,7 @@ const Concert = () => {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                      {/* 🎶 Updated Stream Now Button */}
                       <Button
                         variant="luxury"
                         size="lg"
@@ -153,9 +154,10 @@ const Concert = () => {
                           )
                         }
                       >
-                        <Ticket className="mr-2 h-5 w-5" />
+                        <Music className="mr-2 h-5 w-5" />
                         Stream Now!
                       </Button>
+
                       <Button
                         variant="elegant"
                         size="lg"
