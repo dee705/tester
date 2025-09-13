@@ -2,29 +2,14 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Headphones } from "lucide-react";
-import { SiSpotify, SiApplemusic, SiYoutube } from "react-icons/si"; // ✅ fixed import
 
-// Helper for Spotify embeds with autoplay
+// Helper for Spotify embeds
 const getSpotifyEmbedUrl = (url: string) => {
   if (!url.includes("open.spotify.com")) return url;
   const parts = url.split("/");
   const type = parts[3];
   const id = parts[4]?.split("?")[0];
-  return `https://open.spotify.com/embed/${type}/${id}?autoplay=1`;
-};
-
-// Helper for YouTube embeds
-const getYouTubeEmbedUrl = (url: string) => {
-  if (url.includes("embed")) return `${url}?autoplay=1`; // already embed
-  if (url.includes("youtu.be")) {
-    const id = url.split("youtu.be/")[1].split("?")[0];
-    return `https://www.youtube.com/embed/${id}?autoplay=1`;
-  }
-  if (url.includes("watch?v=")) {
-    const id = url.split("watch?v=")[1].split("&")[0];
-    return `https://www.youtube.com/embed/${id}?autoplay=1`;
-  }
-  return url;
+  return `https://open.spotify.com/embed/${type}/${id}`;
 };
 
 const Music = () => {
@@ -36,19 +21,19 @@ const Music = () => {
       title: "Dito Ka Lang, Wag kang lalayo",
       album: "Klarisse",
       year: "2025",
-      youtube: "https://youtu.be/zd7kQQ0fjDU?si=t_mzdrK7pce6VaGz",
+      spotify: "https://open.spotify.com/album/4kl5U1j3VxkjcXCpHxzgz7",
     },
     {
       title: "Dito",
       album: "Feels",
       year: "2024",
-      youtube: "https://youtu.be/OwGoyDBW_x8?si=Z3U0Ki2QvuwwGrsN",
+      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK",
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      youtube: "https://youtu.be/GsGKnZSCsCo?si=IYLdNFsDkaChXzHY",
+      spotify: "https://youtu.be/pWYMxPYW2yk?si=S-Vf_g8LpCs4Qs3d", 
     },
     {
       title: "Ulan Ng Kahapon",
@@ -60,7 +45,7 @@ const Music = () => {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      youtube: "https://youtu.be/nuDNvk22Qmg?si=rcms6T5-TR0vddmM",
+      spotify: "https://youtu.be/nuDNvk22Qmg?si=Biuah7DxUz6Rz5Cg", 
     },
   ];
 
@@ -84,10 +69,7 @@ const Music = () => {
   ];
 
   return (
-    <section
-      id="music" // ✅ so nav works
-      className="py-20 bg-gradient-to-b from-green-100 to-white"
-    >
+    <section className="py-20 bg-gradient-to-b from-green-100 to-white">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
@@ -106,9 +88,12 @@ const Music = () => {
             return (
               <Card
                 key={index}
-                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl hover:shadow-lg hover:shadow-green-400/40 ${
+                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
                   isActive ? "ring-2 ring-green-500" : ""
                 }`}
+                onClick={() =>
+                  setCurrentAlbum(isActive ? null : index)
+                }
               >
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -126,9 +111,6 @@ const Music = () => {
                     <Button
                       size="icon"
                       variant="ghost"
-                      onClick={() =>
-                        setCurrentAlbum(isActive ? null : index)
-                      }
                       className="bg-green-500 text-white hover:bg-green-600 rounded-full"
                     >
                       <Headphones />
@@ -151,7 +133,7 @@ const Music = () => {
                         width="100%"
                         height="380"
                         frameBorder="0"
-                        allow="autoplay; encrypted-media"
+                        allow="encrypted-media"
                         className="rounded-xl"
                       />
                     </div>
@@ -166,15 +148,18 @@ const Music = () => {
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Featured Songs
         </h3>
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 gap-8">
           {songs.map((song, index) => {
             const isActive = currentSong === index;
             return (
               <Card
                 key={index}
-                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl hover:shadow-lg hover:shadow-green-400/40 ${
+                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
                   isActive ? "ring-2 ring-green-500" : ""
                 }`}
+                onClick={() =>
+                  setCurrentSong(isActive ? null : index)
+                }
               >
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -189,9 +174,6 @@ const Music = () => {
                     <Button
                       size="icon"
                       variant="ghost"
-                      onClick={() =>
-                        setCurrentSong(isActive ? null : index)
-                      }
                       className="bg-green-500 text-white hover:bg-green-600 rounded-full"
                     >
                       <Headphones />
@@ -217,7 +199,7 @@ const Music = () => {
                             song.spotify.includes("/track/") ? "80" : "380"
                           }
                           frameBorder="0"
-                          allow="autoplay; encrypted-media"
+                          allow="encrypted-media"
                           className="rounded-xl"
                         />
                       )}
@@ -225,10 +207,10 @@ const Music = () => {
                         <iframe
                           width="100%"
                           height="200"
-                          src={getYouTubeEmbedUrl(song.youtube)} // ✅ fixed
+                          src={song.youtube}
                           title={song.title}
                           frameBorder="0"
-                          allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
                           className="rounded-xl"
                         />
@@ -239,48 +221,6 @@ const Music = () => {
               </Card>
             );
           })}
-        </div>
-
-        {/* Listen Everywhere Section */}
-        <div className="text-center mt-24 pb-20">
-          <h3 className="text-3xl font-bold mb-8 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-            Listen Everywhere
-          </h3>
-          <div className="flex flex-wrap justify-center gap-6">
-            <Button
-              onClick={() =>
-                window.open(
-                  "https://open.spotify.com/track/2GjTvT9x3XYnngU7JyKQZZ",
-                  "_blank"
-                )
-              }
-              className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white rounded-full px-6 py-3"
-            >
-              <SiSpotify className="h-5 w-5" /> Spotify
-            </Button>
-            <Button
-              onClick={() =>
-                window.open(
-                  "https://music.apple.com/us/song/dito-ka-lang-wag-kang-lalayo/1834162756",
-                  "_blank"
-                )
-              }
-              className="flex items-center gap-2 bg-pink-500 hover:bg-pink-600 text-white rounded-full px-6 py-3"
-            >
-              <SiApplemusic className="h-5 w-5" /> Apple Music
-            </Button>
-            <Button
-              onClick={() =>
-                window.open(
-                  "https://www.youtube.com/watch?v=RcKMBkkZZdc",
-                  "_blank"
-                )
-              }
-              className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white rounded-full px-6 py-3"
-            >
-              <SiYoutube className="h-5 w-5" /> YouTube
-            </Button>
-          </div>
         </div>
       </div>
     </section>
