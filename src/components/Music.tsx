@@ -5,8 +5,17 @@ import { Play, ExternalLink, Music as MusicIcon, Calendar } from "lucide-react";
 
 const Music = () => {
   const [activeSong, setActiveSong] = useState(null);
+  const [activeAlbum, setActiveAlbum] = useState(null);
 
   const songs = [
+    {
+      title: "Dito Ka Lang, Wag kang lalayo",
+      album: "Klarisse",
+      year: "2025",
+      description: "A heartfelt song that shows empowering anthem on declaring one's love",
+      featured: true,
+      spotify: "https://open.spotify.com/album/4kl5U1j3VxkjcXCpHxzgz7"
+    },
     {
       title: "Dito",
       album: "Feels",
@@ -14,14 +23,6 @@ const Music = () => {
       description: "A heartfelt song from her latest album Feels, showcasing her emotional depth and vocal prowess.",
       featured: true,
       spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK"
-    },
-    {
-      title: "Minamahal Pa Rin Ako",
-      album: "Feels",
-      year: "2024",
-      description: "An emotional ballad about enduring love from her 2024 album Feels.",
-      featured: true,
-      spotify: "https://open.spotify.com/track/2zafsagzdI4ve8Mw9TP9sB"
     },
     {
       title: "Bibitawan Ka",
@@ -47,12 +48,40 @@ const Music = () => {
     }
   ];
 
+  const albums = [
+    {
+      title: "Feels",
+      year: "2024",
+      type: "Latest Album",
+      tracks: 3,
+      description: "Her latest album featuring heartfelt ballads and emotional storytelling.",
+      spotify: "https://open.spotify.com/album/4jUJec6voKpplFklfNeTk6"
+    },
+    {
+      title: "Klarisse",
+      year: "2017",
+      type: "Self-Titled Album",
+      tracks: 10,
+      description: "Her acclaimed self-titled album showcasing her vocal range and artistry.",
+      spotify: "https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC"
+    }
+  ];
+
+  // convert links to embed URLs
   const getEmbedUrl = (url) => {
-    if (url.includes("spotify")) {
+    if (url.includes("spotify.com/track/")) {
       const trackId = url.split("track/")[1]?.split("?")[0];
       return `https://open.spotify.com/embed/track/${trackId}`;
     }
-    if (url.includes("youtube")) {
+    if (url.includes("spotify.com/album/")) {
+      const albumId = url.split("album/")[1]?.split("?")[0];
+      return `https://open.spotify.com/embed/album/${albumId}`;
+    }
+    if (url.includes("spotify.com/artist/")) {
+      const artistId = url.split("artist/")[1]?.split("?")[0];
+      return `https://open.spotify.com/embed/artist/${artistId}`;
+    }
+    if (url.includes("youtube.com/watch?v=")) {
       const videoId = url.split("v=")[1];
       return `https://www.youtube.com/embed/${videoId}`;
     }
@@ -62,6 +91,7 @@ const Music = () => {
   return (
     <section id="music" className="py-20 bg-background">
       <div className="container mx-auto px-4">
+        {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="text-gradient">Music</span> & Albums
@@ -69,6 +99,54 @@ const Music = () => {
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Discover the songs that have touched hearts and the albums that define a generation.
           </p>
+        </div>
+
+        {/* Albums Section */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-bold mb-8 text-center">Albums</h3>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {albums.map((album, index) => (
+              <Card key={index} className="group hover:shadow-luxury transition-all duration-500 border-primary/20">
+                <CardContent className="p-8">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h4 className="text-xl font-bold text-foreground group-hover:text-gradient transition-colors">
+                        {album.title}
+                      </h4>
+                      <p className="text-primary font-medium">{album.type} • {album.year}</p>
+                    </div>
+                    <MusicIcon className="h-6 w-6 text-primary/60 group-hover:text-primary transition-colors" />
+                  </div>
+                  <p className="text-muted-foreground mb-4">{album.description}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">{album.tracks} tracks</span>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="group-hover:bg-primary/10"
+                      onClick={() => setActiveAlbum(activeAlbum === index ? null : index)}
+                    >
+                      <Play className="h-4 w-4" />
+                    </Button>
+                  </div>
+
+                  {/* Embed album player */}
+                  {activeAlbum === index && (
+                    <div className="mt-4">
+                      <iframe
+                        src={getEmbedUrl(album.spotify)}
+                        width="100%"
+                        height="380"
+                        frameBorder="0"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        className="rounded-lg"
+                      ></iframe>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Featured Songs */}
@@ -127,15 +205,15 @@ const Music = () => {
                     </div>
                   </div>
 
-                  {/* Embedded Player */}
+                  {/* Embed song player */}
                   {activeSong === index && (
                     <div className="mt-4">
                       <iframe
                         src={getEmbedUrl(song.spotify)}
                         width="100%"
-                        height={song.spotify.includes("spotify") ? "80" : "315"}
+                        height={song.spotify.includes("youtube") ? "315" : "80"}
                         frameBorder="0"
-                        allow="autoplay; encrypted-media"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                         allowFullScreen
                         className="rounded-lg"
                       ></iframe>
@@ -146,9 +224,12 @@ const Music = () => {
             ))}
           </div>
         </div>
-      </div>
-    </section>
-  );
-};
 
-export default Music;
+        {/* Music Platform Links */}
+        <div className="text-center">
+          <h3 className="text-2xl font-bold mb-8">Listen Everywhere</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button 
+              variant="outline" 
+              className="hover:bg-primary/10 hover:border-primary/30"
+              onClick={() => window.open('https://open.spotify
