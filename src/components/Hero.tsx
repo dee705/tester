@@ -7,14 +7,14 @@ const Hero = () => {
       id="home"
       className="h-[70vh] md:h-[80vh] flex items-center justify-center relative overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(rgba(34,197,94,0.3), rgba(255,255,255,0.5)), url(/lovable-uploads/17ffc630-a780-4ae7-90df-3c29b63db259.png)`,
+        backgroundImage: `url(/lovable-uploads/17ffc630-a780-4ae7-90df-3c29b63db259.png)`,
         backgroundSize: "cover",
         backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Glass Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-green-200/40 via-white/30 to-green-100/40 backdrop-blur-sm"></div>
+      {/* Light Gradient Overlay (lets image show through) */}
+      <div className="absolute inset-0 bg-gradient-to-br from-green-200/40 via-white/20 to-green-100/30"></div>
 
       {/* Content */}
       <div className="container mx-auto px-4 py-20 relative z-10 text-center">
@@ -25,16 +25,16 @@ const Hero = () => {
               Klarisse
             </span>
             <br />
-            <span className="text-gray-800">De Guzman</span>
+            <span className="text-white drop-shadow">De Guzman</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
             Filipino Pop Sensation • Singer-Songwriter • Performer
           </p>
 
           {/* Description */}
-          <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
+          <p className="text-lg text-white/80 mb-12 max-w-3xl mx-auto">
             From reality TV to chart-topping hits, experience the journey of one
             of the Philippines' most dynamic musical talents. Discover the voice
             that's captivating audiences worldwide.
@@ -69,7 +69,7 @@ const Hero = () => {
             </Button>
           </div>
 
-          {/* Floating Stats with Glassmorphism */}
+          {/* Floating Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
             {[
               { value: "10M+", label: "Streams", delay: "0s" },
@@ -84,7 +84,7 @@ const Hero = () => {
                 <div className="text-3xl font-bold bg-gradient-to-r from-green-700 to-green-500 bg-clip-text text-transparent">
                   {stat.value}
                 </div>
-                <div className="text-gray-700">{stat.label}</div>
+                <div className="text-white">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -93,8 +93,8 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-green-500/50 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-green-600 rounded-full mt-2 animate-pulse"></div>
+        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
     </section>
