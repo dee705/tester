@@ -249,7 +249,7 @@ const Music = () => {
             YouTube
           </a>
           <a
-            href="https://soundcloud.com/"
+            href="https://on.soundcloud.com/X7g5hoFdHlsOAswEvG"
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-3 bg-orange-500 text-white rounded-full shadow-md hover:bg-orange-600 transition"
