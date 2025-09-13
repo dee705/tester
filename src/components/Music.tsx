@@ -27,13 +27,13 @@ const Music = () => {
       title: "Dito",
       album: "Feels",
       year: "2024",
-      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK",
+      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK?si=6056ffaaa6d647d9",
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      spotify: "https://youtu.be/pWYMxPYW2yk?si=S-Vf_g8LpCs4Qs3d",
+      spotify: "https://open.spotify.com/track/6Rl2zqkSoIfyUnMFFBYeIK?si=e94916dc00e7479d",
     },
     {
       title: "Ulan Ng Kahapon",
@@ -45,7 +45,7 @@ const Music = () => {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      spotify: "https://youtu.be/nuDNvk22Qmg?si=Biuah7DxUz6Rz5Cg",
+      spotify: "https://open.spotify.com/track/4o8yZ5AnripYyuTksF1nK6?si=960d087bced24098",
     },
   ];
 
