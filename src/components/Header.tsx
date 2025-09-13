@@ -1,16 +1,18 @@
 import { Button } from "@/components/ui/button";
-import { Music, Menu, X } from "lucide-react";
-import { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Music, Menu } from "lucide-react";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsMenuOpen(false);
   };
 
   return (
@@ -23,51 +25,68 @@ const Header = () => {
             <span className="text-xl font-bold text-green-900">Klarisse</span>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-6">
-            {["home", "about", "music", "fanpages"].map((item) => (
-              <button
-                key={item}
-                onClick={() => scrollToSection(item)}
-                className="relative text-gray-800 hover:text-green-700 transition duration-300 ease-in-out
-                           after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-green-600
-                           after:transition-all after:duration-300 hover:after:w-full"
-              >
-                {item.charAt(0).toUpperCase() + item.slice(1)}
-              </button>
-            ))}
-          </nav>
+          {/* Dropdown Navigation - Desktop */}
+          <div className="hidden md:flex items-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="text-gray-800 hover:text-green-700"
+                >
+                  Menu
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-white/90 backdrop-blur-md shadow-lg rounded-xl border border-green-200">
+                {["home", "about", "music", "fanpages"].map((item) => (
+                  <DropdownMenuItem
+                    key={item}
+                    onClick={() => scrollToSection(item)}
+                    className="cursor-pointer text-gray-800 hover:text-green-700"
+                  >
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuItem
+                  onClick={() => scrollToSection("music")}
+                  className="cursor-pointer font-semibold bg-green-600 text-white rounded-md mt-2 hover:bg-green-700 hover:shadow-lg hover:shadow-green-400/50 transition"
+                >
+                  🎧 Listen Now
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
 
-          {/* Listen Now Button */}
-          <Button className="ml-4 bg-green-600 hover:bg-green-700 transition transform hover:scale-105 shadow-md hover:shadow-green-400/50">
-            Listen Now
-          </Button>
-
-          {/* Mobile menu toggle */}
+          {/* Dropdown Navigation - Mobile */}
           <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md bg-white/30 backdrop-blur-md hover:bg-green-100 transition"
-            >
-              {isMenuOpen ? <X /> : <Menu />}
-            </button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="p-2 rounded-md bg-white/30 backdrop-blur-md hover:bg-green-100 transition"
+                >
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-white/90 backdrop-blur-lg shadow-lg rounded-xl border border-green-200">
+                {["home", "about", "music", "fanpages"].map((item) => (
+                  <DropdownMenuItem
+                    key={item}
+                    onClick={() => scrollToSection(item)}
+                    className="cursor-pointer text-gray-800 hover:text-green-700"
+                  >
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuItem
+                  onClick={() => scrollToSection("music")}
+                  className="cursor-pointer font-semibold bg-green-600 text-white rounded-md mt-2 hover:bg-green-700 hover:shadow-lg hover:shadow-green-400/50 transition"
+                >
+                  🎧 Listen Now
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <nav className="md:hidden mt-4 flex flex-col space-y-3 bg-white/60 backdrop-blur-lg p-4 rounded-xl shadow-lg">
-            {["home", "about", "music", "fanpages"].map((item) => (
-              <button
-                key={item}
-                onClick={() => scrollToSection(item)}
-                className="text-gray-800 hover:text-green-700 transition duration-300 ease-in-out"
-              >
-                {item.charAt(0).toUpperCase() + item.slice(1)}
-              </button>
-            ))}
-          </nav>
-        )}
       </div>
     </header>
   );
