@@ -227,7 +227,7 @@ const Music = () => {
             </Button>
             <Button
               className="bg-black hover:bg-gray-800 text-white shadow-md hover:shadow-gray-500/50"
-              onClick={() => window.open("https://music.apple.com", "_blank")}
+              onClick={() => window.open("https://music.apple.com/us/artist/klarisse/1462398733", "_blank")}
             >
               <Apple className="mr-2 h-5 w-5" /> Apple Music
             </Button>
@@ -239,7 +239,7 @@ const Music = () => {
             </Button>
             <Button
               className="bg-orange-500 hover:bg-orange-600 text-white shadow-md hover:shadow-orange-400/50"
-              onClick={() => window.open("https://soundcloud.com", "_blank")}
+              onClick={() => window.open("https://on.soundcloud.com/S4TdClgpsEvCdcdEny", "_blank")}
             >
               <Cloud className="mr-2 h-5 w-5" /> SoundCloud
             </Button>
