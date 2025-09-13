@@ -94,7 +94,7 @@ const Music = () => {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-green-700">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
             Music & Albums
           </h2>
           <p className="text-xl text-black max-w-3xl mx-auto">
@@ -105,7 +105,7 @@ const Music = () => {
 
         {/* Albums Section */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold mb-8 text-center text-green-700">
+          <h3 className="text-2xl font-bold mb-8 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
             Albums
           </h3>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -117,7 +117,7 @@ const Music = () => {
                 <CardContent className="p-8">
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h4 className="text-xl font-bold text-green-700">
+                      <h4 className="text-xl font-bold bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
                         {album.title}
                       </h4>
                       <p className="text-green-600 font-medium">
@@ -165,7 +165,7 @@ const Music = () => {
 
         {/* Featured Songs */}
         <div className="mb-12">
-          <h3 className="text-2xl font-bold mb-8 text-center text-green-700">
+          <h3 className="text-2xl font-bold mb-8 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
             Featured Songs
           </h3>
           <div className="grid gap-6">
@@ -188,7 +188,9 @@ const Music = () => {
                         <div className="flex items-center gap-3 mb-2">
                           <h4
                             className={`text-lg font-bold ${
-                              isBlack ? "text-black" : "text-green-700"
+                              isBlack
+                                ? "text-black"
+                                : "bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent"
                             }`}
                           >
                             {song.title}
@@ -223,9 +225,11 @@ const Music = () => {
                         <Button
                           variant="ghost"
                           size="icon"
-                          className={`group-hover:bg-${
-                            isBlack ? "gray-100" : "green-50"
-                          } ${isBlack ? "text-black" : "text-green-700"}`}
+                          className={`${
+                            isBlack
+                              ? "text-black hover:bg-gray-100"
+                              : "text-green-700 hover:bg-green-50"
+                          }`}
                           onClick={() =>
                             setExpandedSong(
                               expandedSong === index ? null : index
@@ -275,7 +279,7 @@ const Music = () => {
 
         {/* Music Platform Links */}
         <div className="text-center">
-          <h3 className="text-2xl font-bold mb-8 text-green-700">
+          <h3 className="text-2xl font-bold mb-8 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
             Listen Everywhere
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
