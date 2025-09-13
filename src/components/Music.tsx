@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
-  Play,
-  ExternalLink,
   Music as MusicIcon,
   Calendar,
   ChevronDown,
@@ -57,6 +55,7 @@ const Music = () => {
       year: "2021",
       description: "A nostalgic track about memories and past relationships.",
       youtube: "https://www.youtube.com/embed/RcKMBkkZZdc",
+      blackTheme: true,
     },
     {
       title: "Wala na Talaga",
@@ -65,6 +64,7 @@ const Music = () => {
       description:
         "A nostalgic track that expresses a finality and the absence of something that was once there.",
       spotify: "https://open.spotify.com/track/6A3oVEfrPO6XSYfakUw3N1",
+      blackTheme: true,
     },
   ];
 
@@ -169,86 +169,107 @@ const Music = () => {
             Featured Songs
           </h3>
           <div className="grid gap-6">
-            {songs.map((song, index) => (
-              <Card
-                key={index}
-                className={`group hover:shadow-lg transition-all duration-500 ${
-                  song.featured
-                    ? "border-green-500 bg-gradient-to-r from-green-50 to-green-100"
-                    : "border-green-300"
-                }`}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h4 className="text-lg font-bold text-green-700">
-                          {song.title}
-                        </h4>
-                        {song.featured && (
-                          <span className="bg-green-600 text-white text-xs px-2 py-1 rounded-full font-medium">
-                            Featured
+            {songs.map((song, index) => {
+              const isBlack = song.blackTheme;
+              return (
+                <Card
+                  key={index}
+                  className={`group hover:shadow-lg transition-all duration-500 ${
+                    isBlack
+                      ? "border-black"
+                      : song.featured
+                      ? "border-green-500 bg-gradient-to-r from-green-50 to-green-100"
+                      : "border-green-300"
+                  }`}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h4
+                            className={`text-lg font-bold ${
+                              isBlack ? "text-black" : "text-green-700"
+                            }`}
+                          >
+                            {song.title}
+                          </h4>
+                          {song.featured && !isBlack && (
+                            <span className="bg-green-600 text-white text-xs px-2 py-1 rounded-full font-medium">
+                              Featured
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-4 text-sm text-black mb-2">
+                          <span className="flex items-center gap-1">
+                            <MusicIcon
+                              className={`h-4 w-4 ${
+                                isBlack ? "text-black" : "text-green-600"
+                              }`}
+                            />
+                            {song.album}
                           </span>
-                        )}
+                          <span className="flex items-center gap-1">
+                            <Calendar
+                              className={`h-4 w-4 ${
+                                isBlack ? "text-black" : "text-green-600"
+                              }`}
+                            />
+                            {song.year}
+                          </span>
+                        </div>
+                        <p className="text-black text-sm">{song.description}</p>
                       </div>
-                      <div className="flex items-center gap-4 text-sm text-black mb-2">
-                        <span className="flex items-center gap-1">
-                          <MusicIcon className="h-4 w-4 text-green-600" />
-                          {song.album}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Calendar className="h-4 w-4 text-green-600" />
-                          {song.year}
-                        </span>
-                      </div>
-                      <p className="text-black text-sm">{song.description}</p>
-                    </div>
-                    <div className="flex items-center gap-2 ml-4">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="group-hover:bg-green-50 text-green-700"
-                        onClick={() =>
-                          setExpandedSong(expandedSong === index ? null : index)
-                        }
-                      >
-                        {expandedSong === index ? (
-                          <ChevronUp className="h-5 w-5" />
-                        ) : (
-                          <ChevronDown className="h-5 w-5" />
-                        )}
-                      </Button>
-                    </div>
-                  </div>
-                  {expandedSong === index && (
-                    <div className="mt-4">
-                      {song.spotify && (
-                        <iframe
-                          src={getSpotifyEmbedUrl(song.spotify)}
-                          width="100%"
-                          height={
-                            song.spotify.includes("/track/") ? "80" : "380"
+                      <div className="flex items-center gap-2 ml-4">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className={`group-hover:bg-${
+                            isBlack ? "gray-100" : "green-50"
+                          } ${isBlack ? "text-black" : "text-green-700"}`}
+                          onClick={() =>
+                            setExpandedSong(
+                              expandedSong === index ? null : index
+                            )
                           }
-                          frameBorder="0"
-                          allow="encrypted-media"
-                        />
-                      )}
-                      {song.youtube && (
-                        <iframe
-                          width="100%"
-                          height="315"
-                          src={song.youtube}
-                          title={song.title}
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        />
-                      )}
+                        >
+                          {expandedSong === index ? (
+                            <ChevronUp className="h-5 w-5" />
+                          ) : (
+                            <ChevronDown className="h-5 w-5" />
+                          )}
+                        </Button>
+                      </div>
                     </div>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
+                    {expandedSong === index && (
+                      <div className="mt-4">
+                        {song.spotify && (
+                          <iframe
+                            src={getSpotifyEmbedUrl(song.spotify)}
+                            width="100%"
+                            height={
+                              song.spotify.includes("/track/") ? "80" : "380"
+                            }
+                            frameBorder="0"
+                            allow="encrypted-media"
+                          />
+                        )}
+                        {song.youtube && (
+                          <iframe
+                            width="100%"
+                            height="315"
+                            src={song.youtube}
+                            title={song.title}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        )}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
 
@@ -260,7 +281,7 @@ const Music = () => {
           <div className="flex flex-wrap justify-center gap-4">
             <Button
               variant="outline"
-              className="hover:bg-green-50 hover:border-green-400 text-green-700"
+              className="hover:bg-black/10 hover:border-black text-black"
               onClick={() =>
                 window.open(
                   "https://open.spotify.com/artist/7r59WFPJdYBQmnIQB4DX7K",
@@ -273,7 +294,7 @@ const Music = () => {
             </Button>
             <Button
               variant="outline"
-              className="hover:bg-green-50 hover:border-green-400 text-green-700"
+              className="hover:bg-black/10 hover:border-black text-black"
               onClick={() =>
                 window.open(
                   "https://music.apple.com/ph/album/klarisse-de-guzman/1444083907",
@@ -286,7 +307,7 @@ const Music = () => {
             </Button>
             <Button
               variant="outline"
-              className="hover:bg-green-50 hover:border-green-400 text-green-700"
+              className="hover:bg-black/10 hover:border-black text-black"
               onClick={() =>
                 window.open("https://www.youtube.com/@KLARISSEUpdates", "_blank")
               }
