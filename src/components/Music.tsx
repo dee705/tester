@@ -22,19 +22,19 @@ const Music = () => {
       title: "Dito Ka Lang, Wag kang lalayo",
       album: "Klarisse",
       year: "2025",
-      spotify: "https://open.spotify.com/album/4kl5U1j3VxkjcXCpHxzgz7",
+      youtube: "https://youtu.be/zd7kQQ0fjDU?si=t_mzdrK7pce6VaGz",
     },
     {
       title: "Dito",
       album: "Feels",
       year: "2024",
-      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK",
+      youtube: "https://youtu.be/OwGoyDBW_x8?si=Z3U0Ki2QvuwwGrsN",
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      spotify: "https://open.spotify.com/track/6Rl2zqkSoIfyUnMFFBYeIK",
+      youtube: "https://youtu.be/GsGKnZSCsCo?si=IYLdNFsDkaChXzHY",
     },
     {
       title: "Ulan Ng Kahapon",
@@ -46,7 +46,7 @@ const Music = () => {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      spotify: "https://open.spotify.com/track/6A3oVEfrPO6XSYfakUw3N1",
+      youtube: "https://youtu.be/nuDNvk22Qmg?si=rcms6T5-TR0vddmM",
     },
   ];
 
