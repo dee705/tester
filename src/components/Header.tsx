@@ -21,7 +21,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <Music className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold">My Site</span>
+            <span className="text-xl font-bold"> Klarisse</span>
           </div>
 
           {/* Navigation */}
