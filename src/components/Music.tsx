@@ -13,6 +13,20 @@ const getSpotifyEmbedUrl = (url: string) => {
   return `https://open.spotify.com/embed/${type}/${id}?autoplay=1`;
 };
 
+// Helper for YouTube embeds
+const getYouTubeEmbedUrl = (url: string) => {
+  if (url.includes("embed")) return `${url}?autoplay=1`; // already embed
+  if (url.includes("youtu.be")) {
+    const id = url.split("youtu.be/")[1].split("?")[0];
+    return `https://www.youtube.com/embed/${id}?autoplay=1`;
+  }
+  if (url.includes("watch?v=")) {
+    const id = url.split("watch?v=")[1].split("&")[0];
+    return `https://www.youtube.com/embed/${id}?autoplay=1`;
+  }
+  return url;
+};
+
 const Music = () => {
   const [currentSong, setCurrentSong] = useState<number | null>(null);
   const [currentAlbum, setCurrentAlbum] = useState<number | null>(null);
@@ -71,7 +85,7 @@ const Music = () => {
 
   return (
     <section
-      id="music" // ✅ added so nav works
+      id="music" // ✅ so nav works
       className="py-20 bg-gradient-to-b from-green-100 to-white"
     >
       <div className="container mx-auto px-4">
@@ -211,7 +225,7 @@ const Music = () => {
                         <iframe
                           width="100%"
                           height="200"
-                          src={`${song.youtube}?autoplay=1`}
+                          src={getYouTubeEmbedUrl(song.youtube)} // ✅ fixed
                           title={song.title}
                           frameBorder="0"
                           allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
