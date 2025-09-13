@@ -233,7 +233,7 @@ const Music = () => {
             </Button>
             <Button
               className="bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-red-400/50"
-              onClick={() => window.open("https://www.youtube.com/@Klarisse", "_blank")}
+              onClick={() => window.open("https://music.youtube.com/channel/UCeg7EAceRGI8D6q1j4djPTQ?si=mFVkSBDjI2JmOH1n", "_blank")}
             >
               <Youtube className="mr-2 h-5 w-5" /> YouTube
             </Button>
