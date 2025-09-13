@@ -13,8 +13,11 @@ const Hero = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Light Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-green-200/40 via-white/20 to-green-100/30"></div>
+      {/* ✅ Main Light Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-green-200/20 via-white/10 to-green-100/20"></div>
+
+      {/* ✅ Extra Bottom Dark Fade for readability */}
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/50 via-black/30 to-transparent"></div>
 
       {/* Content */}
       <div className="container mx-auto px-4 py-20 relative z-10 text-center">
@@ -25,16 +28,16 @@ const Hero = () => {
               Klarisse
             </span>
             <br />
-            <span className="text-white drop-shadow">De Guzman</span>
+            <span className="text-white drop-shadow-lg">De Guzman</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+          <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
             Filipino Pop Sensation • Singer-Songwriter • Performer
           </p>
 
-          {/* ✅ Readable Description */}
-          <p className="text-lg text-white mb-12 max-w-3xl mx-auto drop-shadow-xl bg-black/50 px-6 py-4 rounded-2xl backdrop-blur-sm leading-relaxed">
+          {/* ✅ Description now stronger contrast */}
+          <p className="text-lg text-white mb-12 max-w-3xl mx-auto drop-shadow-2xl">
             From reality TV to chart-topping hits, experience the journey of one
             of the Philippines' most dynamic musical talents. Discover the voice
             that's captivating audiences worldwide.
@@ -84,7 +87,7 @@ const Hero = () => {
                 <div className="text-3xl font-bold bg-gradient-to-r from-green-700 to-green-500 bg-clip-text text-transparent">
                   {stat.value}
                 </div>
-                <div className="text-white">{stat.label}</div>
+                <div className="text-white drop-shadow">{stat.label}</div>
               </div>
             ))}
           </div>
