@@ -1,11 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  ExternalLink,
-  Users,
-  Heart,
-  Star,
-} from "lucide-react";
+import { ExternalLink, Users, Heart, Star } from "lucide-react";
 
 const Fanpage = () => {
   const fanCommunities = [
@@ -78,17 +73,17 @@ const Fanpage = () => {
         {/* Stats Overview */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           <div className="text-center">
-            <Users className="h-8 w-8 text-primary mx-auto mb-2" />
+            <Users className="h-8 w-8 text-primary mx-auto mb-2 animate-pulse" />
             <div className="text-3xl font-bold text-foreground">2</div>
             <div className="text-sm text-muted-foreground">Fan Communities</div>
           </div>
           <div className="text-center">
-            <Heart className="h-8 w-8 text-red-500 mx-auto mb-2" />
+            <Heart className="h-8 w-8 text-red-500 mx-auto mb-2 animate-bounce" />
             <div className="text-3xl font-bold text-foreground">Strong</div>
             <div className="text-sm text-muted-foreground">Support</div>
           </div>
           <div className="text-center">
-            <Star className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
+            <Star className="h-8 w-8 text-yellow-500 mx-auto mb-2 animate-spin-slow" />
             <div className="text-3xl font-bold text-foreground">Dedicated</div>
             <div className="text-sm text-muted-foreground">Fans</div>
           </div>
@@ -104,7 +99,7 @@ const Fanpage = () => {
           {fanCommunities.map((community, index) => (
             <Card
               key={index}
-              className="border-primary/20 hover:shadow-md transition-all duration-300 hover:scale-105 group"
+              className="border-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300 group"
             >
               <CardContent className="p-6">
                 <div className="space-y-4">
@@ -124,10 +119,12 @@ const Fanpage = () => {
                       <Button
                         key={i}
                         variant="outline"
-                        className="w-full flex items-center justify-center gap-2 rounded-xl border hover:shadow-md transition-all"
+                        className="w-full flex items-center justify-center gap-2 rounded-xl border hover:bg-primary/5 hover:shadow-glow transition-all duration-300"
                         onClick={() => window.open(link.url, "_blank")}
                       >
-                        <i className={`${link.iconClass} ${link.color}`} />
+                        <i
+                          className={`${link.iconClass} ${link.color} group-hover:animate-bounce`}
+                        />
                         <span className="font-medium">{link.platform}</span>
                       </Button>
                     ))}
@@ -140,7 +137,7 @@ const Fanpage = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-16">
-          <div className="bg-gradient-primary/10 rounded-2xl p-8 border border-primary/20">
+          <div className="bg-gradient-primary/10 rounded-2xl p-8 border border-primary/20 shadow-md hover:shadow-lg transition-all">
             <h3 className="text-2xl font-bold mb-4">Join the Fan Communities</h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               Connect with fellow fans through Klarissenatics and Klangots.
@@ -151,6 +148,7 @@ const Fanpage = () => {
               <Button
                 variant="luxury"
                 size="lg"
+                className="hover:scale-105 transition-transform duration-300"
                 onClick={() =>
                   window.open(
                     "https://www.facebook.com/share/1BB7Ms5YxQ/",
@@ -163,6 +161,7 @@ const Fanpage = () => {
               <Button
                 variant="elegant"
                 size="lg"
+                className="hover:scale-105 transition-transform duration-300"
                 onClick={() =>
                   window.open(
                     "https://www.facebook.com/share/1DzuSVjNAF/",
