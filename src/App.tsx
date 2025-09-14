@@ -9,6 +9,9 @@ import ConcertPopup from "./components/ConcertPopup";
 
 const queryClient = new QueryClient();
 
+// 🔹 Toggle popup on/off here
+const SHOW_POPUP = false; // change to true to enable
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -20,8 +23,8 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-        {/* ConcertPopup is global and always mounted */}
-        <ConcertPopup />
+        {/* ConcertPopup is global and can be toggled */}
+        {SHOW_POPUP && <ConcertPopup />}
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
