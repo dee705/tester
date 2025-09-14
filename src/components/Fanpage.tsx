@@ -25,7 +25,7 @@ const Fanpage = () => {
           platform: "Instagram",
           url: "https://www.instagram.com/klarissenaticsofficial?igsh=N2F0dm0zYzI3eTY3/",
           icon: <FaInstagram className="h-4 w-4 text-white" />,
-          color: "bg-pink-600",
+          color: "bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600",
         },
         {
           platform: "Twitter/X",
@@ -50,7 +50,7 @@ const Fanpage = () => {
           platform: "Instagram",
           url: "https://www.instagram.com/theklangots?igsh=eDliY3VjMDBrd29y/",
           icon: <FaInstagram className="h-4 w-4 text-white" />,
-          color: "bg-pink-600",
+          color: "bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600",
         },
         {
           platform: "Twitter/X",
@@ -139,44 +139,6 @@ const Fanpage = () => {
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-primary/10 rounded-2xl p-8 border border-primary/20">
-            <h3 className="text-2xl font-bold mb-4">Join the Fan Communities</h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Connect with fellow fans through Klarissenatics and Klangots.
-              Share your love for Klarisse's music and stay updated with fan
-              activities and events!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                variant="luxury"
-                size="lg"
-                onClick={() =>
-                  window.open(
-                    "https://www.facebook.com/share/1BB7Ms5YxQ/",
-                    "_blank"
-                  )
-                }
-              >
-                Join Klarissenatics
-              </Button>
-              <Button
-                variant="elegant"
-                size="lg"
-                onClick={() =>
-                  window.open(
-                    "https://www.facebook.com/share/1DzuSVjNAF/",
-                    "_blank"
-                  )
-                }
-              >
-                Join Klangots
-              </Button>
-            </div>
-          </div>
         </div>
       </div>
     </section>
