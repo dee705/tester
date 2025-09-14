@@ -10,7 +10,7 @@ import ConcertPopup from "./components/ConcertPopup";
 const queryClient = new QueryClient();
 
 // 🔹 Toggle popup on/off here
-const SHOW_POPUP = false; // change to true to enable
+const SHOW_POPUP = true; // change to true to enable
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
