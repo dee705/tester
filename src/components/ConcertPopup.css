@@ -11,6 +11,7 @@
   opacity: 0;
   transition: opacity 0.3s ease, visibility 0.3s;
   z-index: 9999;
+  padding: 10px; /* add margin from screen edges */
 }
 
 .popup-overlay.active {
@@ -20,28 +21,32 @@
 
 .popup-content {
   background: #fff;
-  padding: 20px;
+  padding: 16px;
   border-radius: 12px;
   text-align: center;
   max-width: 600px;
   width: 95%;
+  max-height: 90vh; /* prevent going beyond screen */
+  overflow-y: auto; /* scroll if content too tall */
   position: relative;
 }
 
 /* Close button */
 .close-btn {
   position: absolute;
-  top: 10px; right: 15px;
+  top: 8px;
+  right: 12px;
   font-size: 28px;
   cursor: pointer;
   color: #333;
+  z-index: 10000;
 }
 
 /* Responsive YouTube/Video Wrapper */
 .video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 ratio */
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
   height: 0;
   overflow: hidden;
   border-radius: 10px;
@@ -60,12 +65,16 @@
 .responsive-video {
   width: 100%;
   height: auto;
+  max-height: 55vh; /* keep space for title and close button */
   border-radius: 10px;
+  object-fit: contain;
 }
 
 /* Poster image */
 .responsive-image {
   width: 100%;
   height: auto;
+  max-height: 55vh; /* ✅ ensures image fits screen */
   border-radius: 10px;
+  object-fit: contain; /* keeps aspect ratio */
 }
