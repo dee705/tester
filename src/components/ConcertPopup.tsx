@@ -13,7 +13,7 @@ export default function ConcertPopup() {
 
   // 🔹 Media sources
   const posterImage = "/lovable-uploads/1000007342.jpg";
-  const localVideo = "/videos/concert.mp4";
+  const localVideo = "";
   const youtubeVideo = "https://www.youtube.com/embed/abcd1234"; // replace with real video ID
 
   let content;
