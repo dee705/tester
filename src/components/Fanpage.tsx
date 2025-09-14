@@ -6,7 +6,6 @@ import {
   Heart,
   Star,
 } from "lucide-react";
-import { FaFacebook, FaInstagram, FaXTwitter } from "react-icons/fa6";
 
 const Fanpage = () => {
   const fanCommunities = [
@@ -18,19 +17,19 @@ const Fanpage = () => {
         {
           platform: "Facebook",
           url: "https://www.facebook.com/share/1BB7Ms5YxQ/",
-          icon: <FaFacebook className="h-4 w-4 text-white" />,
+          iconClass: "fab fa-facebook-f",
           color: "bg-blue-600",
         },
         {
           platform: "Instagram",
           url: "https://www.instagram.com/klarissenaticsofficial?igsh=N2F0dm0zYzI3eTY3/",
-          icon: <FaInstagram className="h-4 w-4 text-white" />,
+          iconClass: "fab fa-instagram",
           color: "bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600",
         },
         {
           platform: "Twitter/X",
           url: "https://x.com/KLARISSEnatics_?t=yi1BxfMkRQxv9RTXCukr2w&s=09",
-          icon: <FaXTwitter className="h-4 w-4 text-white" />,
+          iconClass: "fab fa-x-twitter",
           color: "bg-black",
         },
       ],
@@ -43,19 +42,19 @@ const Fanpage = () => {
         {
           platform: "Facebook",
           url: "https://www.facebook.com/share/1DzuSVjNAF/",
-          icon: <FaFacebook className="h-4 w-4 text-white" />,
+          iconClass: "fab fa-facebook-f",
           color: "bg-blue-600",
         },
         {
           platform: "Instagram",
           url: "https://www.instagram.com/theklangots?igsh=eDliY3VjMDBrd29y/",
-          icon: <FaInstagram className="h-4 w-4 text-white" />,
+          iconClass: "fab fa-instagram",
           color: "bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600",
         },
         {
           platform: "Twitter/X",
           url: "https://x.com/theklangots?t=yP1vgOIB5hqdKI8ieoBaHw&s=09",
-          icon: <FaXTwitter className="h-4 w-4 text-white" />,
+          iconClass: "fab fa-x-twitter",
           color: "bg-black",
         },
       ],
@@ -128,8 +127,10 @@ const Fanpage = () => {
                         className="w-full group-hover:bg-primary/10 group-hover:border-primary/30 transition-all"
                         onClick={() => window.open(link.url, "_blank")}
                       >
-                        <span className={`mr-2 ${link.color} p-1 rounded`}>
-                          {link.icon}
+                        <span
+                          className={`mr-2 ${link.color} p-1 rounded bg-clip-text text-transparent`}
+                        >
+                          <i className={`${link.iconClass} text-white`} />
                         </span>
                         {link.platform}
                       </Button>
