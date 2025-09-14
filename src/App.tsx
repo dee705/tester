@@ -23,5 +23,15 @@ const App = () => (
     </TooltipProvider>
   </QueryClientProvider>
 );
+import ConcertPopup from "./components/ConcertPopup";
+
+function App() {
+  return (
+    <>
+      <ConcertPopup />
+      {/* your existing components */}
+    </>
+  );
+}
 
 export default App;
