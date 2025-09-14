@@ -13,15 +13,15 @@ const Hero = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* ✅ Uniform dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/50"></div>
+      {/* ✅ Gradient Overlay (matches header, but darker at bottom for readability) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-green-200/50 via-green-100/40 to-black/40"></div>
 
       {/* Content */}
       <div className="container mx-auto px-4 py-20 relative z-10 text-center text-white">
         <div className="max-w-4xl mx-auto animate-slide-up">
           {/* Heading */}
           <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">
-            <span className="bg-gradient-to-r from-green-400 to-green-200 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
               Klarisse
             </span>
             <br />
@@ -34,7 +34,7 @@ const Hero = () => {
           </p>
 
           {/* ✅ Readable Description */}
-          <p className="text-lg text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-white/95 mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
             From reality TV to chart-topping hits, experience the journey of one
             of the Philippines' most dynamic musical talents. Discover the voice
             that's captivating audiences worldwide.
@@ -57,7 +57,7 @@ const Hero = () => {
 
             <Button
               size="lg"
-              className="glass bg-white/70 text-green-700 hover:bg-green-100 hover:shadow-green-300/50 transition transform hover:scale-105"
+              className="glass bg-white/80 text-green-700 hover:bg-green-100 hover:shadow-green-300/50 transition transform hover:scale-105"
               onClick={() =>
                 document
                   .getElementById("about")
