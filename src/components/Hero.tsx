@@ -13,14 +13,14 @@ const Hero = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Darker Gradient Overlay for readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
+      {/* ✅ Uniform dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/50"></div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 py-20 relative z-10 text-center">
+      <div className="container mx-auto px-4 py-20 relative z-10 text-center text-white">
         <div className="max-w-4xl mx-auto animate-slide-up">
           {/* Heading */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gray-100 drop-shadow-lg">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">
             <span className="bg-gradient-to-r from-green-400 to-green-200 bg-clip-text text-transparent">
               Klarisse
             </span>
@@ -29,12 +29,12 @@ const Hero = () => {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
             Filipino Pop Sensation • Singer-Songwriter • Performer
           </p>
 
           {/* ✅ Readable Description */}
-          <p className="text-lg text-white/95 mb-12 max-w-3xl mx-auto px-4 py-3 rounded-xl bg-black/40 backdrop-blur-sm shadow-lg leading-relaxed">
+          <p className="text-lg text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
             From reality TV to chart-topping hits, experience the journey of one
             of the Philippines' most dynamic musical talents. Discover the voice
             that's captivating audiences worldwide.
@@ -81,7 +81,7 @@ const Hero = () => {
                 className="glass p-6 rounded-2xl text-center animate-float hover:shadow-green-400/40 transition transform hover:-translate-y-2"
                 style={{ animationDelay: stat.delay }}
               >
-                <div className="text-3xl font-bold bg-gradient-to-r from-green-400 to-green-200 bg-clip-text text-transparent">
+                <div className="text-3xl font-bold text-green-400">
                   {stat.value}
                 </div>
                 <div className="text-white">{stat.label}</div>
