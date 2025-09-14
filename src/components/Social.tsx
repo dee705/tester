@@ -46,7 +46,7 @@ const Social = () => {
       id="social"
       className="relative py-20 flex justify-center bg-gradient-to-br from-theme-green to-theme-white overflow-hidden"
     >
-      {/* Gradient overlay for extra depth */}
+      {/* Overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/10 opacity-70 pointer-events-none"></div>
 
       <Card className="relative w-full max-w-lg bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl rounded-2xl">
@@ -63,7 +63,7 @@ const Social = () => {
                 key={index}
                 variant="outline"
                 onClick={() => window.open(platform.link, "_blank")}
-                className="w-full sm:w-auto flex items-center gap-2 px-5 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_var(--theme-glow)]"
+                className="w-full sm:w-auto flex items-center gap-2 px-5 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-glow"
               >
                 <i
                   className={`${platform.iconClass} ${platform.iconColorClass} bg-clip-text text-transparent text-lg`}
