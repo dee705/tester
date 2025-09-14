@@ -3,26 +3,27 @@ import "./ConcertPopup.css";
 
 export default function ConcertPopup() {
   const [show, setShow] = useState(false);
-  const videoRef = useRef<HTMLVideoElement | null>(null); // ✅ reference to video
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     setShow(true); // show popup on load
   }, []);
 
-  // 🔹 Choose what you want to display: "image" | "video" | "youtube"
+  // 🔹 Choose mode: "image" | "video" | "youtube"
   const MEDIA_MODE: "image" | "video" | "youtube" = "video";
 
   // 🔹 Media sources
   const posterImage = "/lovable-uploads/1000007342.jpg";
   const localVideo = "/videos/concertvid.mp4";
-  const youtubeVideo = ""; // replace with real video ID
+  const youtubeVideo = "";
 
-  // ✅ Handle close (stop video if playing)
+  // ✅ Handle close (stop video completely)
   const handleClose = () => {
     setShow(false);
     if (videoRef.current) {
       videoRef.current.pause();
-      videoRef.current.currentTime = 0; // reset to beginning
+      videoRef.current.currentTime = 0;
+      videoRef.current.src = videoRef.current.src; // reloads to fully stop sound
     }
   };
 
@@ -31,7 +32,7 @@ export default function ConcertPopup() {
     content = (
       <div className="video-wrapper">
         <iframe
-          src={`${youtubeVideo}?autoplay=1&mute=1`}
+          src={`${youtubeVideo}?autoplay=1&mute=0`} // try autoplay w/ sound
           title="Concert Video"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -42,11 +43,10 @@ export default function ConcertPopup() {
   } else if (MEDIA_MODE === "video" && localVideo) {
     content = (
       <video
-        ref={videoRef} // ✅ attach ref
+        ref={videoRef}
         src={localVideo}
         controls
         autoPlay
-        loop
         className="responsive-video"
       />
     );
@@ -67,7 +67,6 @@ export default function ConcertPopup() {
           &times;
         </span>
 
-        {/* 🎥 Show content based on MEDIA_MODE */}
         {content}
 
         <h2 className="mt-4 text-xl md:text-2xl font-bold text-center">
