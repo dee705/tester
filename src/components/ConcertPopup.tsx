@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./ConcertPopup.css";
 
 export default function ConcertPopup() {
   const [show, setShow] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null); // ✅ reference to video
 
   useEffect(() => {
     setShow(true); // show popup on load
@@ -15,6 +16,15 @@ export default function ConcertPopup() {
   const posterImage = "/lovable-uploads/1000007342.jpg";
   const localVideo = "/videos/concertvid.mp4";
   const youtubeVideo = ""; // replace with real video ID
+
+  // ✅ Handle close (stop video if playing)
+  const handleClose = () => {
+    setShow(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0; // reset to beginning
+    }
+  };
 
   let content;
   if (MEDIA_MODE === "youtube" && youtubeVideo) {
@@ -32,10 +42,10 @@ export default function ConcertPopup() {
   } else if (MEDIA_MODE === "video" && localVideo) {
     content = (
       <video
+        ref={videoRef} // ✅ attach ref
         src={localVideo}
         controls
         autoPlay
-        muted
         loop
         className="responsive-video"
       />
@@ -53,7 +63,7 @@ export default function ConcertPopup() {
   return (
     <div className={`popup-overlay ${show ? "active" : ""}`}>
       <div className="popup-content">
-        <span className="close-btn" onClick={() => setShow(false)}>
+        <span className="close-btn" onClick={handleClose}>
           &times;
         </span>
 
