@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import ConcertPopup from "./components/ConcertPopup";
 
 const queryClient = new QueryClient();
 
@@ -19,19 +20,11 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        {/* ConcertPopup is global and always mounted */}
+        <ConcertPopup />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
-import ConcertPopup from "./components/ConcertPopup";
-
-function App() {
-  return (
-    <>
-      <ConcertPopup />
-      {/* your existing components */}
-    </>
-  );
-}
 
 export default App;
