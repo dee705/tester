@@ -1,11 +1,3 @@
-T
-5
-You said:
-Hi I have a website project there is a specific section whereas I wanted it to look like a song playlist of my soundtracks the song cover would show on the left side and on the right side is the list of my songs, I wanted the embedded links to still play as it is, can you help me? 
-Here is the source code help me fix it . 
-
-Source code : 
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,7 +9,7 @@ const getSpotifyEmbedUrl = (url: string) => {
   const parts = url.split("/");
   const type = parts[3];
   const id = parts[4]?.split("?")[0];
-  return https://open.spotify.com/embed/${type}/${id};
+  return `https://open.spotify.com/embed/${type}/${id}`;
 };
 
 const Music = () => {
@@ -96,9 +88,9 @@ const Music = () => {
             return (
               <Card
                 key={index}
-                className={transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
+                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
                   isActive ? "ring-2 ring-green-500" : ""
-                }}
+                }`}
                 onClick={() => setCurrentAlbum(isActive ? null : index)}
               >
                 <CardContent className="p-6">
@@ -122,9 +114,9 @@ const Music = () => {
                   {/* Visual Progress */}
                   <div className="h-2 w-full bg-black/20 rounded-full overflow-hidden mb-4">
                     <div
-                      className={h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
+                      className={`h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
                         isActive ? "w-full animate-pulse" : "w-0"
-                      }}
+                      }`}
                     />
                   </div>
 
@@ -156,9 +148,9 @@ const Music = () => {
             return (
               <Card
                 key={index}
-                className={transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
+                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
                   isActive ? "ring-2 ring-green-500" : ""
-                }}
+                }`}
                 onClick={() => setCurrentSong(isActive ? null : index)}
               >
                 <CardContent className="p-6">
@@ -181,9 +173,9 @@ const Music = () => {
                   {/* Visual Progress */}
                   <div className="h-2 w-full bg-black/20 rounded-full overflow-hidden mb-4">
                     <div
-                      className={h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
+                      className={`h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
                         isActive ? "w-full animate-pulse" : "w-0"
-                      }}
+                      }`}
                     />
                   </div>
 
