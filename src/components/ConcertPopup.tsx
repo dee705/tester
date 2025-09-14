@@ -64,7 +64,7 @@ export default function ConcertPopup() {
           Klarisse De Guzman’s The Big Night
         </h2>
         <p className="text-center text-sm md:text-base">
-          <strong>Date:</strong> September 26, 2025 <br />
+          <strong>Date:</strong> September 26, 2025 7pm <br />
           <strong>Venue:</strong> Araneta Coliseum
         </p>
       </div>
