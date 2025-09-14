@@ -1,6 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Users, Heart, Star } from "lucide-react";
+import {
+  ExternalLink,
+  Users,
+  Heart,
+  Star,
+} from "lucide-react";
 
 const Fanpage = () => {
   const fanCommunities = [
@@ -12,20 +17,20 @@ const Fanpage = () => {
         {
           platform: "Facebook",
           url: "https://www.facebook.com/share/1BB7Ms5YxQ/",
-          iconClass: "fab fa-facebook-f",
-          color: "text-blue-600",
+          icon: <i className="fab fa-facebook-f text-white"></i>,
+          color: "bg-blue-600",
         },
         {
           platform: "Instagram",
           url: "https://www.instagram.com/klarissenaticsofficial?igsh=N2F0dm0zYzI3eTY3/",
-          iconClass: "fab fa-instagram",
-          color: "text-pink-600",
+          icon: <i className="fab fa-instagram text-white"></i>,
+          color: "bg-pink-600",
         },
         {
-          platform: "Twitter",
+          platform: "Twitter/X",
           url: "https://x.com/KLARISSEnatics_?t=yi1BxfMkRQxv9RTXCukr2w&s=09",
-          iconClass: "fab fa-x-twitter",
-          color: "text-black",
+          icon: <i className="fab fa-x-twitter text-white"></i>,
+          color: "bg-black",
         },
       ],
     },
@@ -37,20 +42,20 @@ const Fanpage = () => {
         {
           platform: "Facebook",
           url: "https://www.facebook.com/share/1DzuSVjNAF/",
-          iconClass: "fab fa-facebook-f",
-          color: "text-blue-600",
+          icon: <i className="fab fa-facebook-f text-white"></i>,
+          color: "bg-blue-600",
         },
         {
           platform: "Instagram",
           url: "https://www.instagram.com/theklangots?igsh=eDliY3VjMDBrd29y/",
-          iconClass: "fab fa-instagram",
-          color: "text-pink-600",
+          icon: <i className="fab fa-instagram text-white"></i>,
+          color: "bg-pink-600",
         },
         {
-          platform: "Twitter",
+          platform: "Twitter/X",
           url: "https://x.com/theklangots?t=yP1vgOIB5hqdKI8ieoBaHw&s=09",
-          iconClass: "fab fa-x-twitter",
-          color: "text-black",
+          icon: <i className="fab fa-x-twitter text-white"></i>,
+          color: "bg-black",
         },
       ],
     },
@@ -73,17 +78,17 @@ const Fanpage = () => {
         {/* Stats Overview */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           <div className="text-center">
-            <Users className="h-8 w-8 text-primary mx-auto mb-2 animate-pulse" />
+            <Users className="h-8 w-8 text-primary mx-auto mb-2" />
             <div className="text-3xl font-bold text-foreground">2</div>
             <div className="text-sm text-muted-foreground">Fan Communities</div>
           </div>
           <div className="text-center">
-            <Heart className="h-8 w-8 text-red-500 mx-auto mb-2 animate-bounce" />
+            <Heart className="h-8 w-8 text-red-500 mx-auto mb-2" />
             <div className="text-3xl font-bold text-foreground">Strong</div>
             <div className="text-sm text-muted-foreground">Support</div>
           </div>
           <div className="text-center">
-            <Star className="h-8 w-8 text-yellow-500 mx-auto mb-2 animate-spin-slow" />
+            <Star className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
             <div className="text-3xl font-bold text-foreground">Dedicated</div>
             <div className="text-sm text-muted-foreground">Fans</div>
           </div>
@@ -99,7 +104,7 @@ const Fanpage = () => {
           {fanCommunities.map((community, index) => (
             <Card
               key={index}
-              className="border-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300 group"
+              className="border-primary/20 hover:shadow-elegant transition-all duration-300 hover:scale-105 group"
             >
               <CardContent className="p-6">
                 <div className="space-y-4">
@@ -119,13 +124,13 @@ const Fanpage = () => {
                       <Button
                         key={i}
                         variant="outline"
-                        className="w-full flex items-center justify-center gap-2 rounded-xl border hover:bg-primary/5 hover:shadow-glow transition-all duration-300"
+                        className="w-full group-hover:bg-primary/10 group-hover:border-primary/30 transition-all"
                         onClick={() => window.open(link.url, "_blank")}
                       >
-                        <i
-                          className={`${link.iconClass} ${link.color} group-hover:animate-bounce`}
-                        />
-                        <span className="font-medium">{link.platform}</span>
+                        <span className={`mr-2 ${link.color} p-1 rounded`}>
+                          {link.icon}
+                        </span>
+                        {link.platform}
                       </Button>
                     ))}
                   </div>
@@ -137,7 +142,7 @@ const Fanpage = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-16">
-          <div className="bg-gradient-primary/10 rounded-2xl p-8 border border-primary/20 shadow-md hover:shadow-lg transition-all">
+          <div className="bg-gradient-primary/10 rounded-2xl p-8 border border-primary/20">
             <h3 className="text-2xl font-bold mb-4">Join the Fan Communities</h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               Connect with fellow fans through Klarissenatics and Klangots.
@@ -146,9 +151,8 @@ const Fanpage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                variant="luxury"
                 size="lg"
-                className="hover:scale-105 transition-transform duration-300"
+                className="bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto"
                 onClick={() =>
                   window.open(
                     "https://www.facebook.com/share/1BB7Ms5YxQ/",
@@ -159,9 +163,8 @@ const Fanpage = () => {
                 Join Klarissenatics
               </Button>
               <Button
-                variant="elegant"
                 size="lg"
-                className="hover:scale-105 transition-transform duration-300"
+                className="bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto"
                 onClick={() =>
                   window.open(
                     "https://www.facebook.com/share/1DzuSVjNAF/",
