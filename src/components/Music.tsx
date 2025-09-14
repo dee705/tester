@@ -1,3 +1,11 @@
+T
+5
+You said:
+Hi I have a website project there is a specific section whereas I wanted it to look like a song playlist of my soundtracks the song cover would show on the left side and on the right side is the list of my songs, I wanted the embedded links to still play as it is, can you help me? 
+Here is the source code help me fix it . 
+
+Source code : 
+
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,53 +17,46 @@ const getSpotifyEmbedUrl = (url: string) => {
   const parts = url.split("/");
   const type = parts[3];
   const id = parts[4]?.split("?")[0];
-  return `https://open.spotify.com/embed/${type}/${id}`;
+  return https://open.spotify.com/embed/${type}/${id};
 };
 
 const Music = () => {
   const [currentSong, setCurrentSong] = useState<number | null>(null);
   const [currentAlbum, setCurrentAlbum] = useState<number | null>(null);
 
-  // ✅ Updated songs with real cover art
   const songs = [
     {
       title: "Dito Ka Lang, Wag kang lalayo",
       album: "Klarisse",
       year: "2025",
-      cover: "https://i.scdn.co/image/ab67616d0000b273b8e0d685efa8fd06c4f6c875",
       spotify: "https://open.spotify.com/album/4kl5U1j3VxkjcXCpHxzgz7",
     },
     {
       title: "Dito",
       album: "Feels",
       year: "2024",
-      cover: "https://i.scdn.co/image/ab67616d0000b2731d78cde4ba3d79ccf90f7859",
       spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK?si=9e192ed10ee74719",
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      cover: "https://i.scdn.co/image/ab67616d0000b2732a41d478bcf731b23a7b0a8c",
       spotify: "https://open.spotify.com/track/6Rl2zqkSoIfyUnMFFBYeIK?si=d96d472160b04f96",
     },
     {
       title: "Ulan Ng Kahapon",
       album: "Singles",
       year: "2021",
-      cover: "https://i.scdn.co/image/ab67616d0000b2732bcbc179440cb070198f4fb2",
       youtube: "https://www.youtube.com/embed/RcKMBkkZZdc",
     },
     {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      cover: "https://i.scdn.co/image/ab67616d0000b2730f9f62cd088f795917bd7d82",
       spotify: "https://open.spotify.com/track/4o8yZ5AnripYyuTksF1nK6?si=f4d741d320cd4dbf",
     },
   ];
 
-  // ✅ Albums section untouched
   const albums = [
     {
       title: "Feels",
@@ -85,7 +86,7 @@ const Music = () => {
           </h2>
         </div>
 
-        {/* Albums Section (untouched) */}
+        {/* Albums Section */}
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Albums
         </h3>
@@ -95,9 +96,9 @@ const Music = () => {
             return (
               <Card
                 key={index}
-                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
+                className={transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
                   isActive ? "ring-2 ring-green-500" : ""
-                }`}
+                }}
                 onClick={() => setCurrentAlbum(isActive ? null : index)}
               >
                 <CardContent className="p-6">
@@ -121,9 +122,9 @@ const Music = () => {
                   {/* Visual Progress */}
                   <div className="h-2 w-full bg-black/20 rounded-full overflow-hidden mb-4">
                     <div
-                      className={`h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
+                      className={h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
                         isActive ? "w-full animate-pulse" : "w-0"
-                      }`}
+                      }}
                     />
                   </div>
 
@@ -145,7 +146,7 @@ const Music = () => {
           })}
         </div>
 
-        {/* Songs Section (fixed covers + square thumbnails) */}
+        {/* Songs Section */}
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Featured Songs
         </h3>
@@ -155,20 +156,14 @@ const Music = () => {
             return (
               <Card
                 key={index}
-                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
+                className={transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
                   isActive ? "ring-2 ring-green-500" : ""
-                }`}
+                }}
                 onClick={() => setCurrentSong(isActive ? null : index)}
               >
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    {/* Square cover */}
-                    <img
-                      src={song.cover}
-                      alt={song.title}
-                      className="w-16 h-16 rounded-md object-cover"
-                    />
-                    <div className="flex-1">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
                       <h4 className="text-lg font-bold text-green-700">{song.title}</h4>
                       <p className="text-sm text-black/60">
                         {song.album} • {song.year}
@@ -186,9 +181,9 @@ const Music = () => {
                   {/* Visual Progress */}
                   <div className="h-2 w-full bg-black/20 rounded-full overflow-hidden mb-4">
                     <div
-                      className={`h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
+                      className={h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
                         isActive ? "w-full animate-pulse" : "w-0"
-                      }`}
+                      }}
                     />
                   </div>
 
@@ -240,25 +235,19 @@ const Music = () => {
             </Button>
             <Button
               className="bg-black hover:bg-gray-800 text-white shadow-md hover:shadow-gray-500/50"
-              onClick={() =>
-                window.open("https://music.apple.com/us/artist/klarisse/1462398733", "_blank")
-              }
+              onClick={() => window.open("https://music.apple.com/us/artist/klarisse/1462398733", "_blank")}
             >
               <Apple className="mr-2 h-5 w-5" /> Apple Music
             </Button>
             <Button
               className="bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-red-400/50"
-              onClick={() =>
-                window.open("https://music.youtube.com/channel/UCeg7EAceRGI8D6q1j4djPTQ?si=mFVkSBDjI2JmOH1n", "_blank")
-              }
+              onClick={() => window.open("https://music.youtube.com/channel/UCeg7EAceRGI8D6q1j4djPTQ?si=mFVkSBDjI2JmOH1n", "_blank")}
             >
               <Youtube className="mr-2 h-5 w-5" /> YouTube
             </Button>
             <Button
               className="bg-orange-500 hover:bg-orange-600 text-white shadow-md hover:shadow-orange-400/50"
-              onClick={() =>
-                window.open("https://on.soundcloud.com/S4TdClgpsEvCdcdEny", "_blank")
-              }
+              onClick={() => window.open("https://on.soundcloud.com/S4TdClgpsEvCdcdEny", "_blank")}
             >
               <Cloud className="mr-2 h-5 w-5" /> SoundCloud
             </Button>
