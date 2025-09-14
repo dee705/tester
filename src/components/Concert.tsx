@@ -26,16 +26,17 @@ const Concert = () => {
       playerRef.current = new (window as any).YT.Player("concert-video", {
         videoId: "zd7kQQ0fjDU",
         playerVars: {
-          autoplay: 0,
-          mute: 1,
+          autoplay: 1, // ✅ enable autoplay
+          mute: 1,     // ✅ muted so autoplay works across browsers
           controls: 0,
           modestbranding: 1,
           rel: 0,
         },
         events: {
-          onReady: () => {
+          onReady: (event: any) => {
             setDuration(playerRef.current.getDuration());
             setIsMuted(true);
+            event.target.playVideo(); // ✅ force play when ready
           },
           onStateChange: (event: any) => {
             if (event.data === (window as any).YT.PlayerState.PLAYING) {
@@ -194,7 +195,8 @@ const Concert = () => {
                           onChange={handleSeek}
                           className="absolute w-full h-2 opacity-0 cursor-pointer z-20"
                         />
-                        <div className="absolute top-1/2 -translate-y-1/2 h-2 rounded bg-green-500"
+                        <div
+                          className="absolute top-1/2 -translate-y-1/2 h-2 rounded bg-green-500"
                           style={{ width: `${progress}%` }}
                         />
                       </div>
