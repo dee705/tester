@@ -3,49 +3,41 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Headphones, Music2, Youtube, Apple, Cloud } from "lucide-react";
 
-// Helper for Spotify embeds
-const getSpotifyEmbedUrl = (url: string) => {
-  if (!url.includes("open.spotify.com")) return url;
-  const parts = url.split("/");
-  const type = parts[3];
-  const id = parts[4]?.split("?")[0];
-  return `https://open.spotify.com/embed/${type}/${id}`;
-};
-
 const Music = () => {
   const [currentSong, setCurrentSong] = useState<number | null>(null);
   const [currentAlbum, setCurrentAlbum] = useState<number | null>(null);
 
+  // 🔑 Use YouTube EMBED links only
   const songs = [
     {
       title: "Dito Ka Lang, Wag kang lalayo",
       album: "Klarisse",
       year: "2025",
-      spotify: "https://open.spotify.com/album/4kl5U1j3VxkjcXCpHxzgz7",
+      youtube: "<iframe width="560" height="315" src="https://www.youtube.com/embed/zd7kQQ0fjDU?si=M7O83yVAEPjJQexq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>", 
     },
     {
       title: "Dito",
       album: "Feels",
       year: "2024",
-      spotify: "https://open.spotify.com/track/5sfqkmXnAigZ3KIwQIH8sK?si=9e192ed10ee74719",
+      youtube: "<iframe width="560" height="315" src="https://www.youtube.com/embed/VxnNphj9qtQ?si=G3zr_iQhzs04CJ2D" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>", 
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      spotify: "https://open.spotify.com/track/6Rl2zqkSoIfyUnMFFBYeIK?si=d96d472160b04f96",
+      youtube: "<iframe width="560" height="315" src="https://www.youtube.com/embed/GsGKnZSCsCo?si=WrnmaMEYPhp0vx-N" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>", 
     },
     {
       title: "Ulan Ng Kahapon",
       album: "Singles",
       year: "2021",
-      youtube: "https://www.youtube.com/embed/RcKMBkkZZdc",
+      youtube: "<iframe width="560" height="315" src="https://www.youtube.com/embed/RcKMBkkZZdc?si=ialxtLiaYNomQC-W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>", 
     },
     {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      spotify: "https://open.spotify.com/track/4o8yZ5AnripYyuTksF1nK6?si=f4d741d320cd4dbf",
+      youtube: "<iframe width="560" height="315" src="https://www.youtube.com/embed/nuDNvk22Qmg?si=F7o1qYMGRtZSAiHC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>", 
     },
   ];
 
@@ -78,7 +70,7 @@ const Music = () => {
           </h2>
         </div>
 
-        {/* Albums Section */}
+        {/* Albums Section (Spotify embeds stay the same) */}
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Albums
         </h3>
@@ -123,7 +115,7 @@ const Music = () => {
                   {isActive && (
                     <div className="mt-4">
                       <iframe
-                        src={getSpotifyEmbedUrl(album.spotify)}
+                        src={`https://open.spotify.com/embed/album/${album.spotify.split("/").pop()}`}
                         width="100%"
                         height="380"
                         frameBorder="0"
@@ -138,7 +130,7 @@ const Music = () => {
           })}
         </div>
 
-        {/* Songs Section */}
+        {/* Featured Songs Section */}
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Featured Songs
         </h3>
@@ -148,10 +140,9 @@ const Music = () => {
             return (
               <Card
                 key={index}
-                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
+                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl hover:shadow-lg hover:shadow-green-400/40 ${
                   isActive ? "ring-2 ring-green-500" : ""
                 }`}
-                onClick={() => setCurrentSong(isActive ? null : index)}
               >
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -165,6 +156,7 @@ const Music = () => {
                       size="icon"
                       variant="ghost"
                       className="bg-green-500 text-white hover:bg-green-600 rounded-full"
+                      onClick={() => setCurrentSong(isActive ? null : index)}
                     >
                       <Headphones />
                     </Button>
@@ -179,31 +171,15 @@ const Music = () => {
                     />
                   </div>
 
-                  {isActive && (
-                    <div className="mt-4">
-                      {song.spotify && (
-                        <iframe
-                          src={getSpotifyEmbedUrl(song.spotify)}
-                          width="100%"
-                          height={song.spotify.includes("/track/") ? "80" : "380"}
-                          frameBorder="0"
-                          allow="encrypted-media"
-                          className="rounded-xl"
-                        />
-                      )}
-                      {song.youtube && (
-                        <iframe
-                          width="100%"
-                          height="200"
-                          src={song.youtube}
-                          title={song.title}
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          className="rounded-xl"
-                        />
-                      )}
-                    </div>
+                  {isActive && song.youtube && (
+                    <iframe
+                      src={`${song.youtube}?autoplay=1`}
+                      width="0"
+                      height="0"
+                      frameBorder="0"
+                      allow="autoplay; encrypted-media"
+                      style={{ display: "none" }} // invisible, behaves like audio
+                    />
                   )}
                 </CardContent>
               </Card>
@@ -227,13 +203,20 @@ const Music = () => {
             </Button>
             <Button
               className="bg-black hover:bg-gray-800 text-white shadow-md hover:shadow-gray-500/50"
-              onClick={() => window.open("https://music.apple.com/us/artist/klarisse/1462398733", "_blank")}
+              onClick={() =>
+                window.open("https://music.apple.com/us/artist/klarisse/1462398733", "_blank")
+              }
             >
               <Apple className="mr-2 h-5 w-5" /> Apple Music
             </Button>
             <Button
               className="bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-red-400/50"
-              onClick={() => window.open("https://music.youtube.com/channel/UCeg7EAceRGI8D6q1j4djPTQ?si=mFVkSBDjI2JmOH1n", "_blank")}
+              onClick={() =>
+                window.open(
+                  "https://music.youtube.com/channel/UCeg7EAceRGI8D6q1j4djPTQ?si=mFVkSBDjI2JmOH1n",
+                  "_blank"
+                )
+              }
             >
               <Youtube className="mr-2 h-5 w-5" /> YouTube
             </Button>
