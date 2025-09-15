@@ -1,43 +1,52 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Headphones, Music2, Youtube, Apple, Cloud } from "lucide-react";
 
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
+
 const Music = () => {
   const [currentSong, setCurrentSong] = useState<number | null>(null);
   const [currentAlbum, setCurrentAlbum] = useState<number | null>(null);
+  const [elapsed, setElapsed] = useState(0);
+  const playerRef = useRef<any>(null);
 
-  // 🔑 Use YouTube EMBED links only
+  // ✅ Featured songs use YouTube video IDs only
   const songs = [
     {
       title: "Dito Ka Lang, Wag kang lalayo",
       album: "Klarisse",
       year: "2025",
-      youtube: "https://www.youtube.com/embed/zd7kQQ0fjDU?si=M7O83yVAEPjJQexq", 
+      youtube: "zd7kQQ0fjDU",
     },
     {
       title: "Dito",
       album: "Feels",
       year: "2024",
-      youtube: "https://www.youtube.com/embed/VxnNphj9qtQ?si=G3zr_iQhzs04CJ2D", 
+      youtube: "VxnNphj9qtQ",
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      youtube: "https://www.youtube.com/embed/GsGKnZSCsCo?si=WrnmaMEYPhp0vx-N", 
+      youtube: "GsGKnZSCsCo",
     },
     {
       title: "Ulan Ng Kahapon",
       album: "Singles",
       year: "2021",
-      youtube: "https://www.youtube.com/embed/RcKMBkkZZdc?si=ialxtLiaYNomQC-W", 
+      youtube: "RcKMBkkZZdc",
     },
     {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      youtube: "https://www.youtube.com/embed/nuDNvk22Qmg?si=F7o1qYMGRtZSAiHC",
+      youtube: "nuDNvk22Qmg",
     },
   ];
 
@@ -59,6 +68,48 @@ const Music = () => {
       spotify: "https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC",
     },
   ];
+
+  // ✅ Load YouTube API once
+  useEffect(() => {
+    if (!window.YT) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.body.appendChild(tag);
+    }
+  }, []);
+
+  // ✅ Create player and track elapsed time
+  useEffect(() => {
+    if (currentSong !== null && window.YT) {
+      if (playerRef.current) {
+        playerRef.current.destroy();
+      }
+      playerRef.current = new window.YT.Player(`yt-player-${currentSong}`, {
+        videoId: songs[currentSong].youtube,
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+        },
+        events: {
+          onReady: (event: any) => event.target.playVideo(),
+        },
+      });
+
+      const interval = setInterval(() => {
+        if (playerRef.current && playerRef.current.getCurrentTime) {
+          setElapsed(Math.floor(playerRef.current.getCurrentTime()));
+        }
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [currentSong]);
+
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s.toString().padStart(2, "0")}`;
+  };
 
   return (
     <section id="music" className="py-20 bg-gradient-to-b from-green-100 to-white">
@@ -151,14 +202,17 @@ const Music = () => {
                       <p className="text-sm text-black/60">
                         {song.album} • {song.year}
                       </p>
+                      {isActive && (
+                        <p className="text-xs text-green-600 mt-1">
+                          ⏱ {formatTime(elapsed)}
+                        </p>
+                      )}
                     </div>
                     <Button
                       size="icon"
                       variant="ghost"
                       className="bg-green-500 text-white hover:bg-green-600 rounded-full"
-                      onClick={() =>
-                        setCurrentSong(isActive ? null : index) // 🔑 stops old song, plays new
-                      }
+                      onClick={() => setCurrentSong(isActive ? null : index)}
                     >
                       <Headphones />
                     </Button>
@@ -173,16 +227,11 @@ const Music = () => {
                     />
                   </div>
 
-                  {isActive && song.youtube && (
-                    <iframe
-                      key={song.youtube} // 🔑 force remount when switching songs
-                      src={`${song.youtube}${song.youtube.includes("?") ? "&" : "?"}autoplay=1`}
-                      width="0"
-                      height="0"
-                      frameBorder="0"
-                      allow="autoplay; encrypted-media"
-                      style={{ display: "none" }}
-                    />
+                  {/* Hidden Player */}
+                  {isActive && (
+                    <div style={{ display: "none" }}>
+                      <div id={`yt-player-${index}`} />
+                    </div>
                   )}
                 </CardContent>
               </Card>
