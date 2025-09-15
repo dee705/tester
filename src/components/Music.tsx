@@ -13,31 +13,31 @@ const Music = () => {
       title: "Dito Ka Lang, Wag kang lalayo",
       album: "Klarisse",
       year: "2025",
-      youtube: "<iframe width="560" height="315" src="https://www.youtube.com/embed/zd7kQQ0fjDU?si=M7O83yVAEPjJQexq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>", 
+      youtube: "https://www.youtube.com/embed/zd7kQQ0fjDU?si=M7O83yVAEPjJQexq", 
     },
     {
       title: "Dito",
       album: "Feels",
       year: "2024",
-      youtube: "<iframe width="560" height="315" src="https://www.youtube.com/embed/VxnNphj9qtQ?si=G3zr_iQhzs04CJ2D" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>", 
+      youtube: "https://www.youtube.com/embed/VxnNphj9qtQ?si=G3zr_iQhzs04CJ2D", 
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      youtube: "<iframe width="560" height="315" src="https://www.youtube.com/embed/GsGKnZSCsCo?si=WrnmaMEYPhp0vx-N" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>", 
+      youtube: "https://www.youtube.com/embed/GsGKnZSCsCo?si=WrnmaMEYPhp0vx-N", 
     },
     {
       title: "Ulan Ng Kahapon",
       album: "Singles",
       year: "2021",
-      youtube: "<iframe width="560" height="315" src="https://www.youtube.com/embed/RcKMBkkZZdc?si=ialxtLiaYNomQC-W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>", 
+      youtube: "https://www.youtube.com/embed/RcKMBkkZZdc?si=ialxtLiaYNomQC-W", 
     },
     {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      youtube: "<iframe width="560" height="315" src="https://www.youtube.com/embed/nuDNvk22Qmg?si=F7o1qYMGRtZSAiHC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>", 
+      youtube: "https://www.youtube.com/embed/nuDNvk22Qmg?si=F7o1qYMGRtZSAiHC",
     },
   ];
 
