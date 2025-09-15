@@ -70,7 +70,7 @@ const Music = () => {
           </h2>
         </div>
 
-        {/* Albums Section (Spotify embeds stay the same) */}
+        {/* Albums Section */}
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Albums
         </h3>
@@ -156,7 +156,9 @@ const Music = () => {
                       size="icon"
                       variant="ghost"
                       className="bg-green-500 text-white hover:bg-green-600 rounded-full"
-                      onClick={() => setCurrentSong(isActive ? null : index)}
+                      onClick={() =>
+                        setCurrentSong(isActive ? null : index) // 🔑 stops old song, plays new
+                      }
                     >
                       <Headphones />
                     </Button>
@@ -173,12 +175,13 @@ const Music = () => {
 
                   {isActive && song.youtube && (
                     <iframe
-                      src={`${song.youtube}?autoplay=1`}
+                      key={song.youtube} // 🔑 force remount when switching songs
+                      src={`${song.youtube}${song.youtube.includes("?") ? "&" : "?"}autoplay=1`}
                       width="0"
                       height="0"
                       frameBorder="0"
                       allow="autoplay; encrypted-media"
-                      style={{ display: "none" }} // invisible, behaves like audio
+                      style={{ display: "none" }}
                     />
                   )}
                 </CardContent>
