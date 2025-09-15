@@ -65,7 +65,7 @@ const Music = () => {
       type: "Self-Titled Album",
       description:
         "Her acclaimed self-titled album showcasing her vocal range and artistry.",
-      spotify: "https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC",
+      spotify: "  https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC?si=FmasTWCLSCumqR6549uEwQ", 
     },
   ];
 
