@@ -3,42 +3,75 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Headphones, Music2, Youtube, Apple, Cloud } from "lucide-react";
 
+// Helper for Spotify embeds
+const getSpotifyEmbedUrl = (url: string) => {
+  if (!url.includes("open.spotify.com")) return url;
+  const parts = url.split("/");
+  const type = parts[3];
+  const id = parts[4]?.split("?")[0];
+  return `https://open.spotify.com/embed/${type}/${id}`;
+};
+
 const Music = () => {
   const [currentSong, setCurrentSong] = useState<number | null>(null);
   const [currentAlbum, setCurrentAlbum] = useState<number | null>(null);
-  const [time, setTime] = useState(0);
+  const [timer, setTimer] = useState(0);
 
-  // 🔑 Use YouTube EMBED links only
+  // Timer effect (resets on song change)
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    if (currentSong !== null) {
+      setTimer(0);
+      interval = setInterval(() => {
+        setTimer((prev) => prev + 1);
+      }, 1000);
+    } else {
+      setTimer(0);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [currentSong]);
+
+  // Helper to format seconds as mm:ss
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const s = (seconds % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  };
+
   const songs = [
     {
       title: "Dito Ka Lang, Wag kang lalayo",
       album: "Klarisse",
       year: "2025",
-      youtube: "https://www.youtube.com/embed/zd7kQQ0fjDU",
+      youtube: "https://www.youtube.com/embed/nuDNvk22Qmg?autoplay=1", // sample
     },
     {
       title: "Dito",
       album: "Feels",
       year: "2024",
-      youtube: "https://www.youtube.com/embed/VxnNphj9qtQ",
+      youtube: "https://www.youtube.com/embed/example1?autoplay=1",
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
-      youtube: "https://www.youtube.com/embed/GsGKnZSCsCo",
+      youtube: "https://www.youtube.com/embed/example2?autoplay=1",
     },
     {
       title: "Ulan Ng Kahapon",
       album: "Singles",
       year: "2021",
-      youtube: "https://www.youtube.com/embed/RcKMBkkZZdc",
+      youtube: "https://www.youtube.com/embed/RcKMBkkZZdc?autoplay=1",
     },
     {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
-      youtube: "https://www.youtube.com/embed/nuDNvk22Qmg",
+      youtube: "https://www.youtube.com/embed/nuDNvk22Qmg?autoplay=1",
     },
   ];
 
@@ -57,19 +90,9 @@ const Music = () => {
       type: "Self-Titled Album",
       description:
         "Her acclaimed self-titled album showcasing her vocal range and artistry.",
-      spotify: "https://open.spotify.com/album/5Ym6GBzrbw1fHFezqoxRVl", // ✅ fixed album link
+      spotify: "https://open.spotify.com/album/5Ym6GBzrbw1fHFezqoxRVl", // ✅ corrected album link
     },
   ];
-
-  // Timer for visible "proof" playback
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (currentSong !== null) {
-      setTime(0);
-      interval = setInterval(() => setTime((t) => t + 1), 1000);
-    }
-    return () => clearInterval(interval);
-  }, [currentSong]);
 
   return (
     <section id="music" className="py-20 bg-gradient-to-b from-green-100 to-white">
@@ -126,7 +149,7 @@ const Music = () => {
                   {isActive && (
                     <div className="mt-4">
                       <iframe
-                        src={`https://open.spotify.com/embed/album/${album.spotify.split("/").pop()}`}
+                        src={getSpotifyEmbedUrl(album.spotify)}
                         width="100%"
                         height="380"
                         frameBorder="0"
@@ -141,7 +164,7 @@ const Music = () => {
           })}
         </div>
 
-        {/* Featured Songs Section */}
+        {/* Songs Section */}
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Featured Songs
         </h3>
@@ -151,9 +174,10 @@ const Music = () => {
             return (
               <Card
                 key={index}
-                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl hover:shadow-lg hover:shadow-green-400/40 ${
+                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
                   isActive ? "ring-2 ring-green-500" : ""
                 }`}
+                onClick={() => setCurrentSong(isActive ? null : index)}
               >
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -162,15 +186,11 @@ const Music = () => {
                       <p className="text-sm text-black/60">
                         {song.album} • {song.year}
                       </p>
-                      {isActive && (
-                        <p className="text-xs text-green-600 mt-1">▶ Playing... {time}s</p>
-                      )}
                     </div>
                     <Button
                       size="icon"
                       variant="ghost"
                       className="bg-green-500 text-white hover:bg-green-600 rounded-full"
-                      onClick={() => setCurrentSong(isActive ? null : index)}
                     >
                       <Headphones />
                     </Button>
@@ -185,15 +205,22 @@ const Music = () => {
                     />
                   </div>
 
-                  {isActive && song.youtube && (
-                    <iframe
-                      src={`${song.youtube}?autoplay=1`}
-                      width="0"
-                      height="0"
-                      frameBorder="0"
-                      allow="autoplay; encrypted-media"
-                      style={{ display: "none" }}
-                    />
+                  {isActive && (
+                    <div className="mt-4 space-y-2">
+                      <iframe
+                        width="100%"
+                        height="200"
+                        src={song.youtube}
+                        title={song.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="rounded-xl"
+                      />
+                      <p className="text-sm text-gray-600 text-center">
+                        ⏱️ {formatTime(timer)}
+                      </p>
+                    </div>
                   )}
                 </CardContent>
               </Card>
