@@ -49,7 +49,7 @@ const Music = () => {
       type: "Latest Album",
       description:
         "Her latest album featuring heartfelt ballads and emotional storytelling.",
-      spotify: "https://open.spotify.com/album/4jUJec6voKpplFklfNeTk6",
+      spotifyId: "4jUJec6voKpplFklfNeTk6",
     },
     {
       title: "Klarisse",
@@ -57,7 +57,7 @@ const Music = () => {
       type: "Self-Titled Album",
       description:
         "Her acclaimed self-titled album showcasing her vocal range and artistry.",
-      spotify: "https://open.spotify.com/album/5Ym6GBzrbw1fHFezqoxRVl", // ✅ fixed album link
+      spotifyId: "0U9ZD8Tu410sGD8i3eRsAK", // ✅ fixed album link
     },
   ];
 
@@ -126,7 +126,7 @@ const Music = () => {
                   {isActive && (
                     <div className="mt-4">
                       <iframe
-                        src={`https://open.spotify.com/embed/album/${album.spotify.split("/").pop()}`}
+                        src={`https://open.spotify.com/embed/album/${album.spotifyId}`}
                         width="100%"
                         height="380"
                         frameBorder="0"
