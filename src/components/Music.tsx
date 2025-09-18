@@ -1,7 +1,17 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Headphones, Music2, Youtube, Apple, Cloud } from "lucide-react";
+import {
+  Headphones,
+  Music2,
+  Youtube,
+  Apple,
+  Cloud,
+  Play,
+  Pause,
+  SkipBack,
+  SkipForward,
+} from "lucide-react";
 
 const Music = () => {
   const [currentSong, setCurrentSong] = useState(0);
@@ -192,7 +202,7 @@ const Music = () => {
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
                   <img
-                    src={`https://picsum.photos/100?random=${currentSong}`} // ✅ back to dynamic random art
+                    src={`https://picsum.photos/100?random=${currentSong}`}
                     alt={song.title}
                     className="w-full h-full object-cover"
                   />
@@ -226,14 +236,22 @@ const Music = () => {
 
               {/* Controls */}
               <div className="flex justify-center items-center gap-6 text-green-600">
-                <button onClick={playPrev} className="hover:scale-110 transition">⏮</button>
+                <button onClick={playPrev} className="hover:scale-110 transition">
+                  <SkipBack className="w-6 h-6" />
+                </button>
                 <button
                   className="bg-green-500 text-white p-3 rounded-full hover:bg-green-600 transition"
                   onClick={() => setIsPlaying(!isPlaying)}
                 >
-                  {isPlaying ? "⏸" : "▶"}
+                  {isPlaying ? (
+                    <Pause className="w-6 h-6 text-white" />
+                  ) : (
+                    <Play className="w-6 h-6 text-white" />
+                  )}
                 </button>
-                <button onClick={playNext} className="hover:scale-110 transition">⏭</button>
+                <button onClick={playNext} className="hover:scale-110 transition">
+                  <SkipForward className="w-6 h-6" />
+                </button>
               </div>
             </div>
 
