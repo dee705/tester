@@ -145,9 +145,12 @@ const Music = () => {
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Featured Songs
         </h3>
+
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {songs.map((song, index) => {
             const isActive = currentSong === index;
+            const progress = isActive ? Math.min((time % 60) / 60, 1) * 100 : 0;
+
             return (
               <Card
                 key={index}
@@ -155,36 +158,64 @@ const Music = () => {
                   isActive ? "ring-2 ring-green-500" : ""
                 }`}
               >
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h4 className="text-lg font-bold text-green-700">{song.title}</h4>
-                      <p className="text-sm text-black/60">
-                        {song.album} • {song.year}
-                      </p>
-                      {isActive && (
-                        <p className="text-xs text-green-600 mt-1">▶ Playing... {time}s</p>
-                      )}
+                <CardContent className="p-0">
+                  {/* Top Green Header */}
+                  <div className="flex items-center justify-between bg-green-600 text-white rounded-t-2xl px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      {/* Album Art */}
+                      <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+                        <img
+                          src={`https://picsum.photos/100?random=${index}`} // 👉 replace with actual album art if available
+                          alt={song.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h4 className="text-md font-semibold">{song.title}</h4>
+                        <p className="text-xs opacity-80">{song.album}</p>
+                      </div>
                     </div>
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className="bg-green-500 text-white hover:bg-green-600 rounded-full"
-                      onClick={() => setCurrentSong(isActive ? null : index)}
-                    >
-                      <Headphones />
-                    </Button>
+                    <button className="text-white hover:text-red-400 transition">
+                      ♥
+                    </button>
                   </div>
 
-                  {/* Visual Progress */}
-                  <div className="h-2 w-full bg-black/20 rounded-full overflow-hidden mb-4">
-                    <div
-                      className={`h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
-                        isActive ? "w-full animate-pulse" : "w-0"
-                      }`}
-                    />
+                  {/* Playback Section */}
+                  <div className="p-6 text-center">
+                    <h4 className="text-xl font-bold mb-2 text-black">{song.title}</h4>
+                    <p className="text-lg text-black/70 mb-4">
+                      {song.album} • {song.year}
+                    </p>
+
+                    {/* Progress bar */}
+                    <div className="h-1 w-full bg-gray-200 rounded-full overflow-hidden mb-6">
+                      <div
+                        className="h-1 bg-green-500 transition-all duration-500"
+                        style={{ width: `${progress}%` }}
+                      />
+                    </div>
+
+                    {/* Controls */}
+                    <div className="flex justify-center items-center gap-6 text-green-600">
+                      <button className="hover:scale-110 transition">⏮</button>
+                      <button
+                        className="bg-green-500 text-white p-3 rounded-full hover:bg-green-600 transition"
+                        onClick={() => setCurrentSong(isActive ? null : index)}
+                      >
+                        {isActive ? "⏸" : "▶"}
+                      </button>
+                      <button className="hover:scale-110 transition">⏭</button>
+                    </div>
+
+                    {/* Playback time */}
+                    {isActive && (
+                      <p className="text-xs text-green-600 mt-3">
+                        ▶ Playing... {time}s
+                      </p>
+                    )}
                   </div>
 
+                  {/* Hidden YouTube iframe */}
                   {isActive && song.youtube && (
                     <iframe
                       src={`${song.youtube}?autoplay=1`}
