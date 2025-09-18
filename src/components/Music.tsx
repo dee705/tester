@@ -10,7 +10,7 @@ const Music = () => {
   const [duration, setDuration] = useState(0);
   const playerRef = useRef<any>(null);
 
-  // ✅ Use YouTube video IDs only (not full URLs)
+  // ✅ Use YouTube video IDs only
   const songs = [
     { title: "Dito Ka Lang, Wag kang lalayo", album: "Klarisse", year: "2025", youtubeId: "zd7kQQ0fjDU" },
     { title: "Dito", album: "Feels", year: "2024", youtubeId: "VxnNphj9qtQ" },
@@ -124,13 +124,16 @@ const Music = () => {
           </h2>
         </div>
 
-        {/* ✅ Albums Section (unchanged) */}
+        {/* ✅ Albums Section (UNCHANGED) */}
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Albums
         </h3>
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {albums.map((album, index) => (
-            <Card key={index} className="transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl hover:shadow-lg hover:shadow-green-400/40">
+            <Card
+              key={index}
+              className="transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl hover:shadow-lg hover:shadow-green-400/40"
+            >
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div>
@@ -164,7 +167,7 @@ const Music = () => {
           ))}
         </div>
 
-        {/* 🎵 Featured Songs Section */}
+        {/* 🎵 Featured Songs Section (FIXED) */}
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Featured Songs
         </h3>
