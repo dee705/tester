@@ -7,6 +7,7 @@ const Music = () => {
   const [currentSong, setCurrentSong] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState(0);
+  const [currentAlbum, setCurrentAlbum] = useState<number | null>(null);
 
   // 🔑 Songs with durations (in seconds)
   const songs = [
@@ -15,35 +16,54 @@ const Music = () => {
       album: "Klarisse",
       year: "2025",
       youtube: "https://www.youtube.com/embed/zd7kQQ0fjDU",
-      duration: 240, // 4:00
+      duration: 240,
     },
     {
       title: "Dito",
       album: "Feels",
       year: "2024",
       youtube: "https://www.youtube.com/embed/VxnNphj9qtQ",
-      duration: 210, // 3:30
+      duration: 210,
     },
     {
       title: "Bibitawan Ka",
       album: "Feels",
       year: "2024",
       youtube: "https://www.youtube.com/embed/GsGKnZSCsCo",
-      duration: 230, // 3:50
+      duration: 230,
     },
     {
       title: "Ulan Ng Kahapon",
       album: "Singles",
       year: "2021",
       youtube: "https://www.youtube.com/embed/RcKMBkkZZdc",
-      duration: 200, // 3:20
+      duration: 200,
     },
     {
       title: "Wala na Talaga",
       album: "Klarisse",
       year: "2017",
       youtube: "https://www.youtube.com/embed/nuDNvk22Qmg",
-      duration: 250, // 4:10
+      duration: 250,
+    },
+  ];
+
+  const albums = [
+    {
+      title: "Feels",
+      year: "2024",
+      type: "Latest Album",
+      description:
+        "Her latest album featuring heartfelt ballads and emotional storytelling.",
+      spotifyId: "4jUJec6voKpplFklfNeTk6",
+    },
+    {
+      title: "Klarisse",
+      year: "2017",
+      type: "Self-Titled Album",
+      description:
+        "Her acclaimed self-titled album showcasing her vocal range and artistry.",
+      spotifyId: "0U9ZD8Tu410sGD8i3eRsAK",
     },
   ];
 
@@ -100,6 +120,66 @@ const Music = () => {
           </h2>
         </div>
 
+        {/* 🎼 Albums Section */}
+        <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
+          Albums
+        </h3>
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          {albums.map((album, index) => {
+            const isActive = currentAlbum === index;
+            return (
+              <Card
+                key={index}
+                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
+                  isActive ? "ring-2 ring-green-500" : ""
+                }`}
+                onClick={() => setCurrentAlbum(isActive ? null : index)}
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h4 className="text-lg font-bold text-green-700">{album.title}</h4>
+                      <p className="text-sm text-black/60">
+                        {album.type} • {album.year}
+                      </p>
+                      <p className="text-sm text-black/70 mt-2">{album.description}</p>
+                    </div>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="bg-green-500 text-white hover:bg-green-600 rounded-full"
+                    >
+                      <Headphones />
+                    </Button>
+                  </div>
+
+                  {/* Visual Progress */}
+                  <div className="h-2 w-full bg-black/20 rounded-full overflow-hidden mb-4">
+                    <div
+                      className={`h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
+                        isActive ? "w-full animate-pulse" : "w-0"
+                      }`}
+                    />
+                  </div>
+
+                  {isActive && (
+                    <div className="mt-4">
+                      <iframe
+                        src={`https://open.spotify.com/embed/album/${album.spotifyId}`}
+                        width="100%"
+                        height="380"
+                        frameBorder="0"
+                        allow="encrypted-media"
+                        className="rounded-xl"
+                      />
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+
         {/* 🎵 Featured Songs Playback Card */}
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Featured Songs
@@ -112,7 +192,7 @@ const Music = () => {
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
                   <img
-                    src="/images/featured-singer.jpg" // 👉 put your uploaded image here
+                    src={`https://picsum.photos/100?random=${currentSong}`} // ✅ back to dynamic random art
                     alt={song.title}
                     className="w-full h-full object-cover"
                   />
