@@ -15,7 +15,7 @@ const Concert = () => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(0);
   const [buffered, setBuffered] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -26,8 +26,8 @@ const Concert = () => {
       playerRef.current = new (window as any).YT.Player("concert-video", {
         videoId: "zd7kQQ0fjDU",
         playerVars: {
-          autoplay: 1, // ✅ enable autoplay
-          mute: 1,     // ✅ muted so autoplay works across browsers
+          autoplay: 0, // 🚫 disable autoplay
+          mute: 0,     // 🚫 don’t force mute
           controls: 0,
           modestbranding: 1,
           rel: 0,
@@ -35,8 +35,8 @@ const Concert = () => {
         events: {
           onReady: (event: any) => {
             setDuration(playerRef.current.getDuration());
-            setIsMuted(true);
-            event.target.playVideo(); // ✅ force play when ready
+            setIsMuted(false);
+            // ❌ removed: event.target.playVideo()
           },
           onStateChange: (event: any) => {
             if (event.data === (window as any).YT.PlayerState.PLAYING) {
