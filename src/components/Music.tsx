@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Headphones, Music2, Youtube, Apple, Cloud } from "lucide-react";
 
 const Music = () => {
-  const [currentSong, setCurrentSong] = useState<number | null>(null);
+  const [currentSong, setCurrentSong] = useState<number>(0); // 👉 start with first song
   const [currentAlbum, setCurrentAlbum] = useState<number | null>(null);
   const [time, setTime] = useState(0);
 
@@ -57,11 +57,11 @@ const Music = () => {
       type: "Self-Titled Album",
       description:
         "Her acclaimed self-titled album showcasing her vocal range and artistry.",
-      spotifyId: "0U9ZD8Tu410sGD8i3eRsAK", // ✅ fixed album link
+      spotifyId: "0U9ZD8Tu410sGD8i3eRsAK",
     },
   ];
 
-  // Timer for visible "proof" playback
+  // Timer for playback progress
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (currentSong !== null) {
@@ -70,6 +70,25 @@ const Music = () => {
     }
     return () => clearInterval(interval);
   }, [currentSong]);
+
+  // Progress bar % (simulate 60s duration)
+  const progress = Math.min((time % 60) / 60, 1) * 100;
+
+  // Song navigation handlers
+  const playNext = () => {
+    setCurrentSong((prev) => (prev + 1) % songs.length);
+  };
+
+  const playPrev = () => {
+    setCurrentSong((prev) => (prev - 1 + songs.length) % songs.length);
+  };
+
+  const togglePlay = () => {
+    // restart the song from 0
+    setTime(0);
+  };
+
+  const song = songs[currentSong];
 
   return (
     <section id="music" className="py-20 bg-gradient-to-b from-green-100 to-white">
@@ -146,91 +165,71 @@ const Music = () => {
           Featured Songs
         </h3>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {songs.map((song, index) => {
-            const isActive = currentSong === index;
-            const progress = isActive ? Math.min((time % 60) / 60, 1) * 100 : 0;
+        {/* Unified Playback Card */}
+        <Card className="transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl hover:shadow-lg hover:shadow-green-400/40">
+          <CardContent className="p-0">
+            {/* Top Green Header */}
+            <div className="flex items-center justify-between bg-green-600 text-white rounded-t-2xl px-4 py-3">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+                  <img
+                    src={`https://picsum.photos/100?random=${currentSong}`}
+                    alt={song.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h4 className="text-md font-semibold">{song.title}</h4>
+                  <p className="text-xs opacity-80">{song.album}</p>
+                </div>
+              </div>
+              <button className="text-white hover:text-red-400 transition">♥</button>
+            </div>
 
-            return (
-              <Card
-                key={index}
-                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl hover:shadow-lg hover:shadow-green-400/40 ${
-                  isActive ? "ring-2 ring-green-500" : ""
-                }`}
-              >
-                <CardContent className="p-0">
-                  {/* Top Green Header */}
-                  <div className="flex items-center justify-between bg-green-600 text-white rounded-t-2xl px-4 py-3">
-                    <div className="flex items-center gap-3">
-                      {/* Album Art */}
-                      <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
-                        <img
-                          src={`https://picsum.photos/100?random=${index}`} // 👉 replace with actual album art if available
-                          alt={song.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h4 className="text-md font-semibold">{song.title}</h4>
-                        <p className="text-xs opacity-80">{song.album}</p>
-                      </div>
-                    </div>
-                    <button className="text-white hover:text-red-400 transition">
-                      ♥
-                    </button>
-                  </div>
+            {/* Playback Section */}
+            <div className="p-6 text-center">
+              <h4 className="text-xl font-bold mb-2 text-black">{song.title}</h4>
+              <p className="text-lg text-black/70 mb-4">
+                {song.album} • {song.year}
+              </p>
 
-                  {/* Playback Section */}
-                  <div className="p-6 text-center">
-                    <h4 className="text-xl font-bold mb-2 text-black">{song.title}</h4>
-                    <p className="text-lg text-black/70 mb-4">
-                      {song.album} • {song.year}
-                    </p>
+              {/* Progress bar */}
+              <div className="h-1 w-full bg-gray-200 rounded-full overflow-hidden mb-6">
+                <div
+                  className="h-1 bg-green-500 transition-all duration-500"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
 
-                    {/* Progress bar */}
-                    <div className="h-1 w-full bg-gray-200 rounded-full overflow-hidden mb-6">
-                      <div
-                        className="h-1 bg-green-500 transition-all duration-500"
-                        style={{ width: `${progress}%` }}
-                      />
-                    </div>
+              {/* Controls */}
+              <div className="flex justify-center items-center gap-6 text-green-600">
+                <button onClick={playPrev} className="hover:scale-110 transition">⏮</button>
+                <button
+                  className="bg-green-500 text-white p-3 rounded-full hover:bg-green-600 transition"
+                  onClick={togglePlay}
+                >
+                  ⏯
+                </button>
+                <button onClick={playNext} className="hover:scale-110 transition">⏭</button>
+              </div>
 
-                    {/* Controls */}
-                    <div className="flex justify-center items-center gap-6 text-green-600">
-                      <button className="hover:scale-110 transition">⏮</button>
-                      <button
-                        className="bg-green-500 text-white p-3 rounded-full hover:bg-green-600 transition"
-                        onClick={() => setCurrentSong(isActive ? null : index)}
-                      >
-                        {isActive ? "⏸" : "▶"}
-                      </button>
-                      <button className="hover:scale-110 transition">⏭</button>
-                    </div>
+              {/* Playback time */}
+              <p className="text-xs text-green-600 mt-3">▶ Playing... {time}s</p>
+            </div>
 
-                    {/* Playback time */}
-                    {isActive && (
-                      <p className="text-xs text-green-600 mt-3">
-                        ▶ Playing... {time}s
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Hidden YouTube iframe */}
-                  {isActive && song.youtube && (
-                    <iframe
-                      src={`${song.youtube}?autoplay=1`}
-                      width="0"
-                      height="0"
-                      frameBorder="0"
-                      allow="autoplay; encrypted-media"
-                      style={{ display: "none" }}
-                    />
-                  )}
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+            {/* Hidden YouTube iframe */}
+            {song.youtube && (
+              <iframe
+                src={`${song.youtube}?autoplay=1`}
+                width="0"
+                height="0"
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                style={{ display: "none" }}
+              />
+            )}
+          </CardContent>
+        </Card>
 
         {/* ✅ Listen Everywhere Buttons */}
         <div className="text-center mt-20">
