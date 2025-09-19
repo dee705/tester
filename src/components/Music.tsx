@@ -60,6 +60,14 @@ const Music = () => {
 
   const albums = [
     {
+      title: "Unimaginable",
+      year: "2025",
+      type: "Latest Album",
+      description:
+        "It’s a reminder that persistence can lead somewhere meaningful, that your dreams or hopes might be realized even if the road is long.",
+      spotifyId: "6ojC0sFbE9CcsEFgLbxPD8",
+    },
+    {
       title: "Feels",
       year: "2024",
       type: "Latest Album",
