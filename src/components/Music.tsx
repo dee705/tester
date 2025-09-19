@@ -203,12 +203,20 @@ const Music = () => {
           Featured Songs
         </h3>
 
-        <Card className="transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl hover:shadow-lg hover:shadow-green-400/40 mb-16">
-          <CardContent className="p-0">
-            {/* Top Green Header */}
-            <div className="flex items-center justify-between bg-green-600 text-white rounded-t-2xl px-4 py-3">
+        <Card
+          className="relative overflow-hidden rounded-3xl border border-white/30 shadow-lg 
+                     bg-gradient-to-br from-green-50/60 via-white/40 to-green-100/60 
+                     backdrop-blur-xl transition-all duration-500 
+                     hover:shadow-green-400/50 hover:scale-[1.01] mb-16"
+        >
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-green-200/30 via-transparent to-white/40 pointer-events-none" />
+
+          <CardContent className="relative z-10 p-0">
+            {/* Top Header */}
+            <div className="flex items-center justify-between bg-gradient-to-r from-green-600 to-green-500 text-white rounded-t-3xl px-4 py-3 shadow-md">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-inner">
                   <img
                     src={`https://picsum.photos/100?random=${currentSong}`}
                     alt={song.title}
@@ -220,35 +228,42 @@ const Music = () => {
                   <p className="text-xs opacity-80">{song.album}</p>
                 </div>
               </div>
-              <button className="text-white hover:text-red-400 transition">♥</button>
+              <button className="text-white hover:text-red-400 transition-transform hover:scale-110">
+                ♥
+              </button>
             </div>
 
             {/* Playback Section */}
             <div className="p-6 text-center">
-              <h4 className="text-xl font-bold mb-2 text-black">{song.title}</h4>
-              <p className="text-lg text-black/70 mb-4">
+              <h4 className="text-xl font-bold mb-2 text-green-800">{song.title}</h4>
+              <p className="text-lg text-green-700/80 mb-4">
                 {song.album} • {song.year}
               </p>
 
-              {/* Progress bar with time */}
-              <div className="flex items-center justify-between text-xs text-black/70 mb-1">
+              {/* Progress bar */}
+              <div className="flex items-center justify-between text-xs text-green-900/70 mb-1">
                 <span>{formatTime(time)}</span>
                 <span>{formatTime(song.duration)}</span>
               </div>
-              <div className="h-1 w-full bg-gray-200 rounded-full overflow-hidden mb-6">
+              <div className="h-1.5 w-full bg-green-200/50 rounded-full overflow-hidden mb-6">
                 <div
-                  className="h-1 bg-green-500 transition-all duration-500"
+                  className="h-1.5 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500"
                   style={{ width: `${progress}%` }}
                 />
               </div>
 
               {/* Controls */}
-              <div className="flex justify-center items-center gap-6 text-green-600">
-                <button onClick={playPrev} className="hover:scale-110 transition">
+              <div className="flex justify-center items-center gap-6 text-green-700">
+                <button
+                  onClick={playPrev}
+                  className="hover:scale-125 transition-transform duration-300"
+                >
                   <SkipBack className="w-6 h-6" />
                 </button>
                 <button
-                  className="bg-green-500 text-white p-3 rounded-full hover:bg-green-600 transition"
+                  className="bg-green-500 text-white p-4 rounded-full shadow-md 
+                             hover:bg-green-600 hover:shadow-green-400/50 
+                             transition-all duration-300"
                   onClick={() => setIsPlaying(!isPlaying)}
                 >
                   {isPlaying ? (
@@ -257,7 +272,10 @@ const Music = () => {
                     <Play className="w-6 h-6 text-white" />
                   )}
                 </button>
-                <button onClick={playNext} className="hover:scale-110 transition">
+                <button
+                  onClick={playNext}
+                  className="hover:scale-125 transition-transform duration-300"
+                >
                   <SkipForward className="w-6 h-6" />
                 </button>
               </div>
