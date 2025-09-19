@@ -24,51 +24,51 @@ const Music = () => {
     {
       title: "Unimaginable",
       album: "Unimaginable",
-      year: "2025-09-19",
+      year: "2025",
       youtube: "https://www.youtube.com/embed/QdgVlGwHoXc",
       duration: 189,
     },
     {
       title: "OA",
       album: "Unimaginable",
-      year: "2025-09-19",
+      year: "2025",
       youtube: "https://www.youtube.com/embed/mzHcZPFc-Ag",
       duration: 210,
     },
     {
       title: "Pipilitin",
       album: "Unimaginable",
-      year: "2025-09-19",
+      year: "2025",
       youtube: "https://www.youtube.com/embed/UbIS383_oZw",
-      duration: 265.8,
+      duration: 265,
     },
     {
       title: "Di ko kaya ko to",
       album: "Unimaginable",
-      year: "2025-09-19",
+      year: "2025",
       youtube: "https://www.youtube.com/embed/g5BygcsEF7w",
-      duration: 258.6,
+      duration: 259,
     },
     {
       title: "Finally you came",
       album: "Unimaginable",
-      year: "2025-09-19",
+      year: "2025",
       youtube: "https://www.youtube.com/embed/xISjh6fNDnU",
-      duration: 214.2,
+      duration: 214,
     },
     {
       title: "TAYO",
       album: "Unimaginable",
-      year: "2025-09-19",
+      year: "2025",
       youtube: "https://www.youtube.com/embed/kGfoqBVhcJY",
       duration: 300,
     },
     {
       title: "TODO",
       album: "Unimaginable",
-      year: "2025-09-19",
+      year: "2025",
       youtube: "https://www.youtube.com/embed/ijwXh7U_6A0",
-      duration: 151.8,
+      duration: 152,
     },
     {
       title: "Dito Ka Lang, Wag kang lalayo",
@@ -136,19 +136,11 @@ const Music = () => {
 
   const song = songs[currentSong];
 
-  // ✅ Extract YouTube thumbnail
-  const getYouTubeThumbnail = (url: string) => {
-    const match = url.match(/embed\/([a-zA-Z0-9_-]+)/);
-    return match
-      ? `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg`
-      : "";
-  };
-
-  // Format seconds into m:ss
+  // ✅ Format as MM:SS
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
-    return `${mins}:${String(secs).padStart(2, "0")}`;
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   };
 
   // Timer effect
@@ -158,7 +150,7 @@ const Music = () => {
       interval = setInterval(() => {
         setTime((t) => {
           if (t >= song.duration) {
-            playNext(); // Auto next when song ends
+            playNext();
             return 0;
           }
           return t + 1;
@@ -186,10 +178,7 @@ const Music = () => {
   };
 
   return (
-    <section
-      id="music"
-      className="py-20 bg-gradient-to-b from-green-100 to-white"
-    >
+    <section id="music" className="py-20 bg-gradient-to-b from-green-100 to-white">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
@@ -198,7 +187,7 @@ const Music = () => {
           </h2>
         </div>
 
-        {/* 🎼 Albums Section */}
+        {/* Albums Section */}
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Albums
         </h3>
@@ -216,15 +205,11 @@ const Music = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h4 className="text-lg font-bold text-green-700">
-                        {album.title}
-                      </h4>
+                      <h4 className="text-lg font-bold text-green-700">{album.title}</h4>
                       <p className="text-sm text-black/60">
                         {album.type} • {album.year}
                       </p>
-                      <p className="text-sm text-black/70 mt-2">
-                        {album.description}
-                      </p>
+                      <p className="text-sm text-black/70 mt-2">{album.description}</p>
                     </div>
                     <Button
                       size="icon"
@@ -234,8 +219,6 @@ const Music = () => {
                       <Headphones />
                     </Button>
                   </div>
-
-                  {/* Visual Progress */}
                   <div className="h-2 w-full bg-black/20 rounded-full overflow-hidden mb-4">
                     <div
                       className={`h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
@@ -243,7 +226,6 @@ const Music = () => {
                       }`}
                     />
                   </div>
-
                   {isActive && (
                     <div className="mt-4">
                       <iframe
@@ -262,46 +244,31 @@ const Music = () => {
           })}
         </div>
 
-        {/* 🎵 Featured Songs Playback Card */}
+        {/* Featured Songs */}
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Featured Songs
         </h3>
 
-        <Card
-          className="relative overflow-hidden rounded-3xl border border-white/30 shadow-lg 
-                     bg-gradient-to-br from-green-50/60 via-white/40 to-green-100/60 
-                     backdrop-blur-xl transition-all duration-500 
-                     hover:shadow-green-400/50 hover:scale-[1.01] mb-16"
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-green-200/30 via-transparent to-white/40 pointer-events-none" />
-
-          <CardContent className="relative z-10 p-6">
-            <div className="flex flex-col md:flex-row items-center md:items-stretch gap-6">
-              {/* 🎨 Left Side: Album Cover with Spin Effect */}
-              <div className="w-full md:w-1/3 flex justify-center items-center">
-                <div
-                  className={`w-48 h-48 md:w-full md:h-auto aspect-square rounded-full overflow-hidden shadow-lg border-4 border-white/30 ${
-                    isPlaying ? "animate-spin-slow" : ""
-                  }`}
-                >
-                  <img
-                    src={getYouTubeThumbnail(song.youtube)}
-                    alt={song.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+        <Card className="overflow-hidden rounded-3xl border border-white/30 shadow-lg bg-gradient-to-br from-green-50/60 via-white/40 to-green-100/60 backdrop-blur-xl transition-all duration-500 hover:shadow-green-400/50 hover:scale-[1.01] mb-16">
+          <CardContent className="p-0">
+            <div className="flex flex-col md:flex-row">
+              {/* Album Cover (Left) */}
+              <div className="md:w-1/2 w-full flex items-center justify-center bg-gradient-to-br from-green-100 to-white p-6">
+                <img
+                  src={`https://picsum.photos/400?random=${currentSong}`}
+                  alt={song.title}
+                  className="rounded-2xl shadow-lg w-64 h-64 object-cover"
+                />
               </div>
 
-              {/* 🎶 Right Side: Player */}
-              <div className="w-full md:w-2/3 flex flex-col justify-center text-center">
-                <h4 className="text-2xl font-bold mb-2 text-green-800">
-                  {song.title}
-                </h4>
+              {/* Player (Right) */}
+              <div className="md:w-1/2 w-full p-6 flex flex-col justify-center text-center">
+                <h4 className="text-2xl font-bold mb-2 text-green-800">{song.title}</h4>
                 <p className="text-lg text-green-700/80 mb-4">
                   {song.album} • {song.year}
                 </p>
 
-                {/* Progress bar */}
+                {/* Progress bar with MM:SS timers */}
                 <div className="flex items-center justify-between text-xs text-green-900/70 mb-1">
                   <span>{formatTime(time)}</span>
                   <span>{formatTime(song.duration)}</span>
@@ -315,35 +282,23 @@ const Music = () => {
 
                 {/* Controls */}
                 <div className="flex justify-center items-center gap-6 text-green-700">
-                  <button
-                    onClick={playPrev}
-                    className="hover:scale-125 transition-transform duration-300"
-                  >
+                  <button onClick={playPrev} className="hover:scale-125 transition-transform">
                     <SkipBack className="w-6 h-6" />
                   </button>
                   <button
-                    className="bg-green-500 text-white p-4 rounded-full shadow-md 
-                               hover:bg-green-600 hover:shadow-green-400/50 
-                               transition-all duration-300"
+                    className="bg-green-500 text-white p-4 rounded-full shadow-md hover:bg-green-600 hover:shadow-green-400/50 transition-all"
                     onClick={() => setIsPlaying(!isPlaying)}
                   >
-                    {isPlaying ? (
-                      <Pause className="w-6 h-6 text-white" />
-                    ) : (
-                      <Play className="w-6 h-6 text-white" />
-                    )}
+                    {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
                   </button>
-                  <button
-                    onClick={playNext}
-                    className="hover:scale-125 transition-transform duration-300"
-                  >
+                  <button onClick={playNext} className="hover:scale-125 transition-transform">
                     <SkipForward className="w-6 h-6" />
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* Hidden YouTube iframe */}
+            {/* Hidden YouTube autoplay */}
             {isPlaying && song.youtube && (
               <iframe
                 src={`${song.youtube}?autoplay=1`}
@@ -357,7 +312,7 @@ const Music = () => {
           </CardContent>
         </Card>
 
-        {/* ✅ Listen Everywhere Buttons */}
+        {/* Listen Everywhere */}
         <div className="text-center mt-20">
           <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
             Listen Everywhere
@@ -366,10 +321,7 @@ const Music = () => {
             <Button
               className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-green-400/50"
               onClick={() =>
-                window.open(
-                  "https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC",
-                  "_blank"
-                )
+                window.open("https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC", "_blank")
               }
             >
               <Music2 className="mr-2 h-5 w-5" /> Spotify
@@ -377,10 +329,7 @@ const Music = () => {
             <Button
               className="bg-black hover:bg-gray-800 text-white shadow-md hover:shadow-gray-500/50"
               onClick={() =>
-                window.open(
-                  "https://music.apple.com/us/artist/klarisse/1462398733",
-                  "_blank"
-                )
+                window.open("https://music.apple.com/us/artist/klarisse/1462398733", "_blank")
               }
             >
               <Apple className="mr-2 h-5 w-5" /> Apple Music
@@ -398,12 +347,7 @@ const Music = () => {
             </Button>
             <Button
               className="bg-orange-500 hover:bg-orange-600 text-white shadow-md hover:shadow-orange-400/50"
-              onClick={() =>
-                window.open(
-                  "https://on.soundcloud.com/S4TdClgpsEvCdcdEny",
-                  "_blank"
-                )
-              }
+              onClick={() => window.open("https://on.soundcloud.com/S4TdClgpsEvCdcdEny", "_blank")}
             >
               <Cloud className="mr-2 h-5 w-5" /> SoundCloud
             </Button>
