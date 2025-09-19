@@ -24,49 +24,49 @@ const Music = () => {
     {
       title: "Unimaginable",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/QdgVlGwHoXc",
       duration: 189,
     },
     {
       title: "OA",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/mzHcZPFc-Ag",
       duration: 210,
     },
     {
       title: "Pipilitin",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/UbIS383_oZw",
       duration: 265.8,
     },
     {
       title: "Di ko kaya ko to",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/g5BygcsEF7w",
       duration: 258.6,
     },
     {
       title: "Finally you came",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/xISjh6fNDnU",
       duration: 214.2,
     },
     {
       title: "TAYO",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/kGfoqBVhcJY",
       duration: 300,
     },
     {
       title: "TODO",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/ijwXh7U_6A0",
       duration: 151.8,
     },
@@ -135,6 +135,12 @@ const Music = () => {
   ];
 
   const song = songs[currentSong];
+
+  // ✅ Helper: Get YouTube Thumbnail
+  const getYouTubeThumbnail = (url: string) => {
+    const match = url.match(/embed\/([a-zA-Z0-9_-]+)/);
+    return match ? `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg` : "";
+  };
 
   // Format seconds into MM:SS
   const formatTime = (seconds: number) => {
@@ -258,75 +264,67 @@ const Music = () => {
                      backdrop-blur-xl transition-all duration-500 
                      hover:shadow-green-400/50 hover:scale-[1.01] mb-16"
         >
-          {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-green-200/30 via-transparent to-white/40 pointer-events-none" />
 
-          <CardContent className="relative z-10 p-0">
-            {/* Top Header */}
-            <div className="flex items-center justify-between bg-gradient-to-r from-green-600 to-green-500 text-white rounded-t-3xl px-4 py-3 shadow-md">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-inner">
+          <CardContent className="relative z-10 p-6">
+            <div className="flex flex-col md:flex-row items-center md:items-stretch gap-6">
+              {/* 🎨 Left Side: Album Cover */}
+              <div className="w-full md:w-1/3 flex justify-center items-center">
+                <div className="w-48 h-48 md:w-full md:h-auto aspect-square rounded-2xl overflow-hidden shadow-lg border border-white/20">
                   <img
-                    src={`https://picsum.photos/100?random=${currentSong}`}
+                    src={getYouTubeThumbnail(song.youtube)}
                     alt={song.title}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div>
-                  <h4 className="text-md font-semibold">{song.title}</h4>
-                  <p className="text-xs opacity-80">{song.album}</p>
+              </div>
+
+              {/* 🎶 Right Side: Player */}
+              <div className="w-full md:w-2/3 flex flex-col justify-center">
+                <h4 className="text-2xl font-bold mb-2 text-green-800">{song.title}</h4>
+                <p className="text-lg text-green-700/80 mb-4">
+                  {song.album} • {song.year}
+                </p>
+
+                {/* Progress bar */}
+                <div className="flex items-center justify-between text-xs text-green-900/70 mb-1">
+                  <span>{formatTime(time)}</span>
+                  <span>{formatTime(song.duration)}</span>
                 </div>
-              </div>
-              <button className="text-white hover:text-red-400 transition-transform hover:scale-110">
-                ♥
-              </button>
-            </div>
+                <div className="h-1.5 w-full bg-green-200/50 rounded-full overflow-hidden mb-6">
+                  <div
+                    className="h-1.5 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
 
-            {/* Playback Section */}
-            <div className="p-6 text-center">
-              <h4 className="text-xl font-bold mb-2 text-green-800">{song.title}</h4>
-              <p className="text-lg text-green-700/80 mb-4">
-                {song.album} • {song.year}
-              </p>
-
-              {/* Progress bar */}
-              <div className="flex items-center justify-between text-xs text-green-900/70 mb-1">
-                <span>{formatTime(time)}</span>
-                <span>{formatTime(song.duration)}</span>
-              </div>
-              <div className="h-1.5 w-full bg-green-200/50 rounded-full overflow-hidden mb-6">
-                <div
-                  className="h-1.5 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-
-              {/* Controls */}
-              <div className="flex justify-center items-center gap-6 text-green-700">
-                <button
-                  onClick={playPrev}
-                  className="hover:scale-125 transition-transform duration-300"
-                >
-                  <SkipBack className="w-6 h-6" />
-                </button>
-                <button
-                  className="bg-green-500 text-white p-4 rounded-full shadow-md 
-                             hover:bg-green-600 hover:shadow-green-400/50 
-                             transition-all duration-300"
-                  onClick={() => setIsPlaying(!isPlaying)}
-                >
-                  {isPlaying ? (
-                    <Pause className="w-6 h-6 text-white" />
-                  ) : (
-                    <Play className="w-6 h-6 text-white" />
-                  )}
-                </button>
-                <button
-                  onClick={playNext}
-                  className="hover:scale-125 transition-transform duration-300"
-                >
-                  <SkipForward className="w-6 h-6" />
-                </button>
+                {/* Controls */}
+                <div className="flex justify-center md:justify-start items-center gap-6 text-green-700">
+                  <button
+                    onClick={playPrev}
+                    className="hover:scale-125 transition-transform duration-300"
+                  >
+                    <SkipBack className="w-6 h-6" />
+                  </button>
+                  <button
+                    className="bg-green-500 text-white p-4 rounded-full shadow-md 
+                               hover:bg-green-600 hover:shadow-green-400/50 
+                               transition-all duration-300"
+                    onClick={() => setIsPlaying(!isPlaying)}
+                  >
+                    {isPlaying ? (
+                      <Pause className="w-6 h-6 text-white" />
+                    ) : (
+                      <Play className="w-6 h-6 text-white" />
+                    )}
+                  </button>
+                  <button
+                    onClick={playNext}
+                    className="hover:scale-125 transition-transform duration-300"
+                  >
+                    <SkipForward className="w-6 h-6" />
+                  </button>
+                </div>
               </div>
             </div>
 
