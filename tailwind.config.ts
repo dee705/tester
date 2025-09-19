@@ -108,15 +108,5 @@ export default {
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
-	// tailwind.config.js
-module.exports = {
-  theme: {
-    extend: {
-      animation: {
-        'spin-slow': 'spin 8s linear infinite', // 8s per rotation
-      },
-    },
-  },
-  plugins: [],
-};
+	
 } satisfies Config;
