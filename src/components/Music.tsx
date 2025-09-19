@@ -24,49 +24,49 @@ const Music = () => {
     {
       title: "Unimaginable",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/QdgVlGwHoXc",
       duration: 189,
     },
     {
       title: "OA",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/mzHcZPFc-Ag",
       duration: 210,
     },
     {
       title: "Pipilitin",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/UbIS383_oZw",
       duration: 265,
     },
     {
       title: "Di ko kaya ko to",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/g5BygcsEF7w",
       duration: 259,
     },
     {
       title: "Finally you came",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/xISjh6fNDnU",
       duration: 214,
     },
     {
       title: "TAYO",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/kGfoqBVhcJY",
       duration: 300,
     },
     {
       title: "TODO",
       album: "Unimaginable",
-      year: "2025",
+      year: "2025-09-19",
       youtube: "https://www.youtube.com/embed/ijwXh7U_6A0",
       duration: 152,
     },
@@ -135,6 +135,18 @@ const Music = () => {
   ];
 
   const song = songs[currentSong];
+
+  // ✅ Extract YouTube video ID
+  const getYouTubeId = (url: string) => {
+    const match = url.match(/embed\/([^?]+)/);
+    return match ? match[1] : "";
+  };
+
+  // ✅ Get YouTube thumbnail
+  const getYouTubeThumbnail = (url: string) => {
+    const id = getYouTubeId(url);
+    return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+  };
 
   // ✅ Format as MM:SS
   const formatTime = (seconds: number) => {
@@ -255,7 +267,7 @@ const Music = () => {
               {/* Album Cover (Left) */}
               <div className="md:w-1/2 w-full flex items-center justify-center bg-gradient-to-br from-green-100 to-white p-6">
                 <img
-                  src={`https://picsum.photos/400?random=${currentSong}`}
+                  src={getYouTubeThumbnail(song.youtube)}
                   alt={song.title}
                   className="rounded-2xl shadow-lg w-64 h-64 object-cover"
                 />
