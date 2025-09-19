@@ -22,6 +22,20 @@ const Music = () => {
   // 🔑 Songs with durations (in seconds)
   const songs = [
     {
+      title: "Unimaginable",
+      album: "Unimaginable",
+      year: "2025-09-19",
+      youtube: "https://www.youtube.com/embed/QdgVlGwHoXc",
+      duration: 240,
+    },
+    {
+      title: "OA",
+      album: "Unimaginable",
+      year: "2025-09-19",
+      youtube: "https://www.youtube.com/embed/mzHcZPFc-Ag",
+      duration: 240,
+    },
+    {
       title: "Dito Ka Lang, Wag kang lalayo",
       album: "Klarisse",
       year: "2025",
