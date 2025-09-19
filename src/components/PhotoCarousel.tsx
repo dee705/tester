@@ -10,6 +10,36 @@ import { Badge } from "@/components/ui/badge";
 const PhotoCarousel = () => {
   const photos = [
     {
+      src: "/photos/album1.jpg",
+      caption: "unimaginable",
+      date: "2025",
+    },
+    {
+      src: "/photos/album2.jpg",
+      caption: "unimaginable",
+      date: "2025",
+    },
+    {
+      src: "/photos/album3.jpg",
+      caption: "unimaginable",
+      date: "2025",
+    },
+    {
+      src: "/photos/album4.jpg",
+      caption: "unimaginable",
+      date: "2025",
+    },
+    {
+      src: "/photos/album5.jpg",
+      caption: "unimaginable",
+      date: "2025",
+    },
+    {
+      src: "/photos/album6.jpg",
+      caption: "unimaginable",
+      date: "2025",
+    },
+    {
       src: "/lovable-uploads/555.jpg",
       caption: "555 Isdalicious ❤",
       date: "2025",
