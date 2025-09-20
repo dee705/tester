@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Music from "@/components/Music";
-import Concert from "@/components/Concert";
+// import Concert from "@/components/Concert";  // 👈 disabled for now
 import PhotoCarousel from "@/components/PhotoCarousel";
 import Social from "@/components/Social";
 import Fanpage from "@/components/Fanpage";
@@ -16,7 +16,7 @@ const Index = () => {
       <Hero />
       <About />
       <Music />
-      <Concert />
+      {/* <Concert />  👈 disabled */}
       <PhotoCarousel />
       <Social />
       <Fanpage />
