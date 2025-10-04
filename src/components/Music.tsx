@@ -26,42 +26,42 @@ const Music = () => {
       album: "Unimaginable",
       year: "2025",
       youtube: "https://www.youtube.com/embed/QdgVlGwHoXc",
-      duration: 189,
+      duration: 189.6,
     },
     {
       title: "OA",
       album: "Unimaginable",
       year: "2025",
       youtube: "https://www.youtube.com/embed/mzHcZPFc-Ag",
-      duration: 210,
+      duration: 210.6,
     },
     {
       title: "Pipilitin",
       album: "Unimaginable",
       year: "2025",
       youtube: "https://www.youtube.com/embed/UbIS383_oZw",
-      duration: 265,
+      duration: 265.8,
     },
     {
-      title: "Di ko kaya ko to",
+      title: "Di ko Kaya ko to",
       album: "Unimaginable",
       year: "2025",
       youtube: "https://www.youtube.com/embed/g5BygcsEF7w",
-      duration: 259,
+      duration: 258.6,
     },
     {
       title: "Finally you came",
       album: "Unimaginable",
       year: "2025",
       youtube: "https://www.youtube.com/embed/xISjh6fNDnU",
-      duration: 214,
+      duration: 214.8,
     },
     {
       title: "TAYO",
       album: "Unimaginable",
       year: "2025",
       youtube: "https://www.youtube.com/embed/kGfoqBVhcJY",
-      duration: 300,
+      duration: 309.6,
     },
     {
       title: "TODO",
@@ -71,18 +71,32 @@ const Music = () => {
       duration: 152,
     },
     {
+      title: "Babae Ako",
+      album: "Unimaginable",
+      year: "2025",
+      youtube: "https://www.youtube.com/embed/bMy7r6iNcaM", 
+      duration: 204,
+    },
+    {
       title: "Dito Ka Lang, Wag kang lalayo",
       album: "Klarisse",
       year: "2025",
       youtube: "https://www.youtube.com/embed/zd7kQQ0fjDU",
-      duration: 240,
+      duration: 249.6,
     },
     {
       title: "Dito",
       album: "Feels",
       year: "2024",
       youtube: "https://www.youtube.com/embed/VxnNphj9qtQ",
-      duration: 210,
+      duration: 241.2,
+    },
+    {
+      title: "Minamahal pa rin ako",
+      album: "Feels",
+      year: "2024",
+      youtube: "https://www.youtube.com/embed/WTKCs5j_1JA",
+      duration: 241.8,
     },
     {
       title: "Bibitawan Ka",
@@ -96,7 +110,7 @@ const Music = () => {
       album: "Singles",
       year: "2021",
       youtube: "https://www.youtube.com/embed/RcKMBkkZZdc",
-      duration: 200,
+      duration: 260,
     },
     {
       title: "Wala na Talaga",
@@ -104,6 +118,48 @@ const Music = () => {
       year: "2017",
       youtube: "https://www.youtube.com/embed/nuDNvk22Qmg",
       duration: 250,
+    },
+    {
+      title: "Paalam Na",
+      album: "Klarisse",
+      year: "2017",
+      youtube: "https://www.youtube.com/embed/_-6qgbuFSYA",
+      duration: 300,
+    },
+    {
+      title: "Sa pangarap na lang",
+      album: "Klarisse",
+      year: "2017",
+      youtube: "https://www.youtube.com/embed/q_zMKbI1ufE",
+      duration: 240,
+    },
+    {
+      title: "Eto na naman tayo",
+      album: "Klarisse",
+      year: "2017",
+      youtube: "https://www.youtube.com/embed/Ni-B1lQGgMk",
+      duration: 240,
+    },
+    {
+      title: "Mahal mo pa ba ako",
+      album: "Klarisse",
+      year: "2017",
+      youtube: "https://www.youtube.com/embed/ekljZEYW7oI",
+      duration: 240,
+    },
+    {
+      title: "Sanay tumibok muli",
+      album: "Klarisse",
+      year: "2017",
+      youtube: "https://www.youtube.com/embed/3z4Nujk6P2k",
+      duration: 240,
+    },
+    {
+      title: "Ikaw ay ako",
+      album: "Klarisse",
+      year: "2017",
+      youtube: "https://www.youtube.com/embed/ToBuXLpQyxw",
+      duration: 240,
     },
   ];
 
@@ -145,14 +201,14 @@ const Music = () => {
   // ✅ Get YouTube thumbnail
   const getYouTubeThumbnail = (url: string) => {
     const id = getYouTubeId(url);
-    return https://img.youtube.com/vi/${id}/hqdefault.jpg;
+    return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
   };
 
   // ✅ Format as MM:SS
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
-    return ${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")};
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   };
 
   // Timer effect
@@ -209,9 +265,9 @@ const Music = () => {
             return (
               <Card
                 key={index}
-                className={transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
+                className={`transition-all backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl cursor-pointer hover:shadow-lg hover:shadow-green-400/40 ${
                   isActive ? "ring-2 ring-green-500" : ""
-                }}
+                }`}
                 onClick={() => setCurrentAlbum(isActive ? null : index)}
               >
                 <CardContent className="p-6">
@@ -233,15 +289,15 @@ const Music = () => {
                   </div>
                   <div className="h-2 w-full bg-black/20 rounded-full overflow-hidden mb-4">
                     <div
-                      className={h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
+                      className={`h-2 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500 ${
                         isActive ? "w-full animate-pulse" : "w-0"
-                      }}
+                      }`}
                     />
                   </div>
                   {isActive && (
                     <div className="mt-4">
                       <iframe
-                        src={https://open.spotify.com/embed/album/${album.spotifyId}}
+                        src={`https://open.spotify.com/embed/album/${album.spotifyId}`}
                         width="100%"
                         height="380"
                         frameBorder="0"
@@ -288,7 +344,7 @@ const Music = () => {
                 <div className="h-1.5 w-full bg-green-200/50 rounded-full overflow-hidden mb-6">
                   <div
                     className="h-1.5 bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500"
-                    style={{ width: ${progress}% }}
+                    style={{ width: `${progress}%` }}
                   />
                 </div>
 
@@ -313,7 +369,7 @@ const Music = () => {
             {/* Hidden YouTube autoplay */}
             {isPlaying && song.youtube && (
               <iframe
-                src={${song.youtube}?autoplay=1}
+                src={`${song.youtube}?autoplay=1`}
                 width="0"
                 height="0"
                 frameBorder="0"
@@ -364,40 +420,6 @@ const Music = () => {
               <Cloud className="mr-2 h-5 w-5" /> SoundCloud
             </Button>
           </div>
-        </div>
-
-        {/* Stationhead Section */}
-        <div className="text-center mt-20">
-          <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-            🎧 Listen on Stationhead
-          </h3>
-
-          <Card className="overflow-hidden rounded-3xl border border-white/30 shadow-lg bg-gradient-to-br from-green-50/60 via-white/40 to-green-100/60 backdrop-blur-xl transition-all duration-500 hover:shadow-green-400/50 hover:scale-[1.01] mb-16 max-w-xl mx-auto">
-            <CardContent className="p-6 flex flex-col items-center">
-              <p className="text-lg text-green-700/80 mb-6">
-                Join Klarisse live on <strong>Stationhead</strong> for exclusive sessions and fan
-                interaction.
-              </p>
-
-              <Button
-                className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-green-400/50 mb-6"
-                onClick={() =>
-                  window.open("https://www.stationhead.com/kdgstream", "_blank")
-                }
-              >
-                <Headphones className="mr-2 h-5 w-5" /> Open Stationhead
-              </Button>
-
-              {/* Compact Embed (around 2x2 size) */}
-              <div className="w-[300px] h-[300px]">
-                <iframe
-                  src="https://www.stationhead.com/kdgstream"
-                  className="w-full h-full rounded-xl shadow-md"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                ></iframe>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </section>
