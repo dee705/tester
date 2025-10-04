@@ -57,22 +57,30 @@ const Music = () => {
     let interval: NodeJS.Timeout | null = null;
     if (isPlaying) {
       interval = setInterval(() => {
-        setTime(t => (t >= song.duration ? (playNext(), 0) : t + 1));
+        setTime((t) => (t >= song.duration ? (playNext(), 0) : t + 1));
       }, 1000);
     }
     return () => interval && clearInterval(interval);
   }, [isPlaying, currentSong]);
 
-  const playNext = () => { setCurrentSong((p) => (p + 1) % songs.length); setTime(0); setIsPlaying(true); };
-  const playPrev = () => { setCurrentSong((p) => (p - 1 + songs.length) % songs.length); setTime(0); setIsPlaying(true); };
+  const playNext = () => {
+    setCurrentSong((p) => (p + 1) % songs.length);
+    setTime(0);
+    setIsPlaying(true);
+  };
+  const playPrev = () => {
+    setCurrentSong((p) => (p - 1 + songs.length) % songs.length);
+    setTime(0);
+    setIsPlaying(true);
+  };
 
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
+    const handleClick = (e: MouseEvent) => {
       if (volumeRef.current && !volumeRef.current.contains(e.target as Node)) setShowVolume(false);
       if (playlistRef.current && !playlistRef.current.contains(e.target as Node)) setShowPlaylist(false);
     };
-    document.addEventListener("click", handler);
-    return () => document.removeEventListener("click", handler);
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
   }, []);
 
   const progress = (time / song.duration) * 100;
@@ -111,7 +119,7 @@ const Music = () => {
           ))}
         </div>
 
-        {/* Featured Songs */}
+        {/* FEATURED SONGS SECTION */}
         <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
           Featured Songs
         </h3>
@@ -119,9 +127,13 @@ const Music = () => {
         <Card className="overflow-hidden rounded-3xl border border-white/30 shadow-lg bg-gradient-to-br from-green-50/60 via-white/40 to-green-100/60 backdrop-blur-xl mb-16">
           <CardContent className="p-0">
             <div className="flex flex-col md:flex-row">
-              {/* Cover */}
+              {/* Album Cover */}
               <div className="md:w-1/2 flex items-center justify-center bg-gradient-to-br from-green-100 to-white p-6">
-                <img src={getYouTubeThumbnail(song.youtube)} alt={song.title} className="rounded-2xl shadow-lg w-64 h-64 object-cover" />
+                <img
+                  src={getYouTubeThumbnail(song.youtube)}
+                  alt={song.title}
+                  className="rounded-2xl shadow-lg w-64 h-64 object-cover"
+                />
               </div>
 
               {/* Player */}
@@ -135,30 +147,40 @@ const Music = () => {
                 </div>
 
                 <div className="h-1.5 w-full bg-green-200/50 rounded-full overflow-hidden mb-6">
-                  <div className="h-1.5 bg-gradient-to-r from-green-400 to-green-600 transition-all" style={{ width: `${progress}%` }} />
+                  <div
+                    className="h-1.5 bg-gradient-to-r from-green-400 to-green-600 transition-all"
+                    style={{ width: `${progress}%` }}
+                  />
                 </div>
 
                 {/* Controls */}
                 <div className="flex justify-center items-center gap-4 text-green-700">
-                  <button onClick={playPrev}><SkipBack className="w-6 h-6" /></button>
+                  <button onClick={playPrev} className="hover:scale-125 transition-transform hover:text-green-600">
+                    <SkipBack className="w-6 h-6" />
+                  </button>
                   <button
-                    className="bg-green-500 text-white p-4 rounded-full shadow-md hover:bg-green-600"
+                    className="bg-green-500 text-white p-4 rounded-full shadow-md hover:bg-green-600 hover:shadow-green-400/50 transition-all"
                     onClick={() => setIsPlaying(!isPlaying)}
                   >
                     {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
                   </button>
-                  <button onClick={playNext}><SkipForward className="w-6 h-6" /></button>
+                  <button onClick={playNext} className="hover:scale-125 transition-transform hover:text-green-600">
+                    <SkipForward className="w-6 h-6" />
+                  </button>
 
                   {/* Volume Dropdown */}
                   <div className="relative" ref={volumeRef}>
                     <button
-                      className="ml-2 bg-green-100 p-3 rounded-full hover:bg-green-200"
-                      onClick={(e) => { e.stopPropagation(); setShowVolume(!showVolume); }}
+                      className="ml-2 bg-green-100 p-3 rounded-full hover:bg-green-200 hover:shadow-green-300/50 transition-all"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowVolume(!showVolume);
+                      }}
                     >
                       <Volume2 className="w-5 h-5 text-green-700" />
                     </button>
                     {showVolume && (
-                      <div className="absolute right-0 mt-2 p-3 rounded-xl backdrop-blur-md bg-white/50 border border-white/20">
+                      <div className="absolute right-0 mt-2 p-3 rounded-xl backdrop-blur-md bg-white/50 border border-white/20 shadow-lg flex flex-col items-center">
                         <input
                           type="range"
                           min="0"
@@ -166,7 +188,7 @@ const Music = () => {
                           step="0.01"
                           value={volume}
                           onChange={(e) => setVolume(parseFloat(e.target.value))}
-                          className="w-24 accent-green-600"
+                          className="accent-green-600 rotate-[-90deg] w-24"
                         />
                       </div>
                     )}
@@ -176,18 +198,27 @@ const Music = () => {
                 {/* Playlist Dropdown */}
                 <div className="mt-6" ref={playlistRef}>
                   <Button
-                    onClick={(e) => { e.stopPropagation(); setShowPlaylist(!showPlaylist); }}
-                    className="bg-green-500 text-white hover:bg-green-600 flex items-center gap-2 mx-auto"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowPlaylist(!showPlaylist);
+                    }}
+                    className="bg-green-500 text-white hover:bg-green-600 hover:shadow-green-400/50 flex items-center gap-2 mx-auto"
                   >
                     Playlist <ChevronDown className="w-4 h-4" />
                   </Button>
                   {showPlaylist && (
-                    <div className="mt-3 mx-auto w-full md:w-3/4 rounded-xl backdrop-blur-md bg-white/50 border border-white/20 text-left">
+                    <div className="mt-3 mx-auto w-full md:w-3/4 rounded-xl backdrop-blur-md bg-white/50 border border-white/20 text-left shadow-lg">
                       {songs.map((s, idx) => (
                         <button
                           key={idx}
-                          onClick={() => { setCurrentSong(idx); setShowPlaylist(false); setIsPlaying(true); setTime(0); }}
-                          className={`w-full px-4 py-2 text-sm text-green-800 hover:bg-green-100 ${idx === currentSong ? "bg-green-200/50 font-semibold" : ""}`}
+                          onClick={() => {
+                            setCurrentSong(idx);
+                            setShowPlaylist(false);
+                            setTime(0);
+                          }}
+                          className={`w-full px-4 py-2 text-sm text-green-800 hover:bg-green-100 transition ${
+                            idx === currentSong ? "bg-green-200/50 font-semibold" : ""
+                          }`}
                         >
                           {s.title} • {s.album} • {s.year}
                         </button>
@@ -198,9 +229,10 @@ const Music = () => {
               </div>
             </div>
 
+            {/* Hidden YouTube */}
             {isPlaying && (
               <iframe
-                src={`${song.youtube}?autoplay=1&volume=${volume}`}
+                src={`${song.youtube}?autoplay=1`}
                 width="0"
                 height="0"
                 frameBorder="0"
