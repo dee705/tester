@@ -1,173 +1,71 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import {
-  ExternalLink,
-  Users,
-  Heart,
-  Star,
-} from "lucide-react";
+// Updated imports for different icons
+import { MailOpen, Map } from "lucide-react"; 
 
-// Define the common icon gradient based on the "Klarissenatics" button
-const ICON_GRADIENT = "bg-gradient-to-r from-green-600 to-emerald-700";
-
-const Fanpage = () => {
-  const fanCommunities = [
-    {
-      name: "KLARISSENATICS OFFICIAL",
-      description:
-        "Official fan community for Klarissenatics - devoted fans of Klarisse de Guzman",
-      links: [
-        {
-          platform: "Facebook",
-          url: "https://www.facebook.com/share/1BB7Ms5YxQ/",
-          iconClass: "fab fa-facebook-f",
-        },
-        {
-          platform: "Instagram",
-          url: "https://www.instagram.com/klarissenaticsofficial?igsh=N2F0dm0zYzI3eTY3/",
-          iconClass: "fab fa-instagram",
-        },
-        {
-          platform: "Twitter/X",
-          url: "https://x.com/KLARISSEnatics_?t=yi1BxfMkRQxv9RTXCukr2w&s=09",
-          iconClass: "fab fa-x-twitter",
-        },
-      ],
-    },
-    {
-      name: "KLANGOTS OFFICIAL",
-      description:
-        "Official fan community for Klangots - another amazing fan group supporting Klarisse",
-      links: [
-        {
-          platform: "Facebook",
-          url: "https://www.facebook.com/share/1DzuSVjNAF/",
-          iconClass: "fab fa-facebook-f",
-        },
-        {
-          platform: "Instagram",
-          url: "https://www.instagram.com/theklangots?igsh=eDliY3VjMDBrd29y/",
-          iconClass: "fab fa-instagram",
-        },
-        {
-          platform: "Twitter/X",
-          url: "https://x.com/theklangots?t=yP1vgOIB5hqdKI8ieoBaHw&s=09",
-          iconClass: "fab fa-x-twitter",
-        },
-      ],
-    },
-  ];
-
+const Contact = () => {
   return (
-    <section id="fanpages" className="py-20 bg-background">
+    <section id="contact" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Official <span className="text-gradient">Fan Communities</span>
+            Get in <span className="text-gradient">Touch</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Join the amazing fan communities dedicated to Klarisse de Guzman!
-            Connect with fellow fans and stay updated.
+            Have a question? We'd love to hear from you.
           </p>
         </div>
 
-        {/* Stats Overview */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          <div className="text-center">
-            <Users className="h-8 w-8 text-primary mx-auto mb-2" />
-            <div className="text-3xl font-bold text-foreground">2</div>
-            <div className="text-sm text-muted-foreground">Fan Communities</div>
-          </div>
-          <div className="text-center">
-            <Heart className="h-8 w-8 text-red-500 mx-auto mb-2" />
-            <div className="text-3xl font-bold text-foreground">Strong</div>
-            <div className="text-sm text-muted-foreground">Support</div>
-          </div>
-          <div className="text-center">
-            <Star className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
-            <div className="text-3xl font-bold text-foreground">Dedicated</div>
-            <div className="text-sm text-muted-foreground">Fans</div>
-          </div>
-          <div className="text-center">
-            <ExternalLink className="h-8 w-8 text-accent mx-auto mb-2" />
-            <div className="text-3xl font-bold text-foreground">6</div>
-            <div className="text-sm text-muted-foreground">Platforms</div>
-          </div>
-        </div>
+        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Contact Information */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-2xl font-bold mb-6">Let's Connect</h3>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                Reach out through the official email below.
+              </p>
+            </div>
 
-        {/* Main Fanpages Grid */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {fanCommunities.map((community, index) => (
-            <Card
-              key={index}
-              className="border-primary/20 hover:shadow-elegant transition-all duration-300 hover:scale-105 group"
-            >
+            {/* Email Card (Updated Icon: MailOpen) */}
+            <Card className="border-primary/20 hover:shadow-elegant transition-all duration-300">
               <CardContent className="p-6">
-                <div className="space-y-4">
-                  <h3 className="font-bold text-lg text-center text-foreground group-hover:text-primary transition-colors">
-                    {community.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed text-center">
-                    {community.description}
-                  </p>
-                  
-                  {/* Links with Gradient Icons */}
-                  <div className="grid grid-cols-1 gap-3 pt-2">
-                    {community.links.map((link, i) => (
-                      <Button
-                        key={i}
-                        variant="outline"
-                        className="w-full flex items-center justify-center gap-2 group-hover:bg-primary/10 group-hover:border-primary/30 transition-all"
-                        onClick={() => window.open(link.url, "_blank")}
-                      >
-                        {/* Apply the common green gradient to the icon */}
-                        <i className={`${link.iconClass} ${ICON_GRADIENT} bg-clip-text text-transparent text-lg`}></i>
-                        {link.platform}
-                      </Button>
-                    ))}
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-gradient-primary rounded-lg">
+                    {/* Changed from Mail to MailOpen */}
+                    <MailOpen className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-foreground">Email</h4>
+                    <p className="text-muted-foreground">
+                      klarissenaticsofficial@gmail.com
+                    </p>
                   </div>
                 </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
 
-        {/* Call to Action - Unchanged */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-primary/10 rounded-2xl p-8 border border-primary/20">
-            <h3 className="text-2xl font-bold mb-4">Join the Fan Communities</h3>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto"
-                onClick={() =>
-                  window.open(
-                    "https://www.facebook.com/share/1BB7Ms5YxQ/",
-                    "_blank"
-                  )
-                }
-              >
-                Join Klarissenatics
-              </Button>
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto"
-                onClick={() =>
-                  window.open(
-                    "https://www.facebook.com/share/1DzuSVjNAF/",
-                    "_blank"
-                  )
-                }
-              >
-                Join Klangots
-              </Button>
-            </div>
+            {/* Location Card (Updated Icon: Map) */}
+            <Card className="border-accent/20 hover:shadow-elegant transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-accent rounded-lg">
+                    {/* Changed from MapPin to Map */}
+                    <Map className="h-6 w-6 text-accent-foreground" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-foreground">Location</h4>
+                    <p className="text-muted-foreground">Manila, Philippines</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
+
+          {/* Right column left empty */}
         </div>
       </div>
     </section>
   );
 };
 
-export default Fanpage;
+export default Contact;
