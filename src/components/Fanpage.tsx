@@ -75,9 +75,28 @@ const Fanpage = () => {
           </p>
         </div>
 
-        {/* Stats Overview */}
+        {/* Stats Overview - Left unchanged from your source */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-            {/* ... stats content remains the same ... */}
+          <div className="text-center">
+            <Users className="h-8 w-8 text-primary mx-auto mb-2" />
+            <div className="text-3xl font-bold text-foreground">2</div>
+            <div className="text-sm text-muted-foreground">Fan Communities</div>
+          </div>
+          <div className="text-center">
+            <Heart className="h-8 w-8 text-red-500 mx-auto mb-2" />
+            <div className="text-3xl font-bold text-foreground">Strong</div>
+            <div className="text-sm text-muted-foreground">Support</div>
+          </div>
+          <div className="text-center">
+            <Star className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
+            <div className="text-3xl font-bold text-foreground">Dedicated</div>
+            <div className="text-sm text-muted-foreground">Fans</div>
+          </div>
+          <div className="text-center">
+            <ExternalLink className="h-8 w-8 text-accent mx-auto mb-2" />
+            <div className="text-3xl font-bold text-foreground">6</div>
+            <div className="text-sm text-muted-foreground">Platforms</div>
+          </div>
         </div>
 
         {/* Main Fanpages Grid */}
@@ -95,14 +114,18 @@ const Fanpage = () => {
                   <p className="text-sm text-muted-foreground leading-relaxed text-center">
                     {community.description}
                   </p>
+                  
+                  {/* Links with Gradient Icons */}
                   <div className="grid grid-cols-1 gap-3 pt-2">
                     {community.links.map((link, i) => (
                       <Button
                         key={i}
                         variant="outline"
+                        // Added flex and gap to align the icon and text
                         className="w-full flex items-center justify-center gap-2 group-hover:bg-primary/10 group-hover:border-primary/30 transition-all"
                         onClick={() => window.open(link.url, "_blank")}
                       >
+                        {/* Rendering the Font Awesome icon with gradient classes */}
                         <i className={`${link.iconClass} ${link.iconColorClass} bg-clip-text text-transparent text-lg`}></i>
                         {link.platform}
                       </Button>
@@ -114,9 +137,42 @@ const Fanpage = () => {
           ))}
         </div>
 
-        {/* Call to Action */}
+        {/* Call to Action - Left unchanged from your source */}
         <div className="text-center mt-16">
-            {/* ... call to action content remains the same ... */}
+          <div className="bg-gradient-primary/10 rounded-2xl p-8 border border-primary/20">
+            <h3 className="text-2xl font-bold mb-4">Join the Fan Communities</h3>
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+              Connect with fellow fans through Klarissenatics and Klangots.
+              Share your love for Klarisse's music and stay updated with fan
+              activities and events!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto"
+                onClick={() =>
+                  window.open(
+                    "https://www.facebook.com/share/1BB7Ms5YxQ/",
+                    "_blank"
+                  )
+                }
+              >
+                Join Klarissenatics
+              </Button>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto"
+                onClick={() =>
+                  window.open(
+                    "https://www.facebook.com/share/1DzuSVjNAF/",
+                    "_blank"
+                  )
+                }
+              >
+                Join Klangots
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
