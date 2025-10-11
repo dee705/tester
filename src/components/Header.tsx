@@ -15,7 +15,7 @@ const Header = () => {
     }
   };
 
-  // 🔑 CHANGED: Replaced "listen now" back to "music" in the array.
+  // Navigation items array
   const navItems = ["home", "about", "music", "fanpages"];
 
   return (
@@ -45,16 +45,15 @@ const Header = () => {
                 {navItems.map((item) => (
                   <DropdownMenuItem
                     key={item}
-                    // 🔑 CHANGED: Simple onClick handler restored
                     onClick={() => scrollToSection(item)}
-                    // 🔑 ADDED: Conditional highlight for the "music" item
+                    // 🔑 HIGHLIGHT STYLES APPLIED HERE
                     className={`cursor-pointer ${
                         item === "music" 
-                            ? "font-semibold bg-green-50 text-green-700" // Highlight classes
-                            : "text-gray-800 hover:text-green-700" // Default classes
+                            ? "font-semibold bg-green-600 text-white rounded-md mt-2 hover:bg-green-700 hover:shadow-lg hover:shadow-green-400/50 transition" // Styles matching the 'Listen Now' button
+                            : "text-gray-800 hover:text-green-700" // Default styles
                     }`}
                   >
-                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                    {item === "music" ? "🎧 Music" : item.charAt(0).toUpperCase() + item.slice(1)} 
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
@@ -76,16 +75,15 @@ const Header = () => {
                 {navItems.map((item) => (
                   <DropdownMenuItem
                     key={item}
-                    // 🔑 CHANGED: Simple onClick handler restored
                     onClick={() => scrollToSection(item)}
-                    // 🔑 ADDED: Conditional highlight for the "music" item
+                    // 🔑 HIGHLIGHT STYLES APPLIED HERE
                     className={`cursor-pointer ${
                         item === "music" 
-                            ? "font-semibold bg-green-50 text-green-700" // Highlight classes
-                            : "text-gray-800 hover:text-green-700" // Default classes
+                            ? "font-semibold bg-green-600 text-white rounded-md mt-2 hover:bg-green-700 hover:shadow-lg hover:shadow-green-400/50 transition" // Styles matching the 'Listen Now' button
+                            : "text-gray-800 hover:text-green-700" // Default styles
                     }`}
                   >
-                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                    {item === "music" ? "🎧 Music" : item.charAt(0).toUpperCase() + item.slice(1)}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
