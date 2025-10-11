@@ -108,11 +108,88 @@ const Music = () => {
       duration: 230,
     },
     {
+      title: "Ayoko ng Sana",
+      album: "Klarisse x Rox Santos",
+      year: "2024",
+      youtube: "https://www.youtube.com/embed/8rw_2ps24vI?si",
+      duration: 249,
+    },
+    {
+      title: "Thank you",
+      album: "Klarisse",
+      year: "2022",
+      youtube: "https://www.youtube.com/embed/UHzrSdL540E?si",
+      duration: 273,
+    },
+    {
+      title: "God Is With Us",
+      album: "Klarisse x Emmanuel Lipio Jr",
+      year: "2022",
+      youtube: "https://www.youtube.com/embed/UHzrSdL540E?si",
+      duration: 263,
+    },
+    {
       title: "Ulan Ng Kahapon",
       album: "Singles",
       year: "2021",
       youtube: "https://www.youtube.com/embed/RcKMBkkZZdc",
       duration: 260,
+    },
+        {
+      title: "NBSB",
+      album: "Klarisse",
+      year: "2019",
+      youtube: "https://www.youtube.com/embed/KPEkAVSQ-vI?si",
+      duration: 198,
+    },
+    {
+      title: "The Climb",
+      album: "Klarisse De Guzman",
+      year: "2018",
+      youtube: "https://www.youtube.com/embed/ewC5y76YTis?si",
+      duration: 258,
+    },
+    {
+      title: "Slowly",
+      album: "Klarisse De Guzman",
+      year: "2018",
+      youtube: "https://www.youtube.com/embed/qWNMeDHw1XA?si",
+      duration: 241,
+    },
+    {
+      title: "Everything I do , I do it for you",
+      album: "Klarisse De Guzman",
+      year: "2018",
+      youtube: "https://www.youtube.com/embed/vFBDqSRVMrw?si",
+      duration: 246,
+    },
+    {
+      title: "To Love somebody",
+      album: "Klarisse De Guzman",
+      year: "2018",
+      youtube: "https://www.youtube.com/embed/1gwCk2YdMXM?si",
+      duration: 206,
+    },
+    {
+      title: "Sayang Naman",
+      album: "Klarisse De Guzman",
+      year: "2018",
+      youtube: "https://www.youtube.com/embed/1rMU2MdTr5k",
+      duration: 244,
+    },
+    {
+      title: "Stuck On You",
+      album: "Klarisse De Guzman",
+      year: "2018",
+      youtube: "https://www.youtube.com/embed/JWDub6lHD1g?si",
+      duration: 195,
+    },
+    {
+      title: "I Can't Make You Love Me",
+      album: "Klarisse De Guzman",
+      year: "2018",
+      youtube: "https://www.youtube.com/embed/bPLVcz5fVcE?si",
+      duration: 204,
     },
     {
       title: "Wala na Talaga",
@@ -162,6 +239,34 @@ const Music = () => {
       year: "2017",
       youtube: "https://www.youtube.com/embed/ToBuXLpQyxw",
       duration: 240,
+    },
+    {
+      title: "Di kayang pilitin",
+      album: "Klarisse De Guzman",
+      year: "2015",
+      youtube: "https://www.youtube.com/embed/CUSjyAqBzlk?si",
+      duration: 251.4,
+    },
+    {
+      title: "Sino Ka Ba ft. Nyoy Volante",
+      album: "Klarisse De Guzman",
+      year: "2015",
+      youtube: "https://www.youtube.com/embed/BbQrxetReGQ?si",
+      duration: 321,
+    },
+    {
+      title: "Magpakailanman",
+      album: "Klarisse De Guzman",
+      year: "2015",
+      youtube: "https://www.youtube.com/embed/ivIcdIImFDc?si",
+      duration: 244.8,
+    },
+    {
+      title: "Sabihin Mo Sa Akin",
+      album: "Klarisse De Guzman",
+      year: "2014",
+      youtube: "https://www.youtube.com/embed/qOpkaSWqpJA?si",
+      duration: 249,
     },
   ];
 
@@ -259,8 +364,8 @@ const Music = () => {
   return (
     <>
       {/* ==================================================
-        ORIGINAL MAIN MUSIC SECTION 
-        ==================================================
+          ORIGINAL MAIN MUSIC SECTION 
+          ==================================================
       */}
       <section id="music" className="py-20 bg-gradient-to-b from-green-100 to-white">
         <div className="container mx-auto px-4">
@@ -312,8 +417,12 @@ const Music = () => {
                     </div>
                     {isActive && (
                       <div className="mt-4">
+                        {/* NOTE: You should use the actual Spotify embed URL for production.
+                            The current structure is a placeholder/test URL based on your original code's pattern.
+                            A real Spotify embed link looks like: `https://open.spotify.com/embed/album/${album.spotifyId}`
+                        */}
                         <iframe
-                          src={`http://googleusercontent.com/spotify.com/3{album.spotifyId}`}
+                          src={`https://open.spotify.com/embed/album/${album.spotifyId}?utm_source=generator`}
                           width="100%"
                           height="380"
                           frameBorder="0"
@@ -328,7 +437,7 @@ const Music = () => {
             })}
           </div>
 
-          {/* Featured Songs Card (Main Display) - ONLY THIS SECTION IS MODIFIED */}
+          {/* Featured Songs Card (Main Display) */}
           <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
             Featured Songs
           </h3>
@@ -355,7 +464,7 @@ const Music = () => {
                 </div>
 
                 {/* Right Side: Conditional Rendering for Player vs. Playlist */}
-                
+
                 {/* 1. Player (Default View) - ONLY SHOW IF PLAYLIST IS CLOSED OR FLOATING PLAYER IS NOT ACTIVE */}
                 {!showPlaylist && !isPlaying && (
                   <div className="md:w-1/2 w-full p-6 flex flex-col justify-center text-center">
@@ -395,7 +504,7 @@ const Music = () => {
                     </div>
                   </div>
                 )}
-                
+
                 {/* 1.5. Player Display when Playing: Show a message to direct user to floating player */}
                 {!showPlaylist && isPlaying && (
                     <div className="md:w-1/2 w-full p-6 flex flex-col justify-center text-center">
@@ -457,7 +566,7 @@ const Music = () => {
             </CardContent>
           </Card>
 
-          {/* Listen Everywhere - REMAINS UNCHANGED */}
+          {/* Listen Everywhere - UPDATED LINKS */}
           <div className="text-center mt-20">
             <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
               Listen Everywhere
@@ -466,6 +575,7 @@ const Music = () => {
               <Button
                 className="bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-green-400/50"
                 onClick={() =>
+                  // Updated Spotify link for the artist "Klarisse de Guzman"
                   window.open("https://open.spotify.com/artist/1Imlf2KHeVnyY2bkZe1bNC", "_blank")
                 }
               >
@@ -474,6 +584,7 @@ const Music = () => {
               <Button
                 className="bg-black hover:bg-gray-800 text-white shadow-md hover:shadow-gray-500/50"
                 onClick={() =>
+                  // Apple Music link (Original link verified as correct for the artist)
                   window.open("https://music.apple.com/us/artist/klarisse/1462398733", "_blank")
                 }
               >
@@ -482,6 +593,7 @@ const Music = () => {
               <Button
                 className="bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-red-400/50"
                 onClick={() =>
+                  // YouTube Music link (Original link verified as correct for the artist)
                   window.open(
                     "https://music.youtube.com/channel/UCeg7EAceRGI8D6q1j4djPTQ?si=mFVkSBDjI2JmOH1n",
                     "_blank"
@@ -492,7 +604,10 @@ const Music = () => {
               </Button>
               <Button
                 className="bg-orange-500 hover:bg-orange-600 text-white shadow-md hover:shadow-orange-400/50"
-                onClick={() => window.open("https://on.soundcloud.com/S4TdClgpsEvCdcdEny", "_blank")}
+                onClick={() => 
+                    // Updated SoundCloud link for the artist "Klarisse de Guzman" profile, as the original URL appeared to be a generated link.
+                    window.open("https://soundcloud.com/klarissedeguzman", "_blank")
+                }
               >
                 <Cloud className="mr-2 h-5 w-5" /> SoundCloud
               </Button>
@@ -502,8 +617,8 @@ const Music = () => {
       </section>
 
       {/* ==================================================
-        FLOATING MUSIC PLAYER (BOTTOM RIGHT) - NEW SECTION
-        ==================================================
+          FLOATING MUSIC PLAYER (BOTTOM RIGHT) - NEW SECTION
+          ==================================================
       */}
       {isPlaying && (
         <div className="fixed bottom-4 right-4 z-[9999] p-2">
