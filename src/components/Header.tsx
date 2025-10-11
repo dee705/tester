@@ -15,6 +15,9 @@ const Header = () => {
     }
   };
 
+  // 🔑 CHANGED: Replaced "listen now" back to "music" in the array.
+  const navItems = ["home", "about", "music", "fanpages"];
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50
       bg-gradient-to-r from-white/90 via-green-50/70 to-green-200/60
@@ -39,16 +42,21 @@ const Header = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-white/95 backdrop-blur-md shadow-lg rounded-xl border border-green-100">
-                {["home", "about", "music", "fanpages"].map((item) => (
+                {navItems.map((item) => (
                   <DropdownMenuItem
                     key={item}
+                    // 🔑 CHANGED: Simple onClick handler restored
                     onClick={() => scrollToSection(item)}
-                    className="cursor-pointer text-gray-800 hover:text-green-700"
+                    // 🔑 ADDED: Conditional highlight for the "music" item
+                    className={`cursor-pointer ${
+                        item === "music" 
+                            ? "font-semibold bg-green-50 text-green-700" // Highlight classes
+                            : "text-gray-800 hover:text-green-700" // Default classes
+                    }`}
                   >
                     {item.charAt(0).toUpperCase() + item.slice(1)}
                   </DropdownMenuItem>
                 ))}
-                {/* REMOVED: Listen Now Option for Desktop */}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
@@ -65,16 +73,21 @@ const Header = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-white/95 backdrop-blur-lg shadow-lg rounded-xl border border-green-100">
-                {["home", "about", "music", "fanpages"].map((item) => (
+                {navItems.map((item) => (
                   <DropdownMenuItem
                     key={item}
+                    // 🔑 CHANGED: Simple onClick handler restored
                     onClick={() => scrollToSection(item)}
-                    className="cursor-pointer text-gray-800 hover:text-green-700"
+                    // 🔑 ADDED: Conditional highlight for the "music" item
+                    className={`cursor-pointer ${
+                        item === "music" 
+                            ? "font-semibold bg-green-50 text-green-700" // Highlight classes
+                            : "text-gray-800 hover:text-green-700" // Default classes
+                    }`}
                   >
                     {item.charAt(0).toUpperCase() + item.slice(1)}
                   </DropdownMenuItem>
                 ))}
-                {/* REMOVED: Listen Now Option for Mobile */}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
