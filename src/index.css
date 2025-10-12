@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========= DESIGN SYSTEM ========= */
+@layer base {
+  :root {
+    --background: 0 0% 97%;
+    --foreground: 24 9.8% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 24 9.8% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 24 9.8% 10%;
+
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 159 64% 52%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 142 76% 36%;
+
+    --radius: 0.5rem;
+
+    /* ==== LIGHT GRADIENT ==== */
+    --gradient-start: 142 76% 45%;
+    --gradient-end: 159 64% 60%;
+  }
+
+  .dark {
+    --background: 24 9.8% 10%;
+    --foreground: 60 9.1% 97.8%;
+
+    --card: 24 9.8% 10%;
+    --card-foreground: 60 9.1% 97.8%;
+
+    --popover: 24 9.8% 10%;
+    --popover-foreground: 60 9.1% 97.8%;
+
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 159 64% 52%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 24 9.8% 15%;
+    --muted-foreground: 25 5.3% 64.9%;
+
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+
+    --border: 24 9.8% 15%;
+    --input: 24 9.8% 15%;
+    --ring: 142 76% 36%;
+
+    /* ==== DARK GRADIENT ==== */
+    --gradient-start
