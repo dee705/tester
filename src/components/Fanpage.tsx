@@ -35,19 +35,19 @@ const Fanpage = () => {
       ],
     },
     {
-      name: "KLANGOTS OFFICIAL",
+      name: "KLANGOTSHQ OFFICIAL",
       description:
         "Official fan community for Klangots - another amazing fan group supporting Klarisse",
       links: [
         {
           platform: "Facebook",
-          url: "https://www.facebook.com/share/1DzuSVjNAF/",
+          url: "https://www.facebook.com/klangots.hq/",
           iconClass: "fab fa-facebook-f",
           iconColorClass: "bg-gradient-to-r from-blue-600 to-blue-700",
         },
         {
           platform: "Instagram",
-          url: "https://www.instagram.com/theklangots?igsh=eDliY3VjMDBrd29y/",
+          url: "https://www.instagram.com/klangotshq?igsh=eWpjanR1Z3NpMDN1/",
           iconClass: "fab fa-instagram",
           iconColorClass: "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500",
         },
