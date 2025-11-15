@@ -17,7 +17,8 @@ const Header = () => {
   };
 
   const { theme, setTheme } = useTheme(); // ✅ get and set theme
-  const navItems = ["home", "about", "music", "fanpages"];
+  // CHANGE: replace "fanpages" with "social"
+  const navItems = ["home", "about", "music", "social"];
 
   return (
     <header
