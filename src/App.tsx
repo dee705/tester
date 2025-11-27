@@ -8,6 +8,12 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ConcertPopup from "./components/ConcertPopup";
 
+// New imports for separate pages + menu
+import Menu from "./components/Menu";
+import About from "./pages/About";
+import Music from "./pages/Music";
+import Contact from "./pages/Contact";
+
 const queryClient = new QueryClient();
 
 // 🔹 Toggle popup on/off here
@@ -24,11 +30,20 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          {/* Global menu; use link clicks to go to each page */}
+          <Menu />
+
+          <main>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/music" element={<Music />} />
+              <Route path="/contact" element={<Contact />} />
+
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
 
           {/* ConcertPopup is global and can be toggled */}
           {SHOW_POPUP && <ConcertPopup />}
